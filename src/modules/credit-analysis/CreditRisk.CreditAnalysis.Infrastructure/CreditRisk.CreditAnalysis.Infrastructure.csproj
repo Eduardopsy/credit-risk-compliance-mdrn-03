@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CreditRisk.CreditAnalysis.Domain\CreditRisk.CreditAnalysis.Domain.csproj" />
+    <ProjectReference Include="..\CreditRisk.CreditAnalysis.Application\CreditRisk.CreditAnalysis.Application.csproj" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.11" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.6" />
+  </ItemGroup>
+</Project>

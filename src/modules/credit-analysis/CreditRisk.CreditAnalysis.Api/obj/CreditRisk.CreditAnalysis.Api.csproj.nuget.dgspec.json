@@ -1,0 +1,561 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/CreditRisk.CreditAnalysis.Api.csproj": {}
+  },
+  "projects": {
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/CreditRisk.CreditAnalysis.Api.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/CreditRisk.CreditAnalysis.Api.csproj",
+        "projectName": "CreditRisk.CreditAnalysis.Api",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/CreditRisk.CreditAnalysis.Api.csproj",
+        "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj"
+              },
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj"
+              },
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1902",
+            "NU1903"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "AspNetCore.HealthChecks.NpgSql": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Microsoft.DotNet.ILCompiler": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.30, )",
+              "autoReferenced": true
+            },
+            "Microsoft.NET.ILLink.Tasks": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.30, )",
+              "autoReferenced": true
+            },
+            "Scalar.AspNetCore": {
+              "target": "Package",
+              "version": "[1.2.43, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.9.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "runtime.linux-x64.Microsoft.DotNet.ILCompiler",
+              "version": "[8.0.30, 8.0.30]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.130/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj",
+        "projectName": "CreditRisk.CreditAnalysis.Application",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj",
+        "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj"
+              },
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj"
+              },
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1902",
+            "NU1903"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.11.0, )"
+            },
+            "MassTransit": {
+              "target": "Package",
+              "version": "[8.3.6, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.130/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj",
+        "projectName": "CreditRisk.CreditAnalysis.Domain",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj",
+        "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1902",
+            "NU1903"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.130/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj",
+        "projectName": "CreditRisk.CreditAnalysis.Infrastructure",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj",
+        "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj"
+              },
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1902",
+            "NU1903"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "MassTransit.RabbitMQ": {
+              "target": "Package",
+              "version": "[8.3.6, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.11, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.130/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj",
+        "projectName": "CreditRisk.Shared.Contracts",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj",
+        "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1902",
+            "NU1903"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.130/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj",
+        "projectName": "CreditRisk.Shared.Kernel",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj",
+        "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1902",
+            "NU1903"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.11.0, )"
+            },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.130/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj",
+        "projectName": "CreditRisk.Shared.Observability",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj",
+        "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1902",
+            "NU1903"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "OpenTelemetry": {
+              "target": "Package",
+              "version": "[1.10.0, )"
+            },
+            "OpenTelemetry.Exporter.OpenTelemetryProtocol": {
+              "target": "Package",
+              "version": "[1.10.0, )"
+            },
+            "OpenTelemetry.Exporter.Prometheus.AspNetCore": {
+              "target": "Package",
+              "version": "[1.10.0-beta.1, )"
+            },
+            "OpenTelemetry.Extensions.Hosting": {
+              "target": "Package",
+              "version": "[1.10.0, )"
+            },
+            "OpenTelemetry.Instrumentation.AspNetCore": {
+              "target": "Package",
+              "version": "[1.10.0, )"
+            },
+            "OpenTelemetry.Instrumentation.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[1.10.0-beta.1, )"
+            },
+            "OpenTelemetry.Instrumentation.Http": {
+              "target": "Package",
+              "version": "[1.10.0, )"
+            },
+            "OpenTelemetry.Instrumentation.Process": {
+              "target": "Package",
+              "version": "[1.10.0-beta.1, )"
+            },
+            "OpenTelemetry.Instrumentation.Runtime": {
+              "target": "Package",
+              "version": "[1.10.0, )"
+            },
+            "OpenTelemetry.Instrumentation.StackExchangeRedis": {
+              "target": "Package",
+              "version": "[1.10.0-beta.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.130/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

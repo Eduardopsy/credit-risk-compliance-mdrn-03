@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "1ApFjD0OROVZhSlsp6GnutEmIxprO70g5wU2LEkCYnGdksHnVfEfBkkqFMSnE66gsmOF9ZFq07oi1Ccn4eMQqw==",
+  "success": true,
+  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Domain/CreditRisk.IAM.Domain.csproj",
+  "expectedPackageFiles": [
+    "/home/jorge.eduardo/.nuget/packages/fluentvalidation/11.11.0/fluentvalidation.11.11.0.nupkg.sha512",
+    "/home/jorge.eduardo/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "/home/jorge.eduardo/.nuget/packages/microsoft.extensions.logging.abstractions/8.0.0/microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

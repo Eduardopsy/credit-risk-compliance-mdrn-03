@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CreditRisk.CreditAnalysis.Domain\CreditRisk.CreditAnalysis.Domain.csproj" />
+    <ProjectReference Include="..\..\..\shared\CreditRisk.Shared.Contracts\CreditRisk.Shared.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\shared\CreditRisk.Shared.Kernel\CreditRisk.Shared.Kernel.csproj" />
+    <PackageReference Include="MassTransit" Version="8.3.6" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+  </ItemGroup>
+</Project>

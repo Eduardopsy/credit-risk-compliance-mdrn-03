@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CreditRisk.IAM.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:CreditRisk.IAM.Domain.Entities.RefreshToken">
+            <summary>Represents a refresh token for JWT authentication.</summary>
+        </member>
+        <member name="T:CreditRisk.IAM.Domain.Entities.User">
+            <summary>Aggregate root representing a system user.</summary>
+        </member>
+        <member name="T:CreditRisk.IAM.Domain.Enums.UserRole">
+            <summary>User system roles.</summary>
+        </member>
+        <member name="T:CreditRisk.IAM.Domain.ValueObjects.Email">
+            <summary>Represents a validated user email address.</summary>
+        </member>
+        <member name="T:CreditRisk.IAM.Domain.ValueObjects.HashedPassword">
+            <summary>Represents a securely hashed password.</summary>
+        </member>
+    </members>
+</doc>
