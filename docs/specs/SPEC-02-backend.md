@@ -1027,7 +1027,7 @@ internal sealed class CreditProposalConfiguration : IEntityTypeConfiguration<Cre
 
 ## 5. Business Rules and Invariants
 
-### 5.1 Credit Scoring Engine — Risk Rating Matrix
+### 5.1 Credit Scoring Engine — Risk Rating Mapping
 
 The scoring engine computes a composite score (0–1000) from three inputs and maps it to a risk rating.
 

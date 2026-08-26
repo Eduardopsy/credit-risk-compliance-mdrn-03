@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CreditRisk.Shared.Kernel</name>
+    </assembly>
+    <members>
+        <member name="T:CreditRisk.Shared.Kernel.CQRS.ICommandHandler`2">
+            <summary>
+            Marker interface for command handlers that return a typed result.
+            Register with: services.AddScoped&lt;ICommandHandler&lt;TCommand, TResult&gt;, THandler&gt;()
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.CQRS.IQueryHandler`2">
+            <summary>
+            Marker interface for query handlers that return a typed result.
+            Register with: services.AddScoped&lt;IQueryHandler&lt;TQuery, TResult&gt;, THandler&gt;()
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.Domain.AggregateRoot">
+            <summary>Base class for aggregate roots. Extends Entity with domain event collection.</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.Domain.DomainEvent">
+            <summary>Base record for all domain events. Raised by aggregates, dispatched after UoW commits.</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.Domain.Entity">
+            <summary>Base class for all domain entities. Identity equality semantics.</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.Domain.ValueObject">
+            <summary>Base class for value objects. Compared by component values, not identity.</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.Exceptions.DomainException">
+            <summary>
+            Base exception for all domain-level violations.
+            Thrown only for programming errors (invariant violations), not expected business failures.
+            Expected business failures must use Result pattern instead.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.Guard.Guard">
+            <summary>
+            Provides guard clause methods for validating preconditions.
+            Throws <see cref="T:System.ArgumentException"/> variants for invalid inputs.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.Guard.Guard.AgainstNull``1(``0,System.String)">
+            <summary>Throws <see cref="T:System.ArgumentNullException"/> if value is null.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.Guard.Guard.AgainstNullOrWhiteSpace(System.String,System.String)">
+            <summary>Throws <see cref="T:System.ArgumentException"/> if string is null or whitespace.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.Guard.Guard.AgainstEmpty(System.Guid,System.String)">
+            <summary>Throws <see cref="T:System.ArgumentException"/> if Guid is empty.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.Guard.Guard.AgainstNegative(System.Decimal,System.String)">
+            <summary>Throws <see cref="T:System.ArgumentOutOfRangeException"/> if value is negative.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.Guard.Guard.AgainstZeroOrNegative(System.Decimal,System.String)">
+            <summary>Throws <see cref="T:System.ArgumentOutOfRangeException"/> if value is not positive.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.Guard.Guard.AgainstExceedingMaximum(System.Decimal,System.Decimal,System.String)">
+            <summary>Throws <see cref="T:System.ArgumentOutOfRangeException"/> if value exceeds maximum.</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.Result.Error">
+            <summary>Represents a structured error with a code and human-readable description.</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.Result.PagedResult`1">
+            <summary>
+            Represents a paginated result set.
+            This is the CANONICAL definition — do NOT redefine PagedResult&lt;T&gt; in any
+            Application query file. Always import from CreditRisk.Shared.Kernel.Result.
+            </summary>
+            <typeparam name="T">The type of items in the page.</typeparam>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.Result.Result`1">
+            <summary>
+            Represents the outcome of an operation that can succeed or fail.
+            Use for application-layer methods that can fail for business reasons.
+            Never throw exceptions for expected business failures.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.Result.Result">
+            <summary>Non-generic result for operations that return no value.</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.Validation.ValidationBehavior`2">
+            <summary>
+            Pipeline behavior that runs FluentValidation before executing a command handler.
+            Returns a validation failure Result without invoking the handler if validation fails.
+            </summary>
+            <typeparam name="TCommand">The command type being validated.</typeparam>
+            <typeparam name="TResult">The result type returned by the handler.</typeparam>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.Validation.ValidationBehavior`2.#ctor(System.Collections.Generic.IEnumerable{FluentValidation.IValidator{`0}},Microsoft.Extensions.Logging.ILogger{CreditRisk.Shared.Kernel.Validation.ValidationBehavior{`0,`1}})">
+            <summary>
+            Pipeline behavior that runs FluentValidation before executing a command handler.
+            Returns a validation failure Result without invoking the handler if validation fails.
+            </summary>
+            <typeparam name="TCommand">The command type being validated.</typeparam>
+            <typeparam name="TResult">The result type returned by the handler.</typeparam>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.Validation.ValidationBehavior`2.HandleAsync(`0,System.Func{`0,System.Threading.CancellationToken,System.Threading.Tasks.Task{CreditRisk.Shared.Kernel.Result.Result{`1}}},System.Threading.CancellationToken)">
+            <summary>
+            Validates the command and invokes the next handler if validation passes.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.ValueObjects.Cnpj">
+            <summary>
+            Represents a Brazilian CNPJ (Cadastro Nacional da Pessoa Jurídica) document number.
+            Validates using the official Receita Federal check digit algorithm.
+            Stored as 14 digits without formatting.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Kernel.ValueObjects.Cnpj.Value">
+            <summary>Gets the CNPJ value as 14 unformatted digits.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.Cnpj.Create(System.String)">
+            <summary>Creates a new <see cref="T:CreditRisk.Shared.Kernel.ValueObjects.Cnpj"/> after validating check digits.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.Cnpj.ToFormattedString">
+            <summary>Returns the CNPJ formatted as XX.XXX.XXX/XXXX-XX.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.Cnpj.GetEqualityComponents">
+            <inheritdoc/>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.Cnpj.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.ValueObjects.Cpf">
+            <summary>
+            Represents a Brazilian CPF (Cadastro de Pessoas Físicas) document number.
+            Validates using the official Receita Federal check digit algorithm.
+            Stored as 11 digits without formatting (no dots or dashes).
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Kernel.ValueObjects.Cpf.Value">
+            <summary>Gets the CPF value as 11 unformatted digits.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.Cpf.Create(System.String)">
+            <summary>
+            Creates a new <see cref="T:CreditRisk.Shared.Kernel.ValueObjects.Cpf"/> instance after validating the check digits.
+            </summary>
+            <param name="value">CPF string — may include formatting (dots and dashes) or be 11 raw digits.</param>
+            <returns>A valid <see cref="T:CreditRisk.Shared.Kernel.ValueObjects.Cpf"/> instance.</returns>
+            <exception cref="T:CreditRisk.Shared.Kernel.Exceptions.DomainException">Thrown when the CPF fails check digit validation.</exception>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.Cpf.ToFormattedString">
+            <summary>Returns the CPF formatted as XXX.XXX.XXX-XX.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.Cpf.GetEqualityComponents">
+            <inheritdoc/>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.Cpf.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount">
+            <summary>
+            Represents a monetary amount in Brazilian Reais (BRL).
+            Always non-negative. Precision: 2 decimal places.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount.Amount">
+            <summary>Gets the monetary amount value.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount.Currency">
+            <summary>Gets the currency code. Always "BRL" for this system.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount.Create(System.Decimal)">
+            <summary>Creates a new <see cref="T:CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount"/>. Amount must be non-negative.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount.Zero">
+            <summary>Creates a zero monetary amount.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount.Add(CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount)">
+            <summary>Adds two monetary amounts.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount.Subtract(CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount)">
+            <summary>Subtracts a monetary amount. Result must be non-negative.</summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount.GetEqualityComponents">
+            <inheritdoc/>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount.ToString">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

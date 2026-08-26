@@ -1,0 +1,194 @@
+{
+  "testConfiguration": {
+    "version": "1.0.0",
+    "description": "SPEC-03 Test Suite Configuration",
+    "lastUpdated": "2026-08-26T09:30:00Z",
+    
+    "coverage": {
+      "enabled": true,
+      "format": "cobertura",
+      "htmlReport": true,
+      "thresholds": {
+        "lineCoverage": 80,
+        "branchCoverage": 100,
+        "methodCoverage": 80,
+        "overall": 80
+      },
+      "excludePatterns": [
+        "*Tests",
+        "*Migrations",
+        "<>c__DisplayClass*",
+        "*.g.cs"
+      ],
+      "failOnViolation": true
+    },
+    
+    "testProjects": [
+      {
+        "name": "CreditRisk.IAM.Domain.Tests",
+        "path": "tests/unit/CreditRisk.IAM.Domain.Tests/CreditRisk.IAM.Domain.Tests.csproj",
+        "type": "unit",
+        "frameworks": ["net8.0"],
+        "enabled": true,
+        "description": "IAM module unit tests"
+      },
+      {
+        "name": "CreditRisk.CreditAnalysis.Domain.Tests",
+        "path": "tests/unit/CreditRisk.CreditAnalysis.Domain.Tests/CreditRisk.CreditAnalysis.Domain.Tests.csproj",
+        "type": "unit",
+        "frameworks": ["net8.0"],
+        "enabled": true,
+        "description": "Credit Analysis module unit tests"
+      },
+      {
+        "name": "CreditRisk.Compliance.Domain.Tests",
+        "path": "tests/unit/CreditRisk.Compliance.Domain.Tests/CreditRisk.Compliance.Domain.Tests.csproj",
+        "type": "unit",
+        "frameworks": ["net8.0"],
+        "enabled": true,
+        "description": "Compliance module unit tests"
+      }
+    ],
+    
+    "testGroups": {
+      "unit": {
+        "description": "All unit tests",
+        "includes": ["CreditRisk.IAM.Domain.Tests", "CreditRisk.CreditAnalysis.Domain.Tests", "CreditRisk.Compliance.Domain.Tests"]
+      },
+      "iam": {
+        "description": "IAM module tests",
+        "includes": ["CreditRisk.IAM.Domain.Tests"]
+      },
+      "creditAnalysis": {
+        "description": "Credit Analysis module tests",
+        "includes": ["CreditRisk.CreditAnalysis.Domain.Tests"]
+      },
+      "compliance": {
+        "description": "Compliance module tests",
+        "includes": ["CreditRisk.Compliance.Domain.Tests"]
+      },
+      "scoring": {
+        "description": "Credit scoring tests",
+        "filter": "CreditScoringEngine"
+      },
+      "handlers": {
+        "description": "Command handler tests",
+        "filter": "CommandHandler"
+      }
+    },
+    
+    "execution": {
+      "parallelization": {
+        "enabled": true,
+        "maxThreads": 4,
+        "timeoutSeconds": 300
+      },
+      "retryOnFailure": {
+        "enabled": false,
+        "maxAttempts": 1
+      },
+      "stopOnFirstFailure": false
+    },
+    
+    "reporting": {
+      "formats": ["html", "json", "console"],
+      "outputDirectory": "coverage/report",
+      "historyFile": "coverage/.test-history.json",
+      "maxHistoryEntries": 100
+    },
+    
+    "ci": {
+      "enabled": false,
+      "failOnWarnings": false,
+      "failOnCoverageViolation": true,
+      "generateArtifacts": true,
+      "uploadTo": ""
+    },
+    
+    "quality": {
+      "codeAnalysis": {
+        "enabled": false,
+        "ruleSet": "default"
+      },
+      "mutationTesting": {
+        "enabled": false,
+        "tool": "stryker"
+      },
+      "performanceTesting": {
+        "enabled": false,
+        "baselineMs": 5000
+      }
+    }
+  },
+  
+  "testMetadata": {
+    "totalTests": 28,
+    "byModule": {
+      "IAM": {
+        "count": 7,
+        "lastUpdated": "2026-08-26T09:00:00Z",
+        "tests": [
+          {
+            "name": "LoginCommandHandlerTests",
+            "count": 4,
+            "scenarios": ["Valid credentials", "User not found", "Wrong password", "Cancellation"]
+          },
+          {
+            "name": "LogoutCommandHandlerTests",
+            "count": 3,
+            "scenarios": ["Valid JTI", "Empty JTI", "Already revoked JTI"]
+          }
+        ]
+      },
+      "CreditAnalysis": {
+        "count": 21,
+        "lastUpdated": "2026-08-26T09:00:00Z",
+        "tests": [
+          {
+            "name": "CreditScoringEngineTests",
+            "count": 21,
+            "scenarios": [
+              "Rating A (Excellent)",
+              "Rating B (Good)",
+              "Rating C (Fair)",
+              "Rating D (Poor)",
+              "Rating E (Very Poor)",
+              "Boundary conditions",
+              "Edge cases"
+            ]
+          }
+        ]
+      },
+      "Compliance": {
+        "count": 0,
+        "lastUpdated": null,
+        "tests": [],
+        "pendingImplementation": true
+      }
+    },
+    "coverage": {
+      "overall": null,
+      "lineCoverage": null,
+      "branchCoverage": null,
+      "lastMeasured": null
+    }
+  },
+  
+  "cicd": {
+    "githubActions": {
+      "enabled": false,
+      "workflows": [
+        {
+          "name": "Unit Tests",
+          "triggers": ["push", "pull_request"],
+          "branches": ["main", "develop"]
+        },
+        {
+          "name": "Coverage Report",
+          "triggers": ["schedule"],
+          "schedule": "0 0 * * 0"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat Code Coverage">
+        <Configuration>
+          <Format>cobertura</Format>
+          <Include>
+            [CreditRisk.Shared.Kernel]*
+            [CreditRisk.IAM.Domain]*
+            [CreditRisk.IAM.Application]*
+            [CreditRisk.CreditAnalysis.Domain]*
+            [CreditRisk.CreditAnalysis.Application]*
+            [CreditRisk.Compliance.Domain]*
+            [CreditRisk.Compliance.Application]*
+          </Include>
+          <Exclude>
+            [*Tests]*
+            [*Migrations]*
+          </Exclude>
+          <ExcludeByAttribute>GeneratedCodeAttribute,CompilerGeneratedAttribute</ExcludeByAttribute>
+          <SingleHit>false</SingleHit>
+          <UseSourceLink>true</UseSourceLink>
+          <IncludeTestAssembly>false</IncludeTestAssembly>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+  <RunConfiguration>
+    <ResultsDirectory>./coverage</ResultsDirectory>
+  </RunConfiguration>
+</RunSettings>

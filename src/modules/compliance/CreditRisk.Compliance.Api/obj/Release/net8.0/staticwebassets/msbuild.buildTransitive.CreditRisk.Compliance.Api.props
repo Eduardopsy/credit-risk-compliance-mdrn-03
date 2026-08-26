@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../buildMultiTargeting/CreditRisk.Compliance.Api.props" />
+</Project>

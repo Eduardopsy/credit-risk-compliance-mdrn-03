@@ -4,5 +4,29 @@
         <name>CreditRisk.CreditAnalysis.Infrastructure</name>
     </assembly>
     <members>
+        <member name="T:CreditRisk.CreditAnalysis.Infrastructure.Services.CreditScoringEngine">
+            <summary>
+            Implements credit scoring matrix following BCB Resolução 4.557 risk classification.
+            Calculates rating from bureau score, income, and debt ratio.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Infrastructure.Services.CreditScoringEngine.Evaluate(System.Decimal,CreditRisk.Shared.Kernel.ValueObjects.MoneyAmount,System.Int32)">
+            <summary>
+            Evaluates credit based on bureau score, monthly income, and requested limit.
+            </summary>
+            <returns>Tuple of (Rating, ApprovedLimit, RequiresManualReview)</returns>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Infrastructure.Services.CreditScoringEngine.GetRatingFromBureauScore(System.Int32)">
+            <summary>
+            Maps bureau score (typically 0-900 in Brazil) to risk rating (A-E).
+            Follows BCB standard thresholds.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Infrastructure.Services.CreditScoringEngine.RequiresManualReviewForRating(CreditRisk.CreditAnalysis.Domain.Enums.RiskRating,System.Decimal)">
+            <summary>
+            Determines if manual review is required based on rating and requested amount.
+            Higher ratings have higher auto-approve thresholds.
+            </summary>
+        </member>
     </members>
 </doc>

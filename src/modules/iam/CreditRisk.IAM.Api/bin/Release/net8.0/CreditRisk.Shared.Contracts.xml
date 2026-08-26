@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CreditRisk.Shared.Contracts</name>
+    </assembly>
+    <members>
+        <member name="T:CreditRisk.Shared.Contracts.Compliance.Commands.TransactionReceivedCommand">
+            <summary>Command published by Compliance API for async AML processing.</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent">
+            <summary>
+            Published when an AML alert is created for a flagged transaction.
+            Consumed by: Operations module (SignalR push to compliance-analyst group).
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Contracts.Compliance.Events.FraudConfirmedEvent">
+            <summary>Published when a compliance analyst confirms a transaction as fraud.</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Contracts.Compliance.Events.TransactionFlaggedEvent">
+            <summary>Published when a transaction is flagged by the AML rules engine.</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Contracts.CreditAnalysis.Commands.BureauQueryRequestedCommand">
+            <summary>Command to trigger a credit bureau query for a customer.</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditLimitApprovedEvent">
+            <summary>Published when a credit limit is auto-approved (Rating A or B, limit below threshold).</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent">
+            <summary>
+            Published when a credit proposal is created and saved.
+            Consumed by: CreditAnalysis.Worker (to start evaluation pipeline).
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalEvaluatedEvent">
+            <summary>
+            Published when a credit proposal has been evaluated and a risk rating assigned.
+            Consumed by: Compliance module (AML cross-check), Operations module (dashboard update).
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Contracts.IAM.Events.UserCreatedEvent">
+            <summary>Published when a new user account is created.</summary>
+        </member>
+        <member name="T:CreditRisk.Shared.Contracts.IAM.Events.UserRoleChangedEvent">
+            <summary>Published when a user's role is changed by an administrator.</summary>
+        </member>
+    </members>
+</doc>
