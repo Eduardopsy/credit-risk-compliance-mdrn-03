@@ -13,6 +13,12 @@ using Scalar.AspNetCore;
 
 WebApplicationBuilder builder = WebApplication.CreateSlimBuilder(args);
 
+// Configure Kestrel to listen on all interfaces
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5001);
+});
+
 builder.Services.AddRouting();
 builder.Services.AddCreditRiskObservability(builder.Configuration, serviceName: "credit-analysis-api");
 

@@ -13,6 +13,12 @@ using Scalar.AspNetCore;
 
 WebApplicationBuilder builder = WebApplication.CreateSlimBuilder(args);
 
+// Configure Kestrel to listen on all interfaces
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5002);
+});
+
 builder.Services.AddRouting();
 builder.Services.AddCreditRiskObservability(builder.Configuration, serviceName: "compliance-api");
 
@@ -21,8 +27,7 @@ builder.Services.ConfigureHttpJsonOptions(options =>
     options.SerializerOptions.TypeInfoResolverChain.Insert(0, ComplianceApiJsonContext.Default);
 });
 
-builder.Services.AddDbContext<ComplianceDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres") ?? "Host=localhost;Database=creditrisk;Username=crcl;Password=crcl"));
+// Database is configured in AddComplianceInfrastructure (below)
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

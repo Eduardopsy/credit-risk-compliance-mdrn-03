@@ -103,3 +103,4 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/bin/Debug/net8.0/Swashbuckle.AspNetCore.Swagger.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/bin/Debug/net8.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Api.sourcelink.json

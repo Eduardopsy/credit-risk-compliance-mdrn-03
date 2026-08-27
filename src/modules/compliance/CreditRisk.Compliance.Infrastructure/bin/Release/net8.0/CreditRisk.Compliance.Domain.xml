@@ -4,5 +4,51 @@
         <name>CreditRisk.Compliance.Domain</name>
     </assembly>
     <members>
+        <member name="T:CreditRisk.Compliance.Domain.Services.IAmlRulesEngine">
+            <summary>
+            Evaluates AML (Anti-Money Laundering) rules for suspicious transaction patterns.
+            Implements behavioral analysis and threshold-based detection.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Compliance.Domain.Services.IAmlRulesEngine.EvaluateTransactionAsync(System.Guid,System.Decimal,System.String)">
+            <summary>
+            Evaluates whether a transaction triggers AML rules.
+            </summary>
+            <param name="customerId">Customer performing the transaction.</param>
+            <param name="amount">Transaction amount in currency units.</param>
+            <param name="transactionType">Type of transaction (Online, ATM, Transfer, etc.).</param>
+            <returns>Alert rule info if triggered; null if no alert.</returns>
+        </member>
+        <member name="T:CreditRisk.Compliance.Domain.Services.AmlRuleAlert">
+            <summary>
+            Represents an AML rule alert when a rule is triggered.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Compliance.Domain.Services.AmlRuleAlert.#ctor(System.String,CreditRisk.Compliance.Domain.Enums.AlertSeverity,System.String)">
+            <summary>
+            Represents an AML rule alert when a rule is triggered.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Compliance.Domain.Services.IPepScreeningService">
+            <summary>
+            Service for screening customers against PEP (Politically Exposed Person) databases.
+            Checks if a customer's document (CPF/CNPJ) matches known PEP records.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Compliance.Domain.Services.IPepScreeningService.IsPersonPoliticallyExposedAsync(System.String,System.String)">
+            <summary>
+            Screens a customer document against the PEP database.
+            Returns true if the document matches a PEP record (high risk).
+            </summary>
+            <param name="document">Customer document (CPF/CNPJ).</param>
+            <param name="documentType">Type of document (CPF, CNPJ, etc.).</param>
+            <returns>True if customer is flagged as PEP; false otherwise.</returns>
+        </member>
+        <member name="M:CreditRisk.Compliance.Domain.Services.IPepScreeningService.GetPepRiskLevelAsync(System.String,System.String)">
+            <summary>
+            Gets the risk level of a PEP match (if any).
+            Higher numbers indicate higher risk.
+            </summary>
+        </member>
     </members>
 </doc>

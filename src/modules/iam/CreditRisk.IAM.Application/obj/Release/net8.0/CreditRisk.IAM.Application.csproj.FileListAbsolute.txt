@@ -22,3 +22,4 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Release/net8.0/CreditRisk.IAM.Application.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Release/net8.0/CreditRisk.IAM.Application.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Release/net8.0/ref/CreditRisk.IAM.Application.dll
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Release/net8.0/CreditRisk.IAM.Application.sourcelink.json

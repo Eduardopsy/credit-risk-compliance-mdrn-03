@@ -16,3 +16,4 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/obj/Debug/net8.0/ref/CreditRisk.CreditAnalysis.Domain.dll
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.sourcelink.json

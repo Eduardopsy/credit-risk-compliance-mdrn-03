@@ -4,6 +4,30 @@
         <name>CreditRisk.CreditAnalysis.Infrastructure</name>
     </assembly>
     <members>
+        <member name="T:CreditRisk.CreditAnalysis.Infrastructure.Persistence.Configurations.OutboxMessageConfiguration">
+            <summary>
+            Entity Framework Core configuration for OutboxMessage.
+            Maps to a database table that stores messages for guaranteed delivery via Outbox Pattern.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.CreditAnalysis.Infrastructure.Persistence.Repositories.OutboxRepository">
+            <summary>
+            Repository for persisting and retrieving outbox messages in PostgreSQL.
+            Implements IOutboxRepository for use by OutboxProcessor.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Infrastructure.Persistence.Repositories.OutboxRepository.AddAsync(CreditRisk.Shared.Kernel.Outbox.OutboxMessage,System.Threading.CancellationToken)">
+            <summary>Add a new message to the outbox for guaranteed delivery.</summary>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Infrastructure.Persistence.Repositories.OutboxRepository.GetUnprocessedAsync(System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>Get all unprocessed messages scheduled for now or earlier.</summary>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Infrastructure.Persistence.Repositories.OutboxRepository.UpdateAsync(CreditRisk.Shared.Kernel.Outbox.OutboxMessage,System.Threading.CancellationToken)">
+            <summary>Update outbox message status after publish attempt.</summary>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Infrastructure.Persistence.Repositories.OutboxRepository.DeleteProcessedAsync(System.DateTimeOffset,System.Threading.CancellationToken)">
+            <summary>Delete successfully processed messages older than specified age.</summary>
+        </member>
         <member name="T:CreditRisk.CreditAnalysis.Infrastructure.Services.CreditScoringEngine">
             <summary>
             Implements credit scoring matrix following BCB Resolução 4.557 risk classification.

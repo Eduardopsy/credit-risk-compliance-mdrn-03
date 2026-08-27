@@ -2,17 +2,32 @@
 namespace CreditRisk.Shared.Contracts.CreditAnalysis.Events;
 
 /// <summary>
-/// Published when a credit proposal has been evaluated and a risk rating assigned.
-/// Consumed by: Compliance module (AML cross-check), Operations module (dashboard update).
+/// Published after credit proposal evaluation (scoring completed).
+/// Contains risk assessment result and approved limit.
 /// </summary>
 public sealed record CreditProposalEvaluatedEvent
 {
+    /// <summary>The evaluated proposal identifier.</summary>
     public required Guid ProposalId { get; init; }
+
+    /// <summary>Customer associated with the proposal.</summary>
     public required Guid CustomerId { get; init; }
-    public required string RiskRating { get; init; }         // "A" | "B" | "C" | "D" | "E"
+
+    /// <summary>Risk rating (A, B, C, D, E) from scoring engine.</summary>
+    public required string RiskRating { get; init; }
+
+    /// <summary>Approved credit limit amount.</summary>
     public required decimal ApprovedLimit { get; init; }
+
+    /// <summary>When the evaluation was completed.</summary>
     public required DateTimeOffset EvaluatedAt { get; init; }
-    public required string EvaluatedBy { get; init; }        // "AUTO" or operator ID
+
+    /// <summary>Evaluator identifier (usually "AUTO" for scoring engine).</summary>
+    public required string EvaluatedBy { get; init; }
+
+    /// <summary>Whether manual review is required despite automation.</summary>
     public required bool RequiresManualReview { get; init; }
+
+    /// <summary>Correlation ID for distributed tracing.</summary>
     public required Guid CorrelationId { get; init; }
 }

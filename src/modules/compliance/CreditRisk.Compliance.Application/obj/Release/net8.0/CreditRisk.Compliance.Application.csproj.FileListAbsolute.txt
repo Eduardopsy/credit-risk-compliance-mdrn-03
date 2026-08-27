@@ -22,3 +22,4 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Application/obj/Release/net8.0/CreditRisk.Compliance.Application.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Application/obj/Release/net8.0/CreditRisk.Compliance.Application.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Application/obj/Release/net8.0/ref/CreditRisk.Compliance.Application.dll
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Application/obj/Release/net8.0/CreditRisk.Compliance.Application.sourcelink.json

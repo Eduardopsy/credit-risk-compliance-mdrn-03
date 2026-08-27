@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CreditRisk.CreditAnalysis.Worker</name>
+    </assembly>
+    <members>
+        <member name="T:CreditRisk.CreditAnalysis.Worker.Consumers.CreditProposalCreatedEventConsumer">
+            <summary>
+            Consumes CreditProposalCreatedEvent and orchestrates credit analysis workflow.
+            Fetches bureau data, scores the proposal using CreditScoringEngine, and publishes CreditProposalEvaluatedEvent via Outbox.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Worker.Consumers.CreditProposalCreatedEventConsumer.Consume(MassTransit.ConsumeContext{CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent})">
+            <summary>
+            Handles incoming CreditProposalCreatedEvent.
+            1. Queries bureau for applicant data
+            2. Runs CreditScoringEngine with bureau score and income
+            3. Publishes CreditProposalEvaluatedEvent via Outbox (guaranteed delivery)
+            4. Gracefully degrades if bureau is unavailable (score=0, rating=E)
+            </summary>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Worker.Consumers.CreditProposalCreatedEventConsumer.ExtractMonthlyIncomeFromProposal(CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent)">
+            <summary>
+            Extracts monthly income from proposal. In a real scenario, this would come from a separate service or database.
+            For now, we use a placeholder: estimate based on requested limit (heuristic).
+            </summary>
+        </member>
+        <member name="T:CreditRisk.CreditAnalysis.Worker.Services.BureauHttpClient">
+            <summary>
+            HTTP client for querying the bureau mock service.
+            Implements resilience patterns: retry policy and circuit breaker via Polly.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Worker.Services.BureauHttpClient.QueryAsync(System.String,System.String)">
+            <summary>
+            Queries bureau for applicant credit data.
+            Returns null if bureau is unavailable (graceful degradation).
+            </summary>
+        </member>
+        <member name="T:CreditRisk.CreditAnalysis.Worker.Services.BureauQueryRequest">
+            <summary>Request to query credit bureau.</summary>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Worker.Services.BureauQueryRequest.#ctor(System.String,System.String)">
+            <summary>Request to query credit bureau.</summary>
+        </member>
+        <member name="T:CreditRisk.CreditAnalysis.Worker.Services.BureauQueryResponse">
+            <summary>Credit score response from bureau.</summary>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Worker.Services.BureauQueryResponse.#ctor(System.Int32,System.Decimal,System.String)">
+            <summary>Credit score response from bureau.</summary>
+        </member>
+        <member name="T:CreditRisk.CreditAnalysis.Worker.Services.OutboxProcessor">
+            <summary>
+            Background service that processes outbox messages and publishes them to MassTransit.
+            Polls every 5 seconds, retrieves unprocessed messages, and publishes them with retry logic.
+            Implements guaranteed delivery semantics for event-sourcing patterns.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Worker.Services.OutboxProcessor.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>Execute the background service continuously.</summary>
+        </member>
+    </members>
+</doc>

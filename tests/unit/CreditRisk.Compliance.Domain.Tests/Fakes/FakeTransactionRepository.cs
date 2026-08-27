@@ -20,6 +20,18 @@ internal sealed class FakeTransactionRepository : ITransactionRepository
         return Task.FromResult(_storeById.TryGetValue(id, out var transaction) ? transaction : null);
     }
 
+    public Task<IReadOnlyList<Transaction>> GetByCustomerIdAsync(Guid customerId, int limit = 50, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        var result = _allTransactions
+            .Where(t => t.CustomerId == customerId)
+            .OrderByDescending(t => t.TransactionDate)
+            .Take(limit)
+            .ToList()
+            .AsReadOnly();
+        return Task.FromResult<IReadOnlyList<Transaction>>(result);
+    }
+
     public Task AddAsync(Transaction transaction, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CreditRisk.Compliance.Worker</name>
+    </assembly>
+    <members>
+        <member name="T:CreditRisk.Compliance.Worker.Consumers.AmlAlertCreatedEventConsumer">
+            <summary>
+            Consumes AmlAlertCreatedEvent and handles operations notifications.
+            May trigger escalation, compliance review, or regulatory reporting workflows.
+            In this implementation, it logs the event for compliance audit trail.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Compliance.Worker.Consumers.AmlAlertCreatedEventConsumer.Consume(MassTransit.ConsumeContext{CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent})">
+            <summary>
+            Handles incoming AmlAlertCreatedEvent.
+            Logs for compliance audit trail and future escalation workflows.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Compliance.Worker.Consumers.TransactionReceivedCommandConsumer">
+            <summary>
+            Consumes TransactionReceivedCommand and orchestrates compliance screening workflow.
+            1. Persists transaction to database
+            2. Screens customer against PEP database
+            3. Evaluates AML rules
+            4. Creates alerts if needed and publishes via Outbox
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Compliance.Worker.Consumers.TransactionReceivedCommandConsumer.Consume(MassTransit.ConsumeContext{CreditRisk.Shared.Contracts.Compliance.Commands.TransactionReceivedCommand})">
+            <summary>
+            Handles incoming TransactionReceivedCommand.
+            Workflow:
+            1. Persist transaction
+            2. Screen against PEP
+            3. Evaluate AML rules
+            4. Create alerts and publish via Outbox if triggered
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Compliance.Worker.Consumers.TransactionReceivedCommandConsumer.CreateAndPublishAlertAsync(System.Guid,System.Guid,System.String,System.String,System.Decimal,System.Guid)">
+            <summary>
+            Creates an AML alert and publishes via Outbox for guaranteed delivery.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Compliance.Worker.Services.OutboxProcessor">
+            <summary>
+            Background service that processes outbox messages and publishes them to MassTransit.
+            Polls every 5 seconds, retrieves unprocessed messages, and publishes them with retry logic.
+            Implements guaranteed delivery semantics for event-sourcing patterns.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Compliance.Worker.Services.OutboxProcessor.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>Execute the background service continuously.</summary>
+        </member>
+    </members>
+</doc>

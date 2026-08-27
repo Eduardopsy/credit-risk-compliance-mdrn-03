@@ -103,3 +103,4 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Api/obj/Release/net8.0/CreditRisk.Compliance.Api.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Api/obj/Release/net8.0/CreditRisk.Compliance.Api.genruntimeconfig.cache
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Api/obj/Release/net8.0/ref/CreditRisk.Compliance.Api.dll
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Api/obj/Release/net8.0/CreditRisk.Compliance.Api.sourcelink.json

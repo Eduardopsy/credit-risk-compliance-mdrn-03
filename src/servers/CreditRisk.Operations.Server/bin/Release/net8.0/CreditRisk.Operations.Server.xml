@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CreditRisk.Operations.Server</name>
+    </assembly>
+    <members>
+        <member name="T:CreditRisk.Operations.Server.Consumers.AmlAlertCreatedEventConsumer">
+            <summary>
+            Consumes AmlAlertCreatedEvent and broadcasts to connected clients via SignalR.
+            Triggered by compliance worker when alerts are created and published.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Consumers.AmlAlertCreatedEventConsumer.Consume(MassTransit.ConsumeContext{CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent})">
+            <summary>
+            Handles incoming AmlAlertCreatedEvent.
+            Broadcasts to operations dashboard via SignalR hub.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Server.Hubs.OperationsHub">
+            <summary>
+            SignalR hub for real-time operations updates.
+            Broadcasts compliance alerts, transaction flags, and operational events to connected clients.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Hubs.OperationsHub.BroadcastAmlAlert(CreditRisk.Operations.Server.Hubs.AmlAlertNotification)">
+            <summary>
+            Broadcasts an AML alert to all connected clients.
+            Called by AlertNotificationService when AmlAlertCreatedEvent is received.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Hubs.OperationsHub.BroadcastUrgentAlert(CreditRisk.Operations.Server.Hubs.AmlAlertNotification)">
+            <summary>
+            Broadcasts an urgent alert (Critical severity) to all connected clients.
+            Used for immediate escalation notifications.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Hubs.OperationsHub.NotifyTransactionFlagged(CreditRisk.Operations.Server.Hubs.TransactionFlaggedNotification)">
+            <summary>
+            Notifies compliance officers of a flagged transaction.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Hubs.OperationsHub.UpdateDashboard(CreditRisk.Operations.Server.Hubs.DashboardUpdateNotification)">
+            <summary>
+            Sends a dashboard update with alert statistics.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Server.Hubs.AmlAlertNotification">
+            <summary>
+            Notification payload for AML alerts sent via SignalR.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Hubs.AmlAlertNotification.#ctor(System.Guid,System.Guid,System.Guid,System.String,System.String,System.Decimal,System.DateTimeOffset,System.String)">
+            <summary>
+            Notification payload for AML alerts sent via SignalR.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Server.Hubs.TransactionFlaggedNotification">
+            <summary>
+            Notification payload for flagged transactions.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Hubs.TransactionFlaggedNotification.#ctor(System.Guid,System.Guid,System.String,System.Collections.Generic.List{System.String},System.DateTimeOffset)">
+            <summary>
+            Notification payload for flagged transactions.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Server.Hubs.DashboardUpdateNotification">
+            <summary>
+            Notification payload for dashboard updates.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Hubs.DashboardUpdateNotification.#ctor(System.Int32,System.Int32,System.Int32,System.DateTimeOffset)">
+            <summary>
+            Notification payload for dashboard updates.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Server.Services.AlertNotificationService">
+            <summary>
+            Service for broadcasting compliance alerts to connected clients via SignalR.
+            Acts as a bridge between message consumers and the OperationsHub.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Services.AlertNotificationService.BroadcastAmlAlertAsync(System.Guid,System.Guid,System.Guid,System.String,System.String,System.Decimal,System.DateTimeOffset)">
+            <summary>
+            Broadcasts an AML alert to all connected clients.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Services.AlertNotificationService.BroadcastTransactionFlaggedAsync(System.Guid,System.Guid,System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Broadcasts transaction flagging notification.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Services.AlertNotificationService.UpdateDashboardAsync(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Updates dashboard with current alert statistics.
+            </summary>
+        </member>
+    </members>
+</doc>

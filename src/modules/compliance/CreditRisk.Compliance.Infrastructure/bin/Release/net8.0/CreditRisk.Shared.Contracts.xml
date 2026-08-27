@@ -5,19 +5,91 @@
     </assembly>
     <members>
         <member name="T:CreditRisk.Shared.Contracts.Compliance.Commands.TransactionReceivedCommand">
-            <summary>Command published by Compliance API for async AML processing.</summary>
+            <summary>
+            Command: A transaction has been received and requires compliance screening.
+            Triggers AML/CFT rules evaluation, PEP screening, and alert creation.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Commands.TransactionReceivedCommand.TransactionId">
+            <summary>Unique transaction identifier.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Commands.TransactionReceivedCommand.CustomerId">
+            <summary>Customer performing the transaction.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Commands.TransactionReceivedCommand.CustomerDocument">
+            <summary>Customer's document (CPF/CNPJ) for PEP screening.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Commands.TransactionReceivedCommand.Amount">
+            <summary>Transaction amount in currency units.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Commands.TransactionReceivedCommand.TransactionType">
+            <summary>Type of transaction (Online, ATM, Branch, etc.).</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Commands.TransactionReceivedCommand.Channel">
+            <summary>Channel used for transaction (Web, Mobile, ATM, etc.).</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Commands.TransactionReceivedCommand.TransactionDate">
+            <summary>When the transaction occurred.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Commands.TransactionReceivedCommand.CorrelationId">
+            <summary>Correlation ID for distributed tracing.</summary>
         </member>
         <member name="T:CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent">
             <summary>
             Published when an AML alert is created for a flagged transaction.
-            Consumed by: Operations module (SignalR push to compliance-analyst group).
+            One event per alert (multiple alerts possible per transaction).
             </summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent.AlertId">
+            <summary>Unique alert identifier.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent.TransactionId">
+            <summary>Transaction that triggered the alert.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent.CustomerId">
+            <summary>Customer involved in the flagged transaction.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent.AlertType">
+            <summary>Type of AML rule that triggered (Smurfing, PepMatch, etc.).</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent.Severity">
+            <summary>Severity level (Low, Medium, High, Critical).</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent.TransactionAmount">
+            <summary>Amount of the flagged transaction.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent.CreatedAt">
+            <summary>When the alert was created.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent.CorrelationId">
+            <summary>Correlation ID for distributed tracing.</summary>
         </member>
         <member name="T:CreditRisk.Shared.Contracts.Compliance.Events.FraudConfirmedEvent">
             <summary>Published when a compliance analyst confirms a transaction as fraud.</summary>
         </member>
         <member name="T:CreditRisk.Shared.Contracts.Compliance.Events.TransactionFlaggedEvent">
-            <summary>Published when a transaction is flagged by the AML rules engine.</summary>
+            <summary>
+            Published when a transaction is flagged by any AML rule.
+            Aggregates all rules triggered for the transaction.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.TransactionFlaggedEvent.TransactionId">
+            <summary>The flagged transaction identifier.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.TransactionFlaggedEvent.CustomerId">
+            <summary>Customer involved in the flagged transaction.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.TransactionFlaggedEvent.FlagReason">
+            <summary>Summary reason for flagging (comma-separated list of triggered rules).</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.TransactionFlaggedEvent.TriggeredRules">
+            <summary>Array of all rules that triggered.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.TransactionFlaggedEvent.FlaggedAt">
+            <summary>When the transaction was flagged.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.Compliance.Events.TransactionFlaggedEvent.CorrelationId">
+            <summary>Correlation ID for distributed tracing.</summary>
         </member>
         <member name="T:CreditRisk.Shared.Contracts.CreditAnalysis.Commands.BureauQueryRequestedCommand">
             <summary>Command to trigger a credit bureau query for a customer.</summary>
@@ -27,15 +99,66 @@
         </member>
         <member name="T:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent">
             <summary>
-            Published when a credit proposal is created and saved.
-            Consumed by: CreditAnalysis.Worker (to start evaluation pipeline).
+            Published when a credit proposal is created.
+            Triggers credit analysis workflow: bureau query → scoring → evaluation.
             </summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent.ProposalId">
+            <summary>Unique proposal identifier.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent.CustomerId">
+            <summary>Customer requesting the credit.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent.CustomerDocument">
+            <summary>Customer's document (CPF/CNPJ).</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent.CustomerDocumentType">
+            <summary>Type of document (CPF, CNPJ, etc.).</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent.RequestedLimit">
+            <summary>Amount requested for credit line.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent.ProposalType">
+            <summary>Type of proposal (Individual, Business, etc.).</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent.CreatedAt">
+            <summary>When the proposal was created.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent.CreatedBy">
+            <summary>Who created the proposal.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalCreatedEvent.CorrelationId">
+            <summary>Correlation ID for distributed tracing.</summary>
         </member>
         <member name="T:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalEvaluatedEvent">
             <summary>
-            Published when a credit proposal has been evaluated and a risk rating assigned.
-            Consumed by: Compliance module (AML cross-check), Operations module (dashboard update).
+            Published after credit proposal evaluation (scoring completed).
+            Contains risk assessment result and approved limit.
             </summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalEvaluatedEvent.ProposalId">
+            <summary>The evaluated proposal identifier.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalEvaluatedEvent.CustomerId">
+            <summary>Customer associated with the proposal.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalEvaluatedEvent.RiskRating">
+            <summary>Risk rating (A, B, C, D, E) from scoring engine.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalEvaluatedEvent.ApprovedLimit">
+            <summary>Approved credit limit amount.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalEvaluatedEvent.EvaluatedAt">
+            <summary>When the evaluation was completed.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalEvaluatedEvent.EvaluatedBy">
+            <summary>Evaluator identifier (usually "AUTO" for scoring engine).</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalEvaluatedEvent.RequiresManualReview">
+            <summary>Whether manual review is required despite automation.</summary>
+        </member>
+        <member name="P:CreditRisk.Shared.Contracts.CreditAnalysis.Events.CreditProposalEvaluatedEvent.CorrelationId">
+            <summary>Correlation ID for distributed tracing.</summary>
         </member>
         <member name="T:CreditRisk.Shared.Contracts.IAM.Events.UserCreatedEvent">
             <summary>Published when a new user account is created.</summary>

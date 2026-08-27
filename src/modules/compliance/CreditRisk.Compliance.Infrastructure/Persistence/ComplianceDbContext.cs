@@ -1,6 +1,7 @@
 // File: src/modules/compliance/CreditRisk.Compliance.Infrastructure/Persistence/ComplianceDbContext.cs
 using CreditRisk.Compliance.Domain.Entities;
 using CreditRisk.Shared.Kernel.Domain;
+using CreditRisk.Shared.Kernel.Outbox;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -10,6 +11,7 @@ public sealed class ComplianceDbContext(DbContextOptions<ComplianceDbContext> op
 {
     public DbSet<Transaction> Transactions => Set<Transaction>();
     public DbSet<AmlAlert> AmlAlerts => Set<AmlAlert>();
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

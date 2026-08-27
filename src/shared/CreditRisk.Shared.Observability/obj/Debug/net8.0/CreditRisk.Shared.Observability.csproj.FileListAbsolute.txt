@@ -12,3 +12,4 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/obj/Debug/net8.0/CreditRisk.Shared.Observability.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/obj/Debug/net8.0/CreditRisk.Shared.Observability.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/obj/Debug/net8.0/ref/CreditRisk.Shared.Observability.dll
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/obj/Debug/net8.0/CreditRisk.Shared.Observability.sourcelink.json

@@ -2,18 +2,35 @@
 namespace CreditRisk.Shared.Contracts.CreditAnalysis.Events;
 
 /// <summary>
-/// Published when a credit proposal is created and saved.
-/// Consumed by: CreditAnalysis.Worker (to start evaluation pipeline).
+/// Published when a credit proposal is created.
+/// Triggers credit analysis workflow: bureau query → scoring → evaluation.
 /// </summary>
 public sealed record CreditProposalCreatedEvent
 {
+    /// <summary>Unique proposal identifier.</summary>
     public required Guid ProposalId { get; init; }
+
+    /// <summary>Customer requesting the credit.</summary>
     public required Guid CustomerId { get; init; }
-    public required string CustomerDocument { get; init; }   // CPF or CNPJ (digits only)
-    public required string CustomerDocumentType { get; init; } // "CPF" or "CNPJ"
+
+    /// <summary>Customer's document (CPF/CNPJ).</summary>
+    public required string CustomerDocument { get; init; }
+
+    /// <summary>Type of document (CPF, CNPJ, etc.).</summary>
+    public required string CustomerDocumentType { get; init; }
+
+    /// <summary>Amount requested for credit line.</summary>
     public required decimal RequestedLimit { get; init; }
-    public required string ProposalType { get; init; }       // "Individual" or "LegalEntity"
+
+    /// <summary>Type of proposal (Individual, Business, etc.).</summary>
+    public required string ProposalType { get; init; }
+
+    /// <summary>When the proposal was created.</summary>
     public required DateTimeOffset CreatedAt { get; init; }
-    public required string CreatedBy { get; init; }          // Operator user ID
+
+    /// <summary>Who created the proposal.</summary>
+    public required string CreatedBy { get; init; }
+
+    /// <summary>Correlation ID for distributed tracing.</summary>
     public required Guid CorrelationId { get; init; }
 }

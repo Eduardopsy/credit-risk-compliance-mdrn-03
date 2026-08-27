@@ -1,0 +1,68 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/external/CreditRisk.BureauMock.Service/CreditRisk.BureauMock.Service.csproj": {}
+  },
+  "projects": {
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/external/CreditRisk.BureauMock.Service/CreditRisk.BureauMock.Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/external/CreditRisk.BureauMock.Service/CreditRisk.BureauMock.Service.csproj",
+        "projectName": "CreditRisk.BureauMock.Service",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/external/CreditRisk.BureauMock.Service/CreditRisk.BureauMock.Service.csproj",
+        "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/external/CreditRisk.BureauMock.Service/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "noWarn": [
+            "NU1902",
+            "NU1903"
+          ],
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.130/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

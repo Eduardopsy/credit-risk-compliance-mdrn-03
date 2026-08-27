@@ -1,0 +1,424 @@
+[0;34m════════════════════════════════════════════════════════════[0m
+[0;34mSPEC-03 Test Suite Runner[0m
+[0;34m════════════════════════════════════════════════════════════[0m
+[0;34m[2026-08-27 09:31:59][0m Starting test run
+[0;34m[2026-08-27 09:31:59][0m Configuration: Unit=true, Integration=false, Coverage=false
+[1;33m▶ Available Test Projects[0m
+[1;33m▶ Discovering Test Projects[0m
+[0;32m[INFO][0m Found: integration
+[0;32m[INFO][0m Found: CreditRisk.CreditAnalysis.Domain.Tests
+[0;32m[INFO][0m Found: CreditRisk.IAM.Domain.Tests
+[0;32m[INFO][0m Found: CreditRisk.Compliance.Domain.Tests
+  1. .
+  2. .
+  3. .
+  4. .
+  5. .
+  6. .
+  7. .
+  8. .
+  9. .
+  10. .
+  11. .
+  12. .
+  13. .
+  14. .
+  15. .
+  16. .
+  17. integration
+  18. CreditRisk.CreditAnalysis.Domain.Tests
+  19. CreditRisk.IAM.Domain.Tests
+  20. CreditRisk.Compliance.Domain.Tests
+[1;33m▶ Discovering Test Projects[0m
+[0;32m[INFO][0m Found: integration
+[0;32m[INFO][0m Found: CreditRisk.CreditAnalysis.Domain.Tests
+[0;32m[INFO][0m Found: CreditRisk.IAM.Domain.Tests
+[0;32m[INFO][0m Found: CreditRisk.Compliance.Domain.Tests
+[1;33m▶ Running Tests[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: [1;33m▶
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Discovering
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Test
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Projects[0m
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: [0;32m[INFO][0m
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Found:
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: integration
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: [0;32m[INFO][0m
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Found:
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: CreditRisk.CreditAnalysis.Domain.Tests
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: [0;32m[INFO][0m
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Found:
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: CreditRisk.IAM.Domain.Tests
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: [0;32m[INFO][0m
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Found:
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: CreditRisk.Compliance.Domain.Tests
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: integration
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  CreditRisk.Shared.Kernel -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/bin/Debug/net8.0/CreditRisk.Shared.Kernel.dll
+  CreditRisk.Compliance.Domain -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/bin/Debug/net8.0/CreditRisk.Compliance.Domain.dll
+  CreditRisk.Shared.Contracts -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/bin/Debug/net8.0/CreditRisk.Shared.Contracts.dll
+  CreditRisk.CreditAnalysis.Domain -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.dll
+  CreditRisk.Compliance.Application -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Application/bin/Debug/net8.0/CreditRisk.Compliance.Application.dll
+  CreditRisk.CreditAnalysis.Application -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Application.dll
+  CreditRisk.Compliance.Infrastructure -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Infrastructure/bin/Debug/net8.0/CreditRisk.Compliance.Infrastructure.dll
+  CreditRisk.CreditAnalysis.Infrastructure -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Infrastructure.dll
+  CreditRisk.Integration.Tests -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/bin/Debug/net8.0/CreditRisk.Integration.Tests.dll
+Execução de teste para /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/bin/Debug/net8.0/CreditRisk.Integration.Tests.dll (.NETCoreApp,Version=v8.0)
+Ferramenta de Linha de Comando de Execução de Teste da Microsoft (R) Versão 17.8.0 (x64)
+Copyright (c) Microsoft Corporation. Todos os direitos reservados.
+
+Iniciando execução de teste, espere...
+1 arquivos de teste no total corresponderam ao padrão especificado.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.5.8+bd6d97b49a (64-bit .NET 8.0.30)
+[xUnit.net 00:00:00.09]   Discovering: CreditRisk.Integration.Tests
+[xUnit.net 00:00:00.13]   Discovered:  CreditRisk.Integration.Tests
+[xUnit.net 00:00:00.13]   Starting:    CreditRisk.Integration.Tests
+[testcontainers.org 00:00:00.09] Connected to Docker:
+  Host: unix:///var/run/docker.sock
+  Server Version: 29.1.3
+  Kernel Version: 7.0.0-30-generic
+  API Version: 1.52
+  Operating System: Ubuntu 24.04.4 LTS
+  Total Memory: 30.80 GB
+[testcontainers.org 00:00:00.24] Docker container e53aa72d9324 created
+[testcontainers.org 00:00:00.26] Start Docker container e53aa72d9324
+[testcontainers.org 00:00:00.38] Wait for Docker container e53aa72d9324 to complete readiness checks
+[testcontainers.org 00:00:00.38] Docker container e53aa72d9324 ready
+[testcontainers.org 00:00:00.48] Docker container ffad34d45f75 created
+[testcontainers.org 00:00:00.48] Docker container 639d0d314d16 created
+[testcontainers.org 00:00:00.48] Docker container a7e147540347 created
+[testcontainers.org 00:00:00.48] Start Docker container ffad34d45f75
+[testcontainers.org 00:00:00.48] Start Docker container 639d0d314d16
+[testcontainers.org 00:00:00.49] Start Docker container a7e147540347
+[testcontainers.org 00:00:00.61] Wait for Docker container ffad34d45f75 to complete readiness checks
+[testcontainers.org 00:00:00.61] Execute "redis-cli ping" at Docker container ffad34d45f75
+[testcontainers.org 00:00:00.63] Wait for Docker container 639d0d314d16 to complete readiness checks
+[testcontainers.org 00:00:00.64] Execute "pg_isready --host localhost --dbname creditrisk_test --username postgres" at Docker container 639d0d314d16
+[testcontainers.org 00:00:00.66] Wait for Docker container a7e147540347 to complete readiness checks
+[testcontainers.org 00:00:00.67] Docker container ffad34d45f75 ready
+[testcontainers.org 00:00:01.68] Execute "pg_isready --host localhost --dbname creditrisk_test --username postgres" at Docker container 639d0d314d16
+[testcontainers.org 00:00:02.74] Execute "pg_isready --host localhost --dbname creditrisk_test --username postgres" at Docker container 639d0d314d16
+[testcontainers.org 00:00:02.79] Docker container 639d0d314d16 ready
+[testcontainers.org 00:00:05.71] Docker container a7e147540347 ready
+[09:32:11 DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+[09:32:11 DBG] The property 'CreditProposal.ApprovedLimit#MoneyAmount.CreditProposalId' was created in shadow state because there are no eligible CLR members with a matching name.
+[09:32:11 DBG] The property 'CreditProposal.RequestedLimit#MoneyAmount.CreditProposalId' was created in shadow state because there are no eligible CLR members with a matching name.
+[09:32:11 DBG] Entity Framework Core 9.0.0 initialized 'CreditAnalysisDbContext' using provider 'Npgsql.EntityFrameworkCore.PostgreSQL:9.0.0+f07040d3e35e2a228486f3ee9633784aa196a2c3' with options: None
+[09:32:11 DBG] Creating DbConnection.
+[09:32:11 DBG] Created DbConnection. (23ms).
+[09:32:11 DBG] Opening connection to database 'creditrisk_test' on server 'tcp://127.0.0.1:32770'.
+[09:32:11 DBG] Opened connection to database 'creditrisk_test' on server 'tcp://127.0.0.1:32770'.
+[09:32:11 DBG] Creating DbCommand for 'ExecuteReader'.
+[09:32:11 DBG] Created DbCommand for 'ExecuteReader' (2ms).
+[09:32:11 DBG] Initialized DbCommand for 'ExecuteReader' (5ms).
+[09:32:11 DBG] Executing DbCommand [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[09:32:11 ERR] Failed executing DbCommand (16ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[09:32:11 DBG] Closing connection to database 'creditrisk_test' on server 'tcp://127.0.0.1:32770'.
+[09:32:11 DBG] Closed connection to database 'creditrisk_test' on server 'tcp://127.0.0.1:32770' (1ms).
+[09:32:11 DBG] 'CreditAnalysisDbContext' disposed.
+[09:32:11 DBG] Disposing connection to database 'creditrisk_test' on server 'tcp://127.0.0.1:32770'.
+[09:32:11 DBG] Disposed connection to database 'creditrisk_test' on server 'tcp://127.0.0.1:32770' (0ms).
+[testcontainers.org 00:00:06.45] Stop Docker container 639d0d314d16
+[testcontainers.org 00:00:06.45] Stop Docker container a7e147540347
+[testcontainers.org 00:00:06.46] Stop Docker container ffad34d45f75
+[xUnit.net 00:00:06.68]     CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.AlertCreation_PublishesToOutbox_GuaranteesDelivery [FAIL]
+[xUnit.net 00:00:06.68]       System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+[xUnit.net 00:00:06.68]       Stack Trace:
+[xUnit.net 00:00:06.68]            at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+[xUnit.net 00:00:06.68]            at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+[xUnit.net 00:00:06.68]            at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.68]            at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.68]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(147,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync()
+[xUnit.net 00:00:06.68]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(99,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync()
+[xUnit.net 00:00:06.69]     CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.PepScreening_DetectsPepCustomer_CreatesAlert [FAIL]
+[xUnit.net 00:00:06.69]       System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+[xUnit.net 00:00:06.69]       Stack Trace:
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.69]            at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.69]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(147,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync()
+[xUnit.net 00:00:06.69]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(99,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync()
+[xUnit.net 00:00:06.69]     CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.AlertIsolation_CustomerAlertsNotVisible_ToOtherCustomers [FAIL]
+[xUnit.net 00:00:06.69]       System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+[xUnit.net 00:00:06.69]       Stack Trace:
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.69]            at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.69]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(147,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync()
+[xUnit.net 00:00:06.69]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(99,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync()
+[xUnit.net 00:00:06.69]     CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.OutboxMessage_OnFailure_IncrementRetryCount [FAIL]
+[xUnit.net 00:00:06.69]       System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+[xUnit.net 00:00:06.69]       Stack Trace:
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.69]            at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.69]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(147,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync()
+[xUnit.net 00:00:06.69]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(99,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync()
+[xUnit.net 00:00:06.69]     CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.AmlRules_DetectsLargeTransaction_CreatesHighSeverityAlert [FAIL]
+[xUnit.net 00:00:06.69]       System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+[xUnit.net 00:00:06.69]       Stack Trace:
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.69]            at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.69]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(147,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync()
+[xUnit.net 00:00:06.69]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(99,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync()
+[xUnit.net 00:00:06.69]     CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.AmlRules_DetectsStructuring_CreatesAlert [FAIL]
+[xUnit.net 00:00:06.69]       System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+[xUnit.net 00:00:06.69]       Stack Trace:
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.69]            at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.69]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(147,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync()
+[xUnit.net 00:00:06.69]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(99,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync()
+[xUnit.net 00:00:06.69]     CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.PepCache_CachesResults_ReducesQueries [FAIL]
+[xUnit.net 00:00:06.69]       System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+[xUnit.net 00:00:06.69]       Stack Trace:
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+[xUnit.net 00:00:06.69]            at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.69]            at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+[xUnit.net 00:00:06.69]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(147,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync()
+[xUnit.net 00:00:06.69]         /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs(99,0): at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync()
+[xUnit.net 00:00:07.92]   Finished:    CreditRisk.Integration.Tests
+  Com falha CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.AlertCreation_PublishesToOutbox_GuaranteesDelivery [1 ms]
+  Mensagem de erro:
+   System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+  Rastreamento de pilha:
+     at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+   at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 147
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 99
+  Com falha CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.PepScreening_DetectsPepCustomer_CreatesAlert [1 ms]
+  Mensagem de erro:
+   System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+  Rastreamento de pilha:
+     at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+   at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 147
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 99
+  Com falha CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.AlertIsolation_CustomerAlertsNotVisible_ToOtherCustomers [1 ms]
+  Mensagem de erro:
+   System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+  Rastreamento de pilha:
+     at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+   at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 147
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 99
+  Com falha CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.OutboxMessage_OnFailure_IncrementRetryCount [1 ms]
+  Mensagem de erro:
+   System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+  Rastreamento de pilha:
+     at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+   at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 147
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 99
+  Com falha CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.AmlRules_DetectsLargeTransaction_CreatesHighSeverityAlert [1 ms]
+  Mensagem de erro:
+   System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+  Rastreamento de pilha:
+     at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+   at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 147
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 99
+  Com falha CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.AmlRules_DetectsStructuring_CreatesAlert [1 ms]
+  Mensagem de erro:
+   System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+  Rastreamento de pilha:
+     at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+   at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 147
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 99
+  Com falha CreditRisk.Integration.Tests.EndToEnd.TransactionToAlertFlowTests.PepCache_CachesResults_ReducesQueries [1 ms]
+  Mensagem de erro:
+   System.InvalidOperationException : An error was generated for warning 'Microsoft.EntityFrameworkCore.Migrations.PendingModelChangesWarning': The model for context 'CreditAnalysisDbContext' has pending changes. Add a new migration before updating the database. This exception can be suppressed or logged by passing event ID 'RelationalEventId.PendingModelChangesWarning' to the 'ConfigureWarnings' method in 'DbContext.OnConfiguring' or 'AddDbContext'.
+  Rastreamento de pilha:
+     at Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`1.Log[TLoggerCategory](IDiagnosticsLogger`1 logger, TParam arg)
+   at Microsoft.EntityFrameworkCore.Diagnostics.RelationalLoggerExtensions.PendingModelChangesWarning(IDiagnosticsLogger`1 diagnostics, Type contextType)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Migrations.Internal.NpgsqlMigrator.MigrateAsync(String targetMigration, CancellationToken cancellationToken)
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.RunMigrationsAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 147
+   at CreditRisk.Integration.Tests.Infrastructure.IntegrationTestFixture.InitializeAsync() in /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/integration/Infrastructure/IntegrationTestFixture.cs:line 99
+
+Falha na Execução de Teste.
+Total de testes: 7
+     Com falha: 7
+Tempo total: 8,3910 Segundos
+[0;32m✓ ✓ integration passed[0m
+[0;32m[INFO][0m Testing: CreditRisk.CreditAnalysis.Domain.Tests
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  CreditRisk.Shared.Kernel -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/bin/Debug/net8.0/CreditRisk.Shared.Kernel.dll
+  CreditRisk.CreditAnalysis.Domain -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.dll
+  CreditRisk.Shared.Contracts -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/bin/Debug/net8.0/CreditRisk.Shared.Contracts.dll
+  CreditRisk.CreditAnalysis.Application -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Application.dll
+  CreditRisk.CreditAnalysis.Infrastructure -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Infrastructure.dll
+  CreditRisk.CreditAnalysis.Domain.Tests -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.CreditAnalysis.Domain.Tests/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.Tests.dll
+Execução de teste para /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.CreditAnalysis.Domain.Tests/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.Tests.dll (.NETCoreApp,Version=v8.0)
+Ferramenta de Linha de Comando de Execução de Teste da Microsoft (R) Versão 17.8.0 (x64)
+Copyright (c) Microsoft Corporation. Todos os direitos reservados.
+
+Iniciando execução de teste, espere...
+1 arquivos de teste no total corresponderam ao padrão especificado.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.30)
+[xUnit.net 00:00:00.07]   Discovering: CreditRisk.CreditAnalysis.Domain.Tests
+[xUnit.net 00:00:00.12]   Discovered:  CreditRisk.CreditAnalysis.Domain.Tests
+[xUnit.net 00:00:00.13]   Starting:    CreditRisk.CreditAnalysis.Domain.Tests
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_GoodBureauModerateDebt_ReturnsRatingB [15 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_VeryHighIncome_StillRespectsBureauScore [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_BoundaryBureauScores_ReturnsCorrectRating(bureauScore: 580, expectedRating: C) [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_BoundaryBureauScores_ReturnsCorrectRating(bureauScore: 850, expectedRating: A) [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_BoundaryBureauScores_ReturnsCorrectRating(bureauScore: 700, expectedRating: B) [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_BoundaryBureauScores_ReturnsCorrectRating(bureauScore: 400, expectedRating: D) [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_BoundaryBureauScores_ReturnsCorrectRating(bureauScore: 200, expectedRating: E) [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_ZeroMonthlyIncome_ReturnsRatingE [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingB_BelowAutoApproveThreshold_RequiresManualReviewIsFalse [1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_ExcellentBureauLowDebtLowMultiplier_ReturnsRatingA [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_VeryPoorBureauVeryHighDebt_ReturnsRatingE [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingD_AlwaysRequiresManualReview_EvenForSmallAmounts [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingA_AboveAutoApproveThreshold_RequiresManualReviewIsTrue [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingE_ApprovedLimitIsZero [1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_FairBureauHighDebt_ReturnsRatingC [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingB_AboveAutoApproveThreshold_RequiresManualReviewIsTrue [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_PoorBureauHighDebt_ReturnsRatingD [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RequestedLimitExceedsSystemMax_ApprovedLimitCappedAt500k [< 1 ms]
+[xUnit.net 00:00:00.23]   Finished:    CreditRisk.CreditAnalysis.Domain.Tests
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingC_BelowAutoApproveThreshold_RequiresManualReviewIsFalse [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingA_BelowAutoApproveThreshold_RequiresManualReviewIsFalse [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingC_AboveAutoApproveThreshold_RequiresManualReviewIsTrue [< 1 ms]
+
+Execução de Teste Bem-sucedida.
+Total de testes: 21
+     Aprovados: 21
+Tempo total: 0,7442 Segundos
+[0;32m✓ ✓ CreditRisk.CreditAnalysis.Domain.Tests passed[0m
+[0;32m[INFO][0m Testing: CreditRisk.IAM.Domain.Tests
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  CreditRisk.Shared.Kernel -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/bin/Debug/net8.0/CreditRisk.Shared.Kernel.dll
+  CreditRisk.Shared.Contracts -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/bin/Debug/net8.0/CreditRisk.Shared.Contracts.dll
+  CreditRisk.IAM.Domain -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Domain/bin/Debug/net8.0/CreditRisk.IAM.Domain.dll
+  CreditRisk.IAM.Application -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/bin/Debug/net8.0/CreditRisk.IAM.Application.dll
+  CreditRisk.IAM.Infrastructure -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/bin/Debug/net8.0/CreditRisk.IAM.Infrastructure.dll
+  CreditRisk.IAM.Domain.Tests -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.IAM.Domain.Tests/bin/Debug/net8.0/CreditRisk.IAM.Domain.Tests.dll
+Execução de teste para /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.IAM.Domain.Tests/bin/Debug/net8.0/CreditRisk.IAM.Domain.Tests.dll (.NETCoreApp,Version=v8.0)
+Ferramenta de Linha de Comando de Execução de Teste da Microsoft (R) Versão 17.8.0 (x64)
+Copyright (c) Microsoft Corporation. Todos os direitos reservados.
+
+Iniciando execução de teste, espere...
+1 arquivos de teste no total corresponderam ao padrão especificado.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.30)
+[xUnit.net 00:00:00.07]   Discovering: CreditRisk.IAM.Domain.Tests
+[xUnit.net 00:00:00.10]   Discovered:  CreditRisk.IAM.Domain.Tests
+[xUnit.net 00:00:00.11]   Starting:    CreditRisk.IAM.Domain.Tests
+[xUnit.net 00:00:00.20]   Finished:    CreditRisk.IAM.Domain.Tests
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LogoutCommandHandlerTests.HandleAsync_AlreadyRevokedJti_ReturnsSuccess [16 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LoginCommandHandlerTests.HandleAsync_UserNotFound_ReturnsUnauthorizedError [18 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LogoutCommandHandlerTests.HandleAsync_ValidJti_AddsJtiToRevocationStore [< 1 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LogoutCommandHandlerTests.HandleAsync_CancellationRequested_ThrowsOperationCanceledException [9 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LoginCommandHandlerTests.HandleAsync_CancellationRequested_ThrowsOperationCanceledException [10 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LogoutCommandHandlerTests.HandleAsync_EmptyJti_ReturnsValidationError [< 1 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LoginCommandHandlerTests.HandleAsync_ValidCredentials_ReturnsLoginResponse [6 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LoginCommandHandlerTests.HandleAsync_WrongPassword_ReturnsUnauthorizedError [< 1 ms]
+
+Execução de Teste Bem-sucedida.
+Total de testes: 8
+     Aprovados: 8
+Tempo total: 0,7066 Segundos
+[0;32m✓ ✓ CreditRisk.IAM.Domain.Tests passed[0m
+[0;32m[INFO][0m Testing: CreditRisk.Compliance.Domain.Tests
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  CreditRisk.Shared.Kernel -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/bin/Debug/net8.0/CreditRisk.Shared.Kernel.dll
+  CreditRisk.Compliance.Domain -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/bin/Debug/net8.0/CreditRisk.Compliance.Domain.dll
+  CreditRisk.Shared.Contracts -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/bin/Debug/net8.0/CreditRisk.Shared.Contracts.dll
+  CreditRisk.Compliance.Application -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Application/bin/Debug/net8.0/CreditRisk.Compliance.Application.dll
+  CreditRisk.Compliance.Infrastructure -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Infrastructure/bin/Debug/net8.0/CreditRisk.Compliance.Infrastructure.dll
+  CreditRisk.Compliance.Domain.Tests -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.Compliance.Domain.Tests/bin/Debug/net8.0/CreditRisk.Compliance.Domain.Tests.dll
+Execução de teste para /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.Compliance.Domain.Tests/bin/Debug/net8.0/CreditRisk.Compliance.Domain.Tests.dll (.NETCoreApp,Version=v8.0)
+Ferramenta de Linha de Comando de Execução de Teste da Microsoft (R) Versão 17.8.0 (x64)
+Copyright (c) Microsoft Corporation. Todos os direitos reservados.
+
+Iniciando execução de teste, espere...
+1 arquivos de teste no total corresponderam ao padrão especificado.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.30)
+[xUnit.net 00:00:00.08]   Discovering: CreditRisk.Compliance.Domain.Tests
+[xUnit.net 00:00:00.09]   Discovered:  CreditRisk.Compliance.Domain.Tests
+Não há nenhum teste disponível em /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.Compliance.Domain.Tests/bin/Debug/net8.0/CreditRisk.Compliance.Domain.Tests.dll. Verifique se o detector e os executores de teste estão registrados e se as configurações de versão da estrutura da plataforma & são apropriadas e tente novamente.
+
+[0;32m✓ ✓ CreditRisk.Compliance.Domain.Tests passed[0m
+[0;34m════════════════════════════════════════════════════════════[0m
+[0;34mTest Run Complete ✓[0m
+[0;34m════════════════════════════════════════════════════════════[0m
+[0;32m✓ All tests passed successfully![0m
+[0;32m[INFO][0m Log file: /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/logs/test-run-20260827_093159.log

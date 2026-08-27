@@ -1,6 +1,7 @@
 // File: src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/Persistence/CreditAnalysisDbContext.cs
 using CreditRisk.CreditAnalysis.Domain.Entities;
 using CreditRisk.Shared.Kernel.Domain;
+using CreditRisk.Shared.Kernel.Outbox;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -10,6 +11,7 @@ public sealed class CreditAnalysisDbContext(DbContextOptions<CreditAnalysisDbCon
 {
     public DbSet<CreditProposal> CreditProposals => Set<CreditProposal>();
     public DbSet<Customer> Customers => Set<Customer>();
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

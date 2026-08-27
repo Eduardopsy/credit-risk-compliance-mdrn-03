@@ -1,0 +1,190 @@
+[0;34m════════════════════════════════════════════════════════════[0m
+[0;34mSPEC-03 Test Suite Runner[0m
+[0;34m════════════════════════════════════════════════════════════[0m
+[0;34m[2026-08-26 15:51:56][0m Starting test run
+[0;34m[2026-08-26 15:51:56][0m Configuration: Unit=true, Integration=false, Coverage=false
+[1;33m▶ Available Test Projects[0m
+[1;33m▶ Discovering Test Projects[0m
+[0;32m[INFO][0m Found: CreditRisk.CreditAnalysis.Domain.Tests
+[0;32m[INFO][0m Found: CreditRisk.IAM.Domain.Tests
+[0;32m[INFO][0m Found: CreditRisk.Compliance.Domain.Tests
+  1. .
+  2. .
+  3. .
+  4. .
+  5. .
+  6. .
+  7. .
+  8. .
+  9. .
+  10. .
+  11. .
+  12. .
+  13. .
+  14. CreditRisk.CreditAnalysis.Domain.Tests
+  15. CreditRisk.IAM.Domain.Tests
+  16. CreditRisk.Compliance.Domain.Tests
+[1;33m▶ Discovering Test Projects[0m
+[0;32m[INFO][0m Found: CreditRisk.CreditAnalysis.Domain.Tests
+[0;32m[INFO][0m Found: CreditRisk.IAM.Domain.Tests
+[0;32m[INFO][0m Found: CreditRisk.Compliance.Domain.Tests
+[1;33m▶ Running Tests[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: [1;33m▶
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Discovering
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Test
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Projects[0m
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: [0;32m[INFO][0m
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Found:
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: CreditRisk.CreditAnalysis.Domain.Tests
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: [0;32m[INFO][0m
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Found:
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: CreditRisk.IAM.Domain.Tests
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: [0;32m[INFO][0m
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: Found:
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: .
+MSBUILD : error MSB1009: Arquivo de projeto não existe.
+Opção: CreditRisk.Compliance.Domain.Tests
+[0;32m✓ ✓ . passed[0m
+[0;32m[INFO][0m Testing: CreditRisk.CreditAnalysis.Domain.Tests
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  CreditRisk.Shared.Kernel -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/bin/Debug/net8.0/CreditRisk.Shared.Kernel.dll
+  CreditRisk.Shared.Contracts -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/bin/Debug/net8.0/CreditRisk.Shared.Contracts.dll
+  CreditRisk.CreditAnalysis.Domain -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.dll
+  CreditRisk.CreditAnalysis.Application -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Application.dll
+  CreditRisk.CreditAnalysis.Infrastructure -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Infrastructure.dll
+  CreditRisk.CreditAnalysis.Domain.Tests -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.CreditAnalysis.Domain.Tests/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.Tests.dll
+Execução de teste para /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.CreditAnalysis.Domain.Tests/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.Tests.dll (.NETCoreApp,Version=v8.0)
+Ferramenta de Linha de Comando de Execução de Teste da Microsoft (R) Versão 17.8.0 (x64)
+Copyright (c) Microsoft Corporation. Todos os direitos reservados.
+
+Iniciando execução de teste, espere...
+1 arquivos de teste no total corresponderam ao padrão especificado.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.30)
+[xUnit.net 00:00:00.08]   Discovering: CreditRisk.CreditAnalysis.Domain.Tests
+[xUnit.net 00:00:00.13]   Discovered:  CreditRisk.CreditAnalysis.Domain.Tests
+[xUnit.net 00:00:00.13]   Starting:    CreditRisk.CreditAnalysis.Domain.Tests
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_GoodBureauModerateDebt_ReturnsRatingB [5 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_VeryHighIncome_StillRespectsBureauScore [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_BoundaryBureauScores_ReturnsCorrectRating(bureauScore: 580, expectedRating: C) [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_BoundaryBureauScores_ReturnsCorrectRating(bureauScore: 850, expectedRating: A) [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_BoundaryBureauScores_ReturnsCorrectRating(bureauScore: 700, expectedRating: B) [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_BoundaryBureauScores_ReturnsCorrectRating(bureauScore: 400, expectedRating: D) [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_BoundaryBureauScores_ReturnsCorrectRating(bureauScore: 200, expectedRating: E) [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_ZeroMonthlyIncome_ReturnsRatingE [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingB_BelowAutoApproveThreshold_RequiresManualReviewIsFalse [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_ExcellentBureauLowDebtLowMultiplier_ReturnsRatingA [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_VeryPoorBureauVeryHighDebt_ReturnsRatingE [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingD_AlwaysRequiresManualReview_EvenForSmallAmounts [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingA_AboveAutoApproveThreshold_RequiresManualReviewIsTrue [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingE_ApprovedLimitIsZero [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_FairBureauHighDebt_ReturnsRatingC [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingB_AboveAutoApproveThreshold_RequiresManualReviewIsTrue [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_PoorBureauHighDebt_ReturnsRatingD [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RequestedLimitExceedsSystemMax_ApprovedLimitCappedAt500k [< 1 ms]
+[xUnit.net 00:00:00.21]   Finished:    CreditRisk.CreditAnalysis.Domain.Tests
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingC_BelowAutoApproveThreshold_RequiresManualReviewIsFalse [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingA_BelowAutoApproveThreshold_RequiresManualReviewIsFalse [< 1 ms]
+  Aprovado CreditRisk.CreditAnalysis.Domain.Tests.Services.CreditScoringEngineTests.Evaluate_RatingC_AboveAutoApproveThreshold_RequiresManualReviewIsTrue [< 1 ms]
+
+Execução de Teste Bem-sucedida.
+Total de testes: 21
+     Aprovados: 21
+Tempo total: 0,6884 Segundos
+[0;32m✓ ✓ CreditRisk.CreditAnalysis.Domain.Tests passed[0m
+[0;32m[INFO][0m Testing: CreditRisk.IAM.Domain.Tests
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  CreditRisk.Shared.Kernel -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/bin/Debug/net8.0/CreditRisk.Shared.Kernel.dll
+  CreditRisk.IAM.Domain -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Domain/bin/Debug/net8.0/CreditRisk.IAM.Domain.dll
+  CreditRisk.Shared.Contracts -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/bin/Debug/net8.0/CreditRisk.Shared.Contracts.dll
+  CreditRisk.IAM.Application -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/bin/Debug/net8.0/CreditRisk.IAM.Application.dll
+  CreditRisk.IAM.Infrastructure -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/bin/Debug/net8.0/CreditRisk.IAM.Infrastructure.dll
+  CreditRisk.IAM.Domain.Tests -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.IAM.Domain.Tests/bin/Debug/net8.0/CreditRisk.IAM.Domain.Tests.dll
+Execução de teste para /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.IAM.Domain.Tests/bin/Debug/net8.0/CreditRisk.IAM.Domain.Tests.dll (.NETCoreApp,Version=v8.0)
+Ferramenta de Linha de Comando de Execução de Teste da Microsoft (R) Versão 17.8.0 (x64)
+Copyright (c) Microsoft Corporation. Todos os direitos reservados.
+
+Iniciando execução de teste, espere...
+1 arquivos de teste no total corresponderam ao padrão especificado.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.30)
+[xUnit.net 00:00:00.06]   Discovering: CreditRisk.IAM.Domain.Tests
+[xUnit.net 00:00:00.09]   Discovered:  CreditRisk.IAM.Domain.Tests
+[xUnit.net 00:00:00.09]   Starting:    CreditRisk.IAM.Domain.Tests
+[xUnit.net 00:00:00.14]   Finished:    CreditRisk.IAM.Domain.Tests
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LogoutCommandHandlerTests.HandleAsync_AlreadyRevokedJti_ReturnsSuccess [7 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LoginCommandHandlerTests.HandleAsync_UserNotFound_ReturnsUnauthorizedError [7 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LogoutCommandHandlerTests.HandleAsync_ValidJti_AddsJtiToRevocationStore [< 1 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LoginCommandHandlerTests.HandleAsync_CancellationRequested_ThrowsOperationCanceledException [6 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LogoutCommandHandlerTests.HandleAsync_CancellationRequested_ThrowsOperationCanceledException [5 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LogoutCommandHandlerTests.HandleAsync_EmptyJti_ReturnsValidationError [< 1 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LoginCommandHandlerTests.HandleAsync_ValidCredentials_ReturnsLoginResponse [5 ms]
+  Aprovado CreditRisk.IAM.Domain.Tests.Handlers.LoginCommandHandlerTests.HandleAsync_WrongPassword_ReturnsUnauthorizedError [< 1 ms]
+
+Execução de Teste Bem-sucedida.
+Total de testes: 8
+     Aprovados: 8
+Tempo total: 0,6604 Segundos
+[0;32m✓ ✓ CreditRisk.IAM.Domain.Tests passed[0m
+[0;32m[INFO][0m Testing: CreditRisk.Compliance.Domain.Tests
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  CreditRisk.Shared.Kernel -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/bin/Debug/net8.0/CreditRisk.Shared.Kernel.dll
+  CreditRisk.Compliance.Domain -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/bin/Debug/net8.0/CreditRisk.Compliance.Domain.dll
+  CreditRisk.Shared.Contracts -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/bin/Debug/net8.0/CreditRisk.Shared.Contracts.dll
+  CreditRisk.Compliance.Application -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Application/bin/Debug/net8.0/CreditRisk.Compliance.Application.dll
+  CreditRisk.Compliance.Infrastructure -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Infrastructure/bin/Debug/net8.0/CreditRisk.Compliance.Infrastructure.dll
+  CreditRisk.Compliance.Domain.Tests -> /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.Compliance.Domain.Tests/bin/Debug/net8.0/CreditRisk.Compliance.Domain.Tests.dll
+Execução de teste para /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.Compliance.Domain.Tests/bin/Debug/net8.0/CreditRisk.Compliance.Domain.Tests.dll (.NETCoreApp,Version=v8.0)
+Ferramenta de Linha de Comando de Execução de Teste da Microsoft (R) Versão 17.8.0 (x64)
+Copyright (c) Microsoft Corporation. Todos os direitos reservados.
+
+Iniciando execução de teste, espere...
+1 arquivos de teste no total corresponderam ao padrão especificado.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.8.2+699d445a1a (64-bit .NET 8.0.30)
+[xUnit.net 00:00:00.10]   Discovering: CreditRisk.Compliance.Domain.Tests
+[xUnit.net 00:00:00.11]   Discovered:  CreditRisk.Compliance.Domain.Tests
+Não há nenhum teste disponível em /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.Compliance.Domain.Tests/bin/Debug/net8.0/CreditRisk.Compliance.Domain.Tests.dll. Verifique se o detector e os executores de teste estão registrados e se as configurações de versão da estrutura da plataforma & são apropriadas e tente novamente.
+
+[0;32m✓ ✓ CreditRisk.Compliance.Domain.Tests passed[0m
+[0;34m════════════════════════════════════════════════════════════[0m
+[0;34mTest Run Complete ✓[0m
+[0;34m════════════════════════════════════════════════════════════[0m
+[0;32m✓ All tests passed successfully![0m
+[0;32m[INFO][0m Log file: /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/logs/test-run-20260826_155156.log

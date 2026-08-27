@@ -12,3 +12,4 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/obj/Release/net8.0/CreditRisk.Shared.Kernel.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/obj/Release/net8.0/CreditRisk.Shared.Kernel.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/obj/Release/net8.0/ref/CreditRisk.Shared.Kernel.dll
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/obj/Release/net8.0/CreditRisk.Shared.Kernel.sourcelink.json

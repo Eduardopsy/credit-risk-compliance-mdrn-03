@@ -152,3 +152,4 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.CreditAnalysis.Domain.Tests/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.Tests.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.CreditAnalysis.Domain.Tests/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.Tests.genruntimeconfig.cache
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.CreditAnalysis.Domain.Tests/obj/Debug/net8.0/ref/CreditRisk.CreditAnalysis.Domain.Tests.dll
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.CreditAnalysis.Domain.Tests/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Domain.Tests.sourcelink.json

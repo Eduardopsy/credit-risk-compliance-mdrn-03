@@ -177,3 +177,4 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.IAM.Domain.Tests/obj/Release/net8.0/CreditRisk.IAM.Domain.Tests.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.IAM.Domain.Tests/obj/Release/net8.0/CreditRisk.IAM.Domain.Tests.genruntimeconfig.cache
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.IAM.Domain.Tests/obj/Release/net8.0/ref/CreditRisk.IAM.Domain.Tests.dll
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.IAM.Domain.Tests/obj/Release/net8.0/CreditRisk.IAM.Domain.Tests.sourcelink.json

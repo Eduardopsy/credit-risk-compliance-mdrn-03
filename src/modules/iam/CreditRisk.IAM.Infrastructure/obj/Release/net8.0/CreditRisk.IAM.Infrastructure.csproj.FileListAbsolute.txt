@@ -25,3 +25,4 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Release/net8.0/CreditRisk.IAM.Infrastructure.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Release/net8.0/CreditRisk.IAM.Infrastructure.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Release/net8.0/ref/CreditRisk.IAM.Infrastructure.dll
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Release/net8.0/CreditRisk.IAM.Infrastructure.sourcelink.json

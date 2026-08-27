@@ -1,0 +1,76 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                  START HERE - Credit Risk System                         ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+🚀 TO START THE ENTIRE SYSTEM (Infrastructure + Services):
+
+    $ ./start-all-services.sh
+
+That's it! This command will:
+  • Start Docker containers (PostgreSQL, RabbitMQ, Redis, Keycloak)
+  • Wait for infrastructure to be ready
+  • Start all 7 .NET services
+  • Show you logs and next steps
+
+⚡ QUICK REFERENCE:
+
+  ./start-all-services.sh          # Start everything (default)
+  ./start-all-services.sh help     # Show all options
+  ./start-all-services.sh infra-only  # Only Docker
+  ./start-all-services.sh services-only # Only .NET services
+  ./start-all-services.sh tmux     # Use tmux (interactive)
+  ./start-all-services.sh background # Use background (logs to /tmp)
+
+📖 DOCUMENTATION:
+
+  STARTUP.md              ← Complete startup guide
+  START_SERVICES.md       ← Service details
+  GETTING_STARTED.md      ← Quick reference
+  docs/API_REFERENCE.md   ← API endpoints
+  docs/ARCHITECTURE.md    ← System design
+
+🔍 TESTING:
+
+  After services start (wait ~60 seconds):
+  
+    curl http://localhost:5001/health
+    curl http://localhost:5002/health
+    curl http://localhost:5003/health
+    curl http://localhost:8081/health
+
+📊 WHAT GETS STARTED:
+
+  Infrastructure (Docker):
+    ✓ PostgreSQL (5432)
+    ✓ RabbitMQ (5672)
+    ✓ Redis (6379)
+    ✓ Keycloak (8080)
+
+  Application Services:
+    ✓ Bureau Mock Service (8081)
+    ✓ IAM API (5000)
+    ✓ Credit Analysis API (5001)
+    ✓ Compliance API (5002)
+    ✓ Operations Server (5003)
+    ✓ 2 Background Workers
+
+⚙️ SYSTEM REQUIREMENTS:
+
+  • Docker & Docker Compose
+  • .NET 8.0+
+  • 4GB RAM minimum
+  • Port 5000-5003, 8080-8081 available
+
+❓ NEED HELP?
+
+  ./start-all-services.sh help     # Detailed options
+  tail -f /tmp/credit.log          # View service logs
+  docker-compose ps                # Check containers
+  docker-compose logs -f           # Docker logs
+
+🎯 READY?
+
+  Run this now:
+    $ ./start-all-services.sh
+
+═══════════════════════════════════════════════════════════════════════════════
