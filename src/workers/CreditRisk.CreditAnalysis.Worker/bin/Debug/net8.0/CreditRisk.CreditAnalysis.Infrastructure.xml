@@ -4,6 +4,18 @@
         <name>CreditRisk.CreditAnalysis.Infrastructure</name>
     </assembly>
     <members>
+        <member name="T:CreditRisk.CreditAnalysis.Infrastructure.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Infrastructure.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Infrastructure.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CreditRisk.CreditAnalysis.Infrastructure.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
         <member name="T:CreditRisk.CreditAnalysis.Infrastructure.Persistence.Configurations.OutboxMessageConfiguration">
             <summary>
             Entity Framework Core configuration for OutboxMessage.

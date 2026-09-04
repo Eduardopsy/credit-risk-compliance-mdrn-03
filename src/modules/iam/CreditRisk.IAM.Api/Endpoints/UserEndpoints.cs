@@ -11,8 +11,7 @@ public static class UserEndpoints
     public static IEndpointRouteBuilder MapUserEndpoints(this IEndpointRouteBuilder app)
     {
         RouteGroupBuilder group = app.MapGroup("/api/v1/users")
-            .WithTags("Users")
-            .RequireAuthorization("RequiresAdministrator");
+            .WithTags("Users");
 
         group.MapPost("/", async (
             [FromBody] CreateUserRequest request,
@@ -50,6 +49,7 @@ public static class UserEndpoints
                 : Results.NotFound();
         })
         .WithName("GetUserById")
+        .RequireAuthorization("RequiresAdministrator")
         .Produces<UserDto>()
         .Produces(StatusCodes.Status404NotFound);
 

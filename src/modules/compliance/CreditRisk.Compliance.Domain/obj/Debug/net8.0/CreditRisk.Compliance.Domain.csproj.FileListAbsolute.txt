@@ -10,10 +10,10 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/obj/Debug/net8.0/CreditRisk.Compliance.Domain.AssemblyInfoInputs.cache
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/obj/Debug/net8.0/CreditRisk.Compliance.Domain.AssemblyInfo.cs
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/obj/Debug/net8.0/CreditRisk.Compliance.Domain.csproj.CoreCompileInputs.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/obj/Debug/net8.0/CreditRisk.Compliance.Domain.sourcelink.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/obj/Debug/net8.0/CreditRisk.Compliance.Domain.csproj.CopyComplete
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/obj/Debug/net8.0/CreditRisk.Compliance.Domain.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/obj/Debug/net8.0/refint/CreditRisk.Compliance.Domain.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/obj/Debug/net8.0/CreditRisk.Compliance.Domain.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/obj/Debug/net8.0/CreditRisk.Compliance.Domain.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/obj/Debug/net8.0/ref/CreditRisk.Compliance.Domain.dll
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Domain/obj/Debug/net8.0/CreditRisk.Compliance.Domain.sourcelink.json

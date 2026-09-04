@@ -16,10 +16,10 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Application.AssemblyInfoInputs.cache
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Application.AssemblyInfo.cs
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Application.csproj.CoreCompileInputs.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Application.sourcelink.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Application.csproj.CopyComplete
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Application.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/Debug/net8.0/refint/CreditRisk.CreditAnalysis.Application.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Application.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Application.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/Debug/net8.0/ref/CreditRisk.CreditAnalysis.Application.dll
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Application.sourcelink.json

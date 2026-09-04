@@ -1,10 +1,3 @@
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.csproj.AssemblyReference.cache
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.GeneratedMSBuildEditorConfig.editorconfig
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.AssemblyInfoInputs.cache
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.AssemblyInfo.cs
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.csproj.CoreCompileInputs.cache
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.MvcApplicationPartsAssemblyInfo.cache
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.sourcelink.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/bin/Debug/net8.0/CreditRisk.Operations.Server
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/bin/Debug/net8.0/CreditRisk.Operations.Server.deps.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/bin/Debug/net8.0/CreditRisk.Operations.Server.runtimeconfig.json
@@ -90,6 +83,13 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/bin/Debug/net8.0/CreditRisk.Compliance.Infrastructure.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/bin/Debug/net8.0/CreditRisk.Compliance.Application.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/bin/Debug/net8.0/CreditRisk.Compliance.Application.xml
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.csproj.AssemblyReference.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.GeneratedMSBuildEditorConfig.editorconfig
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.AssemblyInfoInputs.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.AssemblyInfo.cs
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.csproj.CoreCompileInputs.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.MvcApplicationPartsAssemblyInfo.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/CreditRisk.Operations.Server.sourcelink.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/staticwebassets.build.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/staticwebassets.development.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/servers/CreditRisk.Operations.Server/obj/Debug/net8.0/staticwebassets/msbuild.CreditRisk.Operations.Server.Microsoft.AspNetCore.StaticWebAssets.props

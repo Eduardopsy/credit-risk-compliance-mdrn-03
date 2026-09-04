@@ -4,5 +4,35 @@
         <name>CreditRisk.IAM.Infrastructure</name>
     </assembly>
     <members>
+        <member name="T:CreditRisk.IAM.Infrastructure.Migrations.InitialCreate">
+            <inheritdoc />
+        </member>
+        <member name="M:CreditRisk.IAM.Infrastructure.Migrations.InitialCreate.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CreditRisk.IAM.Infrastructure.Migrations.InitialCreate.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CreditRisk.IAM.Infrastructure.Migrations.InitialCreate.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CreditRisk.IAM.Infrastructure.Migrations.AddOutboxMessages">
+            <inheritdoc />
+        </member>
+        <member name="M:CreditRisk.IAM.Infrastructure.Migrations.AddOutboxMessages.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CreditRisk.IAM.Infrastructure.Migrations.AddOutboxMessages.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:CreditRisk.IAM.Infrastructure.Migrations.AddOutboxMessages.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:CreditRisk.IAM.Infrastructure.Persistence.Configurations.OutboxMessageConfiguration">
+            <summary>
+            Entity Framework Core configuration for OutboxMessage.
+            Maps to a database table that stores messages for guaranteed delivery via Outbox Pattern.
+            </summary>
+        </member>
     </members>
 </doc>

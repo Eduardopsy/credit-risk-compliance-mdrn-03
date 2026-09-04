@@ -10,6 +10,7 @@ using CreditRisk.Shared.Observability;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using MassTransit;
 
 WebApplicationBuilder builder = WebApplication.CreateSlimBuilder(args);
 
@@ -48,6 +49,16 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddHealthChecks()
     .AddNpgSql(builder.Configuration.GetConnectionString("Postgres") ?? "Host=localhost;Database=creditrisk;Username=crcl;Password=crcl", name: "postgres");
+
+// Add MassTransit with RabbitMQ
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(builder.Configuration.GetConnectionString("RabbitMQ") ?? "rabbitmq://localhost");
+        cfg.ConfigureEndpoints(context);
+    });
+});
 
 builder.Services.AddComplianceInfrastructure(builder.Configuration);
 builder.Services.AddScoped<IngestTransactionCommandHandler>();

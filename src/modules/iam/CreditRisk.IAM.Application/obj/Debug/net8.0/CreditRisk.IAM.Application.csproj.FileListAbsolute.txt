@@ -1,8 +1,3 @@
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.csproj.AssemblyReference.cache
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.GeneratedMSBuildEditorConfig.editorconfig
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.AssemblyInfoInputs.cache
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.AssemblyInfo.cs
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.csproj.CoreCompileInputs.cache
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/bin/Debug/net8.0/CreditRisk.IAM.Application.deps.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/bin/Debug/net8.0/CreditRisk.IAM.Application.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/bin/Debug/net8.0/CreditRisk.IAM.Application.pdb
@@ -16,10 +11,15 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/bin/Debug/net8.0/CreditRisk.Shared.Contracts.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/bin/Debug/net8.0/CreditRisk.Shared.Kernel.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/bin/Debug/net8.0/CreditRisk.Shared.Kernel.xml
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.csproj.AssemblyReference.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.GeneratedMSBuildEditorConfig.editorconfig
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.AssemblyInfoInputs.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.AssemblyInfo.cs
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.csproj.CoreCompileInputs.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.sourcelink.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.csproj.CopyComplete
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/refint/CreditRisk.IAM.Application.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/ref/CreditRisk.IAM.Application.dll
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/obj/Debug/net8.0/CreditRisk.IAM.Application.sourcelink.json

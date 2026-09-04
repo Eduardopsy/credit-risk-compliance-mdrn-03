@@ -1,8 +1,3 @@
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.csproj.AssemblyReference.cache
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.AssemblyInfoInputs.cache
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.AssemblyInfo.cs
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.csproj.CoreCompileInputs.cache
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/bin/Debug/net8.0/CreditRisk.IAM.Infrastructure.deps.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/bin/Debug/net8.0/CreditRisk.IAM.Infrastructure.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/bin/Debug/net8.0/CreditRisk.IAM.Infrastructure.pdb
@@ -19,10 +14,15 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/bin/Debug/net8.0/CreditRisk.Shared.Contracts.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/bin/Debug/net8.0/CreditRisk.Shared.Kernel.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/bin/Debug/net8.0/CreditRisk.Shared.Kernel.xml
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.csproj.AssemblyReference.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.AssemblyInfoInputs.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.AssemblyInfo.cs
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.csproj.CoreCompileInputs.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.sourcelink.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.csproj.CopyComplete
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/refint/CreditRisk.IAM.Infrastructure.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/ref/CreditRisk.IAM.Infrastructure.dll
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/Debug/net8.0/CreditRisk.IAM.Infrastructure.sourcelink.json

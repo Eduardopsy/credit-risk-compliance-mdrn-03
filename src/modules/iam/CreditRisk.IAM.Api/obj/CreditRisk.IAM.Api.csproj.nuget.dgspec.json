@@ -68,17 +68,9 @@
               "target": "Package",
               "version": "[8.0.11, )"
             },
-            "Microsoft.DotNet.ILCompiler": {
-              "suppressParent": "All",
+            "Microsoft.EntityFrameworkCore.Design": {
               "target": "Package",
-              "version": "[8.0.30, )",
-              "autoReferenced": true
-            },
-            "Microsoft.NET.ILLink.Tasks": {
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.30, )",
-              "autoReferenced": true
+              "version": "[8.0.11, )"
             },
             "Scalar.AspNetCore": {
               "target": "Package",
@@ -100,12 +92,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "runtime.linux-x64.Microsoft.DotNet.ILCompiler",
-              "version": "[8.0.30, 8.0.30]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"

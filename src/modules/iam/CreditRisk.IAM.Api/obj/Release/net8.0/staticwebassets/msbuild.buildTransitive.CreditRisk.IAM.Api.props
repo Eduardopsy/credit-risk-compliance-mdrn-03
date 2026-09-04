@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../buildMultiTargeting/CreditRisk.IAM.Api.props" />
-</Project>

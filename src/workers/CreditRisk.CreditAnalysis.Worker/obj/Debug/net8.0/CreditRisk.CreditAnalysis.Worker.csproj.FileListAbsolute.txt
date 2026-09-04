@@ -1,9 +1,3 @@
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.csproj.AssemblyReference.cache
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.GeneratedMSBuildEditorConfig.editorconfig
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.AssemblyInfoInputs.cache
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.AssemblyInfo.cs
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.csproj.CoreCompileInputs.cache
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.sourcelink.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Worker
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.deps.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.runtimeconfig.json
@@ -101,6 +95,12 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Application.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Infrastructure.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/bin/Debug/net8.0/CreditRisk.CreditAnalysis.Infrastructure.xml
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.csproj.AssemblyReference.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.GeneratedMSBuildEditorConfig.editorconfig
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.AssemblyInfoInputs.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.AssemblyInfo.cs
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.csproj.CoreCompileInputs.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.sourcelink.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.csproj.CopyComplete
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/CreditRisk.CreditAnalysis.Worker.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/obj/Debug/net8.0/refint/CreditRisk.CreditAnalysis.Worker.dll

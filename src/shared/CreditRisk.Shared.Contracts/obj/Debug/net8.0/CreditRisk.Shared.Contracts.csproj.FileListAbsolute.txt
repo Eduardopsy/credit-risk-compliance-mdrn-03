@@ -10,10 +10,10 @@
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/Debug/net8.0/CreditRisk.Shared.Contracts.AssemblyInfoInputs.cache
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/Debug/net8.0/CreditRisk.Shared.Contracts.AssemblyInfo.cs
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/Debug/net8.0/CreditRisk.Shared.Contracts.csproj.CoreCompileInputs.cache
+/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/Debug/net8.0/CreditRisk.Shared.Contracts.sourcelink.json
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/Debug/net8.0/CreditRisk.Shared.Contracts.csproj.CopyComplete
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/Debug/net8.0/CreditRisk.Shared.Contracts.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/Debug/net8.0/refint/CreditRisk.Shared.Contracts.dll
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/Debug/net8.0/CreditRisk.Shared.Contracts.xml
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/Debug/net8.0/CreditRisk.Shared.Contracts.pdb
 /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/Debug/net8.0/ref/CreditRisk.Shared.Contracts.dll
-/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/Debug/net8.0/CreditRisk.Shared.Contracts.sourcelink.json

@@ -1,6 +1,7 @@
 // File: src/modules/iam/CreditRisk.IAM.Infrastructure/Persistence/IamDbContext.cs
 using CreditRisk.IAM.Domain.Entities;
 using CreditRisk.Shared.Kernel.Domain;
+using CreditRisk.Shared.Kernel.Outbox;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -10,6 +11,7 @@ public sealed class IamDbContext(DbContextOptions<IamDbContext> options) : DbCon
 {
     public DbSet<User> Users => Set<User>();
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

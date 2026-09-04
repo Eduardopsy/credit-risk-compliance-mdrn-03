@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="../build/CreditRisk.CreditAnalysis.Api.props" />
-</Project>
