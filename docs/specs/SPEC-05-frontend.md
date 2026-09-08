@@ -56,16 +56,16 @@ This frente owns the complete Blazor WebAssembly front-end application:
 
 | Component | Package | Version |
 |---|---|---|
-| Frontend framework | Microsoft.AspNetCore.Components.WebAssembly | 10.0.0 |
-| Frontend auth | Microsoft.AspNetCore.Components.WebAssembly.Authentication | 10.0.0 |
+| Frontend framework | Microsoft.AspNetCore.Components.WebAssembly | 8.0.11 |
+| Frontend auth | Microsoft.AspNetCore.Components.WebAssembly.Authentication | 8.0.11 |
 | UI components | MudBlazor | 7.15.0 |
-| SignalR client | Microsoft.AspNetCore.SignalR.Client | 10.0.0 |
-| HTTP client | System.Net.Http.Json | 10.0.0 |
-| Server hosting | Microsoft.AspNetCore.Components.WebAssembly.Server | 10.0.0 |
-| Server SignalR | Microsoft.AspNetCore.SignalR | 10.0.0 |
+| SignalR client | Microsoft.AspNetCore.SignalR.Client | 8.0.11 |
+| HTTP client | System.Net.Http.Json | 8.0.1 |
+| Server hosting | Microsoft.AspNetCore.Components.WebAssembly.Server | 8.0.11 |
+| Server SignalR | Microsoft.AspNetCore.SignalR | 1.1.0 |
 | Server MassTransit | MassTransit | 8.3.6 |
 | Server MassTransit RabbitMQ | MassTransit.RabbitMQ | 8.3.6 |
-| Server Redis backplane | Microsoft.AspNetCore.SignalR.StackExchangeRedis | 10.0.0 |
+| Server Redis backplane | Microsoft.AspNetCore.SignalR.StackExchangeRedis | 8.0.11 |
 
 ---
 
@@ -1058,7 +1058,7 @@ dotnet run --project src/modules/operations/CreditRisk.Operations.Server/ \
 
 ```bash
 # The Client is served by the Server project in development
-# The Server project serves the WASM app at http://localhost:5004
+# The Server project serves the WASM app at http://localhost:5003
 dotnet run --project src/modules/operations/CreditRisk.Operations.Server/ \
   --launch-profile Development
 ```
@@ -1066,7 +1066,7 @@ dotnet run --project src/modules/operations/CreditRisk.Operations.Server/ \
 ### Step 3: Open Browser
 
 ```bash
-open https://localhost:5004
+open http://localhost:5003
 # You will be redirected to Keycloak login
 # Use credentials from seed-data.sql:
 #   desk-operator@example.com / TestPassword123!
@@ -1095,7 +1095,7 @@ ls /tmp/frontend-publish/wwwroot/
 
 ### Expected Final State
 
-- Browser opens at `https://localhost:5004`
+- Browser opens at `http://localhost:5003`
 - Redirected to Keycloak login page
 - After login, Risk Dashboard loads with MudBlazor components
 - `ConnectionStatusIndicator` shows "Connected" (green)

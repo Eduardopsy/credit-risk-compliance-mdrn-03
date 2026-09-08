@@ -269,8 +269,15 @@ start_services_tmux() {
 start_services_background() {
     print_header "Starting Services in BACKGROUND Mode"
     
-    # Kill any existing dotnet processes
+    # Kill any existing dotnet processes and free ports 5000-5003, 8081
     killall dotnet 2>/dev/null || true
+    for port in 5000 5001 5002 5003 8081; do
+        if command -v fuser >/dev/null 2>&1; then
+            fuser -k "${port}/tcp" 2>/dev/null || true
+        elif command -v lsof >/dev/null 2>&1; then
+            lsof -ti ":${port}" | xargs -r kill -9 2>/dev/null || true
+        fi
+    done
     sleep 1
     
     print_info "Starting services (background processes)..."

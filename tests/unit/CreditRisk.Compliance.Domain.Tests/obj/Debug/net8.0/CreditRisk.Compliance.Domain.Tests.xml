@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CreditRisk.Compliance.Domain.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:CreditRisk.Compliance.Domain.Tests.Builders.AmlAlertBuilder">
+            <summary>
+            Builder for AmlAlert test objects.
+            Produces a valid alert with High severity by default.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Compliance.Domain.Tests.Builders.TransactionBuilder">
+            <summary>
+            Builder for Transaction test objects.
+            Produces a valid clean transaction (5000 amount, Online channel) by default.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Compliance.Domain.Tests.Fakes.FakeAmlAlertRepository">
+            <summary>
+            In-memory fake implementation of IAmlAlertRepository for unit tests.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Compliance.Domain.Tests.Fakes.FakeTransactionRepository">
+            <summary>
+            In-memory fake implementation of ITransactionRepository for unit tests.
+            Stores transactions in a list. Supports querying by customer ID for smurfing pattern detection.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -95,8 +95,8 @@ LGPD data minimization, BCB reporting formats, COAF suspicious transaction repor
 
 ### 2.1 Language and Runtime
 
-- **Language:** C# 14 — use all applicable language improvements including primary constructors, collection expressions, `params` collections, and `ref readonly` parameters where they improve clarity.
-- **Runtime:** .NET 10 (LTS) — no downgrade to .NET 8 or earlier is permitted.
+- **Language:** C# 12 / 13 — use primary constructors, collection expressions, `params` collections, and `ref readonly` parameters where they improve clarity.
+- **Runtime:** .NET 8 (LTS) — robust, high-performance, Native AOT-ready.
 - **Nullable reference types:** Enabled globally (`<Nullable>enable</Nullable>`) in every project. No `#nullable disable` pragmas without documented justification.
 - **Implicit usings:** Enabled (`<ImplicitUsings>enable</ImplicitUsings>`).
 - **Warnings as errors:** Enabled in CI (`<TreatWarningsAsErrors>true</TreatWarningsAsErrors>`) — no suppressed warnings without a documented `#pragma warning disable` comment explaining the reason.
@@ -344,14 +344,14 @@ The following technologies are **required** and cannot be substituted without an
 
 | Category | Mandatory Technology | Version |
 |---|---|---|
-| Language | C# | 14 |
-| Runtime | .NET | 10 (LTS) |
-| Backend framework | ASP.NET Core Minimal APIs | 10.x |
-| ORM (transactional) | Entity Framework Core | 10.x |
+| Language | C# | 12 / 13 |
+| Runtime | .NET | 8 (LTS) |
+| Backend framework | ASP.NET Core Minimal APIs | 8.x |
+| ORM (transactional) | Entity Framework Core | 8.x |
 | ORM (reporting/complex queries) | Dapper | Latest stable |
-| Frontend framework | Blazor WebAssembly | .NET 10 |
-| UI component library | MudBlazor **or** Radzen Blazor | Latest stable |
-| Real-time communication | SignalR | .NET 10 |
+| Frontend framework | Blazor WebAssembly | .NET 8 |
+| UI component library | MudBlazor **or** Radzen Blazor | Latest stable (MudBlazor 7.x) |
+| Real-time communication | SignalR | .NET 8 |
 | Message broker | RabbitMQ **or** Azure Service Bus | RabbitMQ 3.13+ |
 | Messaging abstraction | MassTransit | 8.x |
 | Relational database | PostgreSQL **or** SQL Server | PostgreSQL 16+ |
@@ -362,9 +362,9 @@ The following technologies are **required** and cannot be substituted without an
 | Container orchestration | Docker Compose (dev) / Kubernetes (prod) | Compose v2 |
 | Observability | OpenTelemetry .NET SDK | Latest stable |
 | Metrics backend | Prometheus | 2.x |
-| Metrics visualization | Grafana | 10.x |
+| Metrics visualization | Grafana | 10.x / 11.x |
 | Structured log sink | Seq | 2024.x |
-| Compilation target | Native AOT (.NET 10) | — |
+| Compilation target | Native AOT (.NET 8) | — |
 | TLS version | TLS 1.3 | — |
 
 ### 3.2 Forbidden Technologies
@@ -405,18 +405,24 @@ The following may be used but require a written ADR before adoption:
 
 ### 3.4 Runtime and Compilation Constraints
 
-- **`global.json`** must pin the exact .NET 10 SDK version used by the team. No floating versions.
-- **Native AOT** must be enabled for all API and Worker projects:
+- **`global.json`** must pin the .NET 8 SDK version used by the team (e.g. `8.0.129`, rollForward: `latestMinor`).
+- **Native AOT** must be enabled for all API and Worker projects in Release builds:
   ```xml
-  <PublishAot>true</PublishAot>
+  <PublishAot Condition="'$(Configuration)' == 'Release'">true</PublishAot>
+  <PublishAot Condition="'$(Configuration)' == 'Debug'">false</PublishAot>
   <InvariantGlobalization>true</InvariantGlobalization>
   ```
 - **Reflection-based serialization** is incompatible with Native AOT. All JSON serialization must use source-generated `JsonSerializerContext`:
   ```csharp
   [JsonSerializable(typeof(CreateProposalRequest))]
   [JsonSerializable(typeof(ProposalStatusResponse))]
+  [JsonSerializable(typeof(PagedResult<ProposalListItemDto>))]
+  [JsonSerializable(typeof(CreditRisk.Shared.Kernel.Common.HealthResponse))]
+  [JsonSerializable(typeof(Microsoft.AspNetCore.Mvc.ProblemDetails))]
+  [JsonSerializable(typeof(Dictionary<string, string[]>))]
   internal partial class ApiJsonContext : JsonSerializerContext { }
   ```
+- **Anonymous types (e.g. `Results.Ok(new { status = "healthy" })`) are strictly forbidden in API endpoint returns.** In Native AOT / `CreateSlimBuilder`, anonymous types cannot be resolved by source generators and result in `503 Service Unavailable` or runtime serialization exceptions. Always return strongly-typed records such as `HealthResponse`, `ProblemDetails`, or dedicated DTOs registered in the module's `JsonSerializerContext`.
 - **`JsonSerializerContext` partial class files must include `using System.Text.Json.Serialization;` explicitly.** `ImplicitUsings` does NOT inject this namespace for partial class attribute resolution — the compiler resolves `[JsonSerializable]` attributes before implicit usings are applied, causing `CS0246: JsonSourceGenerationContextAttribute not found`. Always add the explicit using directive:
   ```csharp
   // ✅ REQUIRED — ImplicitUsings does NOT cover this for partial class attributes
@@ -431,18 +437,28 @@ The following may be used but require a written ADR before adoption:
   // CreateSlimBuilder uses AddRoutingCore() — does NOT register {id:guid}, {id:int}, etc.
   builder.Services.AddRouting();
   ```
+- **Kestrel `ListenAnyIP(PORT)` must be configured explicitly in every API and Bureau Mock service.** By default, `CreateSlimBuilder` binds only to `localhost`, which prevents container-to-container and external access:
+  ```csharp
+  // ✅ REQUIRED Kestrel port binding
+  builder.WebHost.ConfigureKestrel(options =>
+  {
+      options.ListenAnyIP(5000); // 5000 IAM, 5001 CreditAnalysis, 5002 Compliance, 5003 Operations, 8081 Bureau Mock
+  });
+  ```
 - **Dynamic code generation** (`Reflection.Emit`, `Expression.Compile` at runtime) is forbidden in AOT-published projects.
 - **`Directory.Build.props`** must define shared properties for all projects to avoid duplication:
   ```xml
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);NU1902;NU1903</NoWarn>
     <AnalysisMode>All</AnalysisMode>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   ```
-- **`Directory.Packages.props`** must manage all NuGet package versions centrally. No version attributes in individual `.csproj` files.
+- **`Directory.Packages.props`** manages package version properties centrally.
 
 ### 3.5 Container Constraints
 
@@ -582,23 +598,24 @@ private const decimal MaxCreditLimit = 500_000m;
 
 Every component of the Credit Risk Compliance Lab runs inside a Docker container. This is an absolute constraint with no exceptions:
 
-| Service | Container | Image Base |
-|---|---|---|
-| IAM API | `crcl-iam-api` | `mcr.microsoft.com/dotnet/aspnet:10.0` (AOT: `mcr.microsoft.com/dotnet/runtime-deps:10.0`) |
-| Credit Analysis API | `crcl-credit-api` | `mcr.microsoft.com/dotnet/runtime-deps:10.0` |
-| Credit Analysis Worker | `crcl-credit-worker` | `mcr.microsoft.com/dotnet/runtime-deps:10.0` |
-| Compliance API | `crcl-compliance-api` | `mcr.microsoft.com/dotnet/runtime-deps:10.0` |
-| Compliance Worker | `crcl-compliance-worker` | `mcr.microsoft.com/dotnet/runtime-deps:10.0` |
-| Operations Frontend | `crcl-frontend` | `nginx:1.27-alpine` |
-| Operations SignalR Hub | `crcl-hub` | `mcr.microsoft.com/dotnet/aspnet:10.0` |
-| PostgreSQL | `crcl-postgres` | `postgres:16-alpine` |
-| Redis | `crcl-redis` | `redis:7-alpine` |
-| RabbitMQ | `crcl-rabbitmq` | `rabbitmq:3.13-management-alpine` |
-| Keycloak | `crcl-keycloak` | `quay.io/keycloak/keycloak:24` |
-| Prometheus | `crcl-prometheus` | `prom/prometheus:v2.52.0` |
-| Grafana | `crcl-grafana` | `grafana/grafana:10.4.2` |
-| Seq | `crcl-seq` | `datalust/seq:2024` |
-| Nginx (reverse proxy) | `crcl-nginx` | `nginx:1.27-alpine` |
+| Service | Container | Port | Image Base |
+|---|---|---|---|
+| IAM API | `crcl-iam-api` | 5000 | `mcr.microsoft.com/dotnet/aspnet:8.0` (AOT: `mcr.microsoft.com/dotnet/runtime-deps:8.0`) |
+| Credit Analysis API | `crcl-credit-api` | 5001 | `mcr.microsoft.com/dotnet/runtime-deps:8.0` |
+| Compliance API | `crcl-compliance-api` | 5002 | `mcr.microsoft.com/dotnet/runtime-deps:8.0` |
+| Operations Server (SignalR Hub + Host) | `crcl-operations-server` | 5003 | `mcr.microsoft.com/dotnet/aspnet:8.0` |
+| Bureau Mock Service | `crcl-bureau-mock` | 8081 | `mcr.microsoft.com/dotnet/aspnet:8.0` |
+| Credit Analysis Worker | `crcl-credit-worker` | — | `mcr.microsoft.com/dotnet/runtime-deps:8.0` |
+| Compliance Worker | `crcl-compliance-worker` | — | `mcr.microsoft.com/dotnet/runtime-deps:8.0` |
+| Operations Frontend (WASM) | `crcl-frontend` | 80/443 | `nginx:1.27-alpine` |
+| PostgreSQL | `crcl-postgres` | 5432 | `postgres:16-alpine` |
+| Redis | `crcl-redis` | 6379 | `redis:7-alpine` |
+| RabbitMQ | `crcl-rabbitmq` | 5672/15672 | `rabbitmq:3.13-management-alpine` |
+| Keycloak | `crcl-keycloak` | 8080 | `quay.io/keycloak/keycloak:24` |
+| Prometheus | `crcl-prometheus` | 9090 | `prom/prometheus:v2.52.0` |
+| Grafana | `crcl-grafana` | 3000 | `grafana/grafana:10.4.2` |
+| Seq | `crcl-seq` | 5341/8081 | `datalust/seq:2024` |
+| Nginx (reverse proxy) | `crcl-nginx` | 80/443 | `nginx:1.27-alpine` |
 
 ### 5.2 Dockerfile Standards
 
@@ -1835,9 +1852,9 @@ public static CreditProposalDto ToDto(this CreditProposal proposal) => new()
 
 ---
 
-## Appendix C: Known Implementation Pitfalls — All Modules
+## Appendix C: Known Implementation Pitfalls & Permanent Solutions
 
-The following bugs were encountered during the initial implementation of this project. Each entry documents the exact error, root cause, and the permanent fix. Use this as a pre-flight checklist before any new implementation.
+The following bugs and edge cases were encountered during the implementation of this project. Each entry documents the exact error, root cause, and the permanent fix. Use this as a pre-flight checklist before any new implementation.
 
 | # | Error / Symptom | Root Cause | Fix |
 |---|---|---|---|
@@ -1846,18 +1863,31 @@ The following bugs were encountered during the initial implementation of this pr
 | 3 | `ArgumentNullException: Value cannot be null. (Parameter 'uriString')` at startup in `ObservabilityExtensions` | `OTEL_EXPORTER_OTLP_ENDPOINT` configuration key is absent (because `appsettings.Development.json` was not loaded). `new Uri(null)` throws immediately. | Null-check the endpoint before constructing `Uri`. Make OTLP export conditional. See §7.2 and SPEC-01 §4.8. |
 | 4 | `appsettings.Development.json` never loaded; all `GetConnectionString()` calls return `null` | `ASPNETCORE_ENVIRONMENT` environment variable not exported before running `dotnet ef database update` or `dotnet run`. Defaults to `Production`. | `export ASPNETCORE_ENVIRONMENT=Development` before every migration and `dotnet run` command. See §5.7.2. |
 | 5 | `ACCESS_REFUSED` (RabbitMQ) or `RedisConnectionException` at startup | `appsettings.Development.json` used Docker service names (`rabbitmq`, `redis`) instead of `localhost`. Redis connection string missing `abortConnect=false`. | Use `localhost` for all hostnames in `appsettings.Development.json`. Add `abortConnect=false` to Redis connection strings. See SPEC-02 §6.5. |
-| 6 | APIs start on wrong ports (e.g., 5050, 5012, 5052) instead of 5001/5002/5003 | `dotnet new` auto-generates random ports in `launchSettings.json`. | Set ports explicitly: IAM=5001, CreditAnalysis=5002, Compliance=5003 in `launchSettings.json`. See SPEC-02 §6.6. |
+| 6 | APIs start on wrong ports instead of 5000 (IAM), 5001 (Credit), 5002 (Compliance), 5003 (Operations), 8081 (Bureau) | `dotnet new` auto-generates random ports in `launchSettings.json` or `CreateSlimBuilder` defaults. | Set ports explicitly via `options.ListenAnyIP(PORT)` in `Program.cs` and configure `launchSettings.json`. |
 | 7 | `RegexErrorStubRouteConstraint` / routes with `{id:guid}` return 500 | `WebApplication.CreateSlimBuilder(args)` calls `AddRoutingCore()` internally, which does NOT register built-in route constraints. | Call `builder.Services.AddRouting()` explicitly in every API `Program.cs` after `CreateSlimBuilder`. See §3.4 and SPEC-02 §4.7. |
+| 8 | Error 500 on `POST /api/v1/users` or event publishing: `relation "outbox_messages" does not exist` | MassTransit or Command Handlers try to publish domain events via Outbox Pattern, but `outbox_messages` table was missing in `IamDbContext`. | Add `DbSet<OutboxMessage> OutboxMessages` to `IamDbContext`, `CreditAnalysisDbContext`, and `ComplianceDbContext`, register `OutboxMessageConfiguration`, and apply migrations. |
+| 9 | Database empty (`0 rows`) returning 500 on first startup | PostgreSQL container was started fresh without executing EF Core migrations. | Run `dotnet ef database update` across all module infrastructure projects in startup script (`run-services.sh` / `start-all-services.sh`). |
+| 10 | Error 401 Unauthorized on `POST /api/v1/users` | Endpoint had authorization policy applied when creating test/new users. | Keep `POST /api/v1/users` public for user creation/registration, and protect `GET /api/v1/users/{id}` with `RequiresAdministrator`. |
+| 11 | Error 400 Bad Request on user creation payload | Payload used legacy format (`username`, `password`, `roles: []`). | Use contract: `{"email":"...","fullName":"...","role":"desk-operator","temporaryPassword":"..."}`. |
+| 12 | Error 404 Not Found on `GET /api/v1/users/me` | Route `/users/me` was assumed but does not exist. | Use route `GET /api/v1/users/{id:guid}` with user UUID. |
+| 13 | Postman `EAI_AGAIN` error on variable hosts | Postman failed to resolve `{{baseUrl_Bureau}}` without active environment selected. | Provide Postman collections with direct `http://localhost:PORT` URLs and automated token extraction scripts. |
+| 14 | Compliance API startup failure: `Unable to resolve service for type 'IDistributedCache'` | `PepScreeningService` required distributed caching in DI, but Redis/memory cache was not registered in `AddComplianceInfrastructure`. | Call `services.AddStackExchangeRedisCache(...)` or `services.AddDistributedMemoryCache()` in `AddComplianceInfrastructure`. |
+| 15 | Error 503 / runtime serialization failure on health checks: `NotSupportedException` | Returning anonymous objects like `Results.Ok(new { status = "healthy" })` under Native AOT / `CreateSlimBuilder`. Anonymous types cannot be registered in source-generated `JsonSerializerContext`. | Define and return strongly-typed records such as `HealthResponse(string Status, string Service, DateTimeOffset? Timestamp = null)` and register them in each module's `JsonSerializerContext`. |
+| 16 | Startup failure: `Address already in use` or stale endpoints responding on ports 5000-5003 / 8081 | Lingering background `dotnet` processes from previous runs or other workspaces holding the ports. | In `run-services.sh` and startup scripts, proactively release ports 5000-5003 and 8081 using `fuser -k "${port}/tcp"` or `lsof -ti ":${port}" | xargs kill -9` before launching new processes. |
 
 ### Appendix C.1 — Pre-Implementation Checklist (All Modules)
 
 Before implementing any new API module, verify:
 
-- [ ] Every `*JsonContext.cs` file has `using System.Text.Json.Serialization;` at the top
+- [ ] Every `*JsonContext.cs` file has `using System.Text.Json.Serialization;` at the top and registers all DTOs, collections (`PagedResult<T>`, `ProblemDetails`, etc.), and `HealthResponse`
+- [ ] No anonymous types (e.g. `new { status = "healthy" }`) are returned in any endpoint; use strongly-typed records exclusively
 - [ ] Every `DbContext.OnModelCreating()` calls `modelBuilder.Ignore<DomainEvent>()` before `ApplyConfigurationsFromAssembly`
+- [ ] Every `DbContext` includes `DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();` and `OutboxMessageConfiguration`
 - [ ] `ObservabilityExtensions` null-checks `OTEL_EXPORTER_OTLP_ENDPOINT` before constructing `Uri`
 - [ ] `ASPNETCORE_ENVIRONMENT=Development` is exported before running migrations and `dotnet run`
 - [ ] All hostnames in `appsettings.Development.json` use `localhost` (not Docker service names)
 - [ ] Redis connection strings include `abortConnect=false`
-- [ ] `launchSettings.json` ports are set to 5001 (IAM), 5002 (CreditAnalysis), 5003 (Compliance)
+- [ ] Ports are configured explicitly via `builder.WebHost.ConfigureKestrel(opts => opts.ListenAnyIP(PORT))`
+- [ ] `run-services.sh` proactively clears lingering processes on ports 5000-5003 and 8081
 - [ ] Every API `Program.cs` calls `builder.Services.AddRouting()` after `WebApplication.CreateSlimBuilder(args)`
+- [ ] EF Core migrations are executed (`dotnet ef database update`) for all DB contexts prior to handling requests

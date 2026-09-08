@@ -59,12 +59,12 @@ This frente owns all asynchronous processing components:
 | Messaging abstraction | MassTransit | 8.3.6 |
 | RabbitMQ transport | MassTransit.RabbitMQ | 8.3.6 |
 | Resilience | Polly | 8.4.2 |
-| HTTP resilience | Microsoft.Extensions.Http.Resilience | 9.3.0 |
+| HTTP resilience | Microsoft.Extensions.Http.Resilience | 8.10.0 |
 | Redis | StackExchange.Redis | 2.8.16 |
-| EF Core | Microsoft.EntityFrameworkCore | 10.0.0 |
-| PostgreSQL | Npgsql.EntityFrameworkCore.PostgreSQL | 10.0.0 |
+| EF Core | Microsoft.EntityFrameworkCore | 8.0.11 |
+| PostgreSQL | Npgsql.EntityFrameworkCore.PostgreSQL | 8.0.11 |
 | Observability | OpenTelemetry (full stack) | 1.9.0 |
-| Hosted services | Microsoft.Extensions.Hosting | 10.0.0 |
+| Hosted services | Microsoft.Extensions.Hosting | 8.0.1 |
 
 ---
 
@@ -103,15 +103,21 @@ src/modules/operations/CreditRisk.Operations.Server/
 └── Serialization/
     └── OperationsServerJsonContext.cs
 
+src/external/CreditRisk.BureauMock.Service/
+├── CreditRisk.BureauMock.Service.csproj
+├── Program.cs
+└── Models.cs
+
 src/shared/CreditRisk.Shared.Kernel/
 └── Outbox/
     ├── OutboxMessage.cs
-    └── IOutboxRepository.cs
+    ├── IOutboxRepository.cs
+    └── IOutboxProcessor.cs
 
 src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/
-└── Outbox/
-    ├── OutboxRepository.cs
-    └── OutboxProcessor.cs
+└── Persistence/
+    ├── Configurations/OutboxMessageConfiguration.cs
+    └── Repositories/OutboxRepository.cs
 ```
 
 ### 3.1 Naming Conventions
@@ -759,6 +765,56 @@ public sealed record BureauQueryResult(
     int Score,
     decimal TotalMonthlyDebt,
     bool IsDegraded = false);
+```
+
+### 4.8 Bureau Mock Service (Port 8081)
+
+The solution includes an external Bureau Mock Service (`src/external/CreditRisk.BureauMock.Service`) that simulates a credit rating agency API.
+
+```csharp
+// File: src/external/CreditRisk.BureauMock.Service/Models.cs
+namespace CreditRisk.BureauMock.Service;
+
+/// <summary>Request to query credit bureau.</summary>
+public record QueryRequest(string Document, string DocumentType);
+
+/// <summary>Credit score response from bureau.</summary>
+public record QueryResponse(int Score, decimal TotalMonthlyDebt, string Status);
+```
+
+```csharp
+// File: src/external/CreditRisk.BureauMock.Service/Program.cs
+using CreditRisk.BureauMock.Service;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(8081);
+});
+
+var app = builder.Build();
+
+app.MapPost("/query", async (QueryRequest request) =>
+{
+    await Task.Delay(Random.Shared.Next(50, 200));
+    int score = Math.Abs(request.Document.GetHashCode()) % 1000;
+    var response = new QueryResponse(score, Random.Shared.Next(0, 50000), "Success");
+    return Results.Ok(response);
+})
+.WithName("QueryBureau")
+.Produces<QueryResponse>(StatusCodes.Status200OK)
+.Produces(StatusCodes.Status400BadRequest);
+
+app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTimeOffset.UtcNow }))
+.WithName("Health")
+.Produces(StatusCodes.Status200OK);
+
+app.MapGet("/statistics", () => Results.Ok(new { totalQueries = 100, successRate = 99.5 }))
+.WithName("Statistics")
+.Produces(StatusCodes.Status200OK);
+
+app.Run();
 ```
 
 ---

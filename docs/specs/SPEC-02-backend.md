@@ -279,7 +279,7 @@ src/modules/compliance/
 
 ### 4.1 REST API Endpoints
 
-#### IAM API — Base URL: `/api/v1`
+#### IAM API — Base URL: `/api/v1` (Port 5000)
 
 | Method | Route | Auth | Request Body | Response | HTTP Codes |
 |---|---|---|---|---|---|
@@ -287,30 +287,30 @@ src/modules/compliance/
 | `POST` | `/auth/logout` | Bearer | None | None | 204, 401 |
 | `POST` | `/auth/refresh` | None | `RefreshTokenRequest` | `LoginResponse` | 200, 401 |
 | `GET` | `/auth/jwks` | None | None | JWKS JSON | 200 |
-| `POST` | `/users` | Admin | `CreateUserRequest` | `UserDto` | 201, 400, 401, 403, 409, 422 |
-| `GET` | `/users/{id}` | Admin | None | `UserDto` | 200, 401, 403, 404 |
-| `PUT` | `/users/{id}/roles` | Admin | `AssignRoleRequest` | `UserDto` | 200, 401, 403, 404, 422 |
+| `POST` | `/users` | None | `CreateUserRequest` | `UserDto` | 201, 400, 409, 422 |
+| `GET` | `/users/{id:guid}` | Admin | None | `UserDto` | 200, 401, 403, 404 |
+| `PUT` | `/users/{id:guid}/roles` | Admin | `AssignRoleRequest` | `UserDto` | 200, 401, 403, 404, 422 |
 | `GET` | `/health` | None | None | Health JSON | 200, 503 |
 
-#### Credit Analysis API — Base URL: `/api/v1`
+#### Credit Analysis API — Base URL: `/api/v1` (Port 5001)
 
 | Method | Route | Auth | Request Body | Response | HTTP Codes |
 |---|---|---|---|---|---|
 | `POST` | `/proposals` | DeskOperator | `CreateProposalRequest` | `ProposalAcceptedResponse` | 202, 401, 403, 422 |
-| `GET` | `/proposals/{id}` | DeskOperator | None | `CreditProposalDto` | 200, 401, 403, 404 |
+| `GET` | `/proposals/{id:guid}` | DeskOperator | None | `CreditProposalDto` | 200, 401, 403, 404 |
 | `GET` | `/proposals` | DeskOperator | None (query params) | `PagedResult<ProposalListItemDto>` | 200, 401, 403 |
-| `PUT` | `/proposals/{id}/submit` | DeskOperator | None | `CreditProposalDto` | 200, 401, 403, 404, 409 |
-| `GET` | `/customers/{id}/credit-history` | DeskOperator | None | `CreditHistoryDto` | 200, 401, 403, 404 |
+| `PUT` | `/proposals/{id:guid}/submit` | DeskOperator | None | `CreditProposalDto` | 200, 401, 403, 404, 409 |
+| `GET` | `/customers/{id:guid}/credit-history` | DeskOperator | None | `CreditHistoryDto` | 200, 401, 403, 404 |
 | `GET` | `/health` | None | None | Health JSON | 200, 503 |
 
-#### Compliance API — Base URL: `/api/v1`
+#### Compliance API — Base URL: `/api/v1` (Port 5002)
 
 | Method | Route | Auth | Request Body | Response | HTTP Codes |
 |---|---|---|---|---|---|
 | `POST` | `/transactions` | ServiceAccount | `IngestTransactionRequest` | `TransactionAcceptedResponse` | 202, 401, 422 |
 | `GET` | `/alerts` | ComplianceAnalyst | None (query params) | `PagedResult<AmlAlertDto>` | 200, 401, 403 |
-| `GET` | `/alerts/{id}` | ComplianceAnalyst | None | `AmlAlertDto` | 200, 401, 403, 404 |
-| `PUT` | `/alerts/{id}/review` | ComplianceAnalyst | `ReviewAlertRequest` | `AmlAlertDto` | 200, 401, 403, 404, 409 |
+| `GET` | `/alerts/{id:guid}` | ComplianceAnalyst | None | `AmlAlertDto` | 200, 401, 403, 404 |
+| `PUT` | `/alerts/{id:guid}/review` | ComplianceAnalyst | `ReviewAlertRequest` | `AmlAlertDto` | 200, 401, 403, 404, 409 |
 | `GET` | `/reports/str` | ComplianceAnalyst | None (query params) | `StrReportDto` | 200, 401, 403 |
 | `GET` | `/health` | None | None | Health JSON | 200, 503 |
 
@@ -834,11 +834,22 @@ using CreditRisk.IAM.Api.Endpoints;
 using CreditRisk.IAM.Api.Middleware;
 using CreditRisk.IAM.Api.Serialization;
 using CreditRisk.IAM.Infrastructure.Persistence;
+using CreditRisk.IAM.Application.Commands.Login;
+using CreditRisk.IAM.Application.Commands.Logout;
+using CreditRisk.IAM.Application.Commands.CreateUser;
+using CreditRisk.IAM.Application.Queries.GetUserById;
 using CreditRisk.Shared.Observability;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using MassTransit;
 
 WebApplicationBuilder builder = WebApplication.CreateSlimBuilder(args);
+
+// Configure Kestrel to listen on all network interfaces
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5000);
+});
 
 // REQUIRED: CreateSlimBuilder uses AddRoutingCore() internally, which does NOT register
 // built-in route constraints like {id:guid}, {id:int}, {id:long}, etc.
@@ -855,17 +866,17 @@ builder.Services.ConfigureHttpJsonOptions(options =>
     options.SerializerOptions.TypeInfoResolverChain.Insert(0, IamApiJsonContext.Default);
 });
 
-// Database
+// Database with Outbox support
 builder.Services.AddDbContext<IamDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres")!));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres") ?? "Host=localhost;Database=creditrisk;Username=crcl;Password=crcl"));
 
 // Authentication — Keycloak OIDC
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = builder.Configuration["Keycloak__Authority"]!;
+        options.Authority = builder.Configuration["Keycloak__Authority"] ?? "http://localhost:8080/realms/crcl";
         options.Audience = builder.Configuration["Keycloak__Audience"] ?? "crcl-api";
-        options.RequireHttpsMetadata = !builder.Environment.IsDevelopment();
+        options.RequireHttpsMetadata = false;
         options.TokenValidationParameters.ValidateIssuerSigningKey = true;
         options.TokenValidationParameters.ClockSkew = TimeSpan.FromSeconds(30);
     });
@@ -886,47 +897,121 @@ builder.Services.AddAuthorization(options =>
               .RequireClaim("roles", "administrator"));
 });
 
-// Rate limiting
-builder.Services.AddRateLimiter(options =>
+// MassTransit with RabbitMQ
+builder.Services.AddMassTransit(x =>
 {
-    options.AddFixedWindowLimiter("auth-endpoints", limiter =>
+    x.UsingRabbitMq((context, cfg) =>
     {
-        limiter.PermitLimit = 5;
-        limiter.Window = TimeSpan.FromMinutes(1);
-        limiter.QueueProcessingOrder = System.Threading.RateLimiting.QueueProcessingOrder.OldestFirst;
-        limiter.QueueLimit = 0;
+        cfg.Host(builder.Configuration.GetConnectionString("RabbitMQ") ?? "rabbitmq://localhost");
+        cfg.ConfigureEndpoints(context);
     });
 });
 
 // Health checks
 builder.Services.AddHealthChecks()
-    .AddNpgSql(builder.Configuration.GetConnectionString("Postgres")!, name: "postgres")
-    .AddRedis(builder.Configuration.GetConnectionString("Redis")!, name: "redis");
+    .AddNpgSql(builder.Configuration.GetConnectionString("Postgres") ?? "Host=localhost;Database=creditrisk;Username=crcl;Password=crcl", name: "postgres")
+    .AddRedis(builder.Configuration.GetConnectionString("Redis") ?? "localhost:6379", name: "redis");
 
-// Infrastructure services
+// Infrastructure services & Handlers
 builder.Services.AddIamInfrastructure(builder.Configuration);
+builder.Services.AddScoped<LoginCommandHandler>();
+builder.Services.AddScoped<LogoutCommandHandler>();
+builder.Services.AddScoped<CreateUserCommandHandler>();
+builder.Services.AddScoped<GetUserByIdQueryHandler>();
 
 // OpenAPI
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 WebApplication app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 // Middleware pipeline
 app.UseMiddleware<GlobalExceptionMiddleware>();
 app.UseAuthentication();
 app.UseMiddleware<JwtRevocationMiddleware>();
 app.UseAuthorization();
-app.UseRateLimiter();
 
 // Endpoints
 app.MapAuthEndpoints();
 app.MapUserEndpoints();
 app.MapHealthChecks("/health");
-
 app.MapSwagger();
-app.UseSwaggerUI();
 
 app.Run();
+```
+
+### 4.7.1 JSON Serialization Contexts (Native AOT)
+
+```csharp
+// File: src/modules/iam/CreditRisk.IAM.Api/Serialization/IamApiJsonContext.cs
+using System.Text.Json.Serialization;
+using CreditRisk.IAM.Application.DTOs;
+using CreditRisk.Shared.Kernel.Common;
+using CreditRisk.Shared.Kernel.Result;
+
+namespace CreditRisk.IAM.Api.Serialization;
+
+[JsonSerializable(typeof(LoginRequest))]
+[JsonSerializable(typeof(LoginResponse))]
+[JsonSerializable(typeof(CreateUserRequest))]
+[JsonSerializable(typeof(UserDto))]
+[JsonSerializable(typeof(HealthResponse))]
+[JsonSerializable(typeof(Microsoft.AspNetCore.Mvc.ProblemDetails))]
+[JsonSerializable(typeof(Dictionary<string, string[]>))]
+[JsonSourceGenerationOptions(
+    PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
+    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull)]
+public sealed partial class IamApiJsonContext : JsonSerializerContext { }
+```
+
+```csharp
+// File: src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/Serialization/CreditAnalysisApiJsonContext.cs
+using System.Text.Json.Serialization;
+using CreditRisk.CreditAnalysis.Application.DTOs;
+using CreditRisk.Shared.Kernel.Common;
+using CreditRisk.Shared.Kernel.Result;
+
+namespace CreditRisk.CreditAnalysis.Api.Serialization;
+
+[JsonSerializable(typeof(CreateProposalRequest))]
+[JsonSerializable(typeof(CreditProposalDto))]
+[JsonSerializable(typeof(ProposalAcceptedResponse))]
+[JsonSerializable(typeof(PagedResult<ProposalListItemDto>))]
+[JsonSerializable(typeof(ProposalListItemDto))]
+[JsonSerializable(typeof(HealthResponse))]
+[JsonSerializable(typeof(Microsoft.AspNetCore.Mvc.ProblemDetails))]
+[JsonSerializable(typeof(Dictionary<string, string[]>))]
+[JsonSourceGenerationOptions(
+    PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
+    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull)]
+public sealed partial class CreditAnalysisApiJsonContext : JsonSerializerContext { }
+```
+
+```csharp
+// File: src/modules/compliance/CreditRisk.Compliance.Api/Serialization/ComplianceApiJsonContext.cs
+using System.Text.Json.Serialization;
+using CreditRisk.Compliance.Application.DTOs;
+using CreditRisk.Compliance.Api.Endpoints;
+using CreditRisk.Shared.Kernel.Common;
+using CreditRisk.Shared.Kernel.Result;
+
+namespace CreditRisk.Compliance.Api.Serialization;
+
+[JsonSerializable(typeof(IngestTransactionRequest))]
+[JsonSerializable(typeof(ReviewAlertRequest))]
+[JsonSerializable(typeof(TransactionDto))]
+[JsonSerializable(typeof(AmlAlertDto))]
+[JsonSerializable(typeof(PagedResult<AmlAlertDto>))]
+[JsonSerializable(typeof(HealthResponse))]
+[JsonSerializable(typeof(Microsoft.AspNetCore.Mvc.ProblemDetails))]
+[JsonSerializable(typeof(Dictionary<string, string[]>))]
+[JsonSourceGenerationOptions(
+    PropertyNamingPolicy = JsonKnownNamingPolicy.CamelCase,
+    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull)]
+public sealed partial class ComplianceApiJsonContext : JsonSerializerContext { }
 ```
 
 ### 4.8 EF Core Configuration
@@ -954,6 +1039,85 @@ app.Run();
 >     modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 > }
 > ```
+
+```csharp
+// File: src/modules/iam/CreditRisk.IAM.Infrastructure/Persistence/IamDbContext.cs
+using CreditRisk.IAM.Domain.Entities;
+using CreditRisk.Shared.Kernel.Domain;
+using CreditRisk.Shared.Kernel.Outbox;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+
+namespace CreditRisk.IAM.Infrastructure.Persistence;
+
+public sealed class IamDbContext(DbContextOptions<IamDbContext> options) : DbContext(options)
+{
+    public DbSet<User> Users => Set<User>();
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Ignore<DomainEvent>();
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
+}
+```
+
+```csharp
+// File: src/modules/iam/CreditRisk.IAM.Infrastructure/Persistence/Configurations/OutboxMessageConfiguration.cs
+using CreditRisk.Shared.Kernel.Outbox;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace CreditRisk.IAM.Infrastructure.Persistence.Configurations;
+
+public sealed class OutboxMessageConfiguration : IEntityTypeConfiguration<OutboxMessage>
+{
+    public void Configure(EntityTypeBuilder<OutboxMessage> builder)
+    {
+        builder.ToTable("outbox_messages");
+        builder.HasKey(x => x.Id);
+
+        builder.Property(x => x.MessageType)
+            .HasColumnName("message_type")
+            .HasColumnType("varchar(500)")
+            .IsRequired();
+
+        builder.Property(x => x.Payload)
+            .HasColumnName("payload")
+            .HasColumnType("jsonb")
+            .IsRequired();
+
+        builder.Property(x => x.ScheduledAt)
+            .HasColumnName("scheduled_at")
+            .HasColumnType("timestamp with time zone")
+            .IsRequired();
+
+        builder.Property(x => x.ProcessedAt)
+            .HasColumnName("processed_at")
+            .HasColumnType("timestamp with time zone");
+
+        builder.Property(x => x.RetryCount)
+            .HasColumnName("retry_count")
+            .HasDefaultValue(0)
+            .IsRequired();
+
+        builder.Property(x => x.Error)
+            .HasColumnName("error")
+            .HasColumnType("text");
+
+        builder.Property(x => x.CreatedAt)
+            .HasColumnName("created_at")
+            .HasColumnType("timestamp with time zone")
+            .IsRequired();
+
+        builder.HasIndex(x => x.ProcessedAt).HasDatabaseName("idx_outbox_processed_at");
+        builder.HasIndex(x => new { x.ScheduledAt, x.ProcessedAt }).HasDatabaseName("idx_outbox_unprocessed");
+    }
+}
+```
 
 ```csharp
 // File: src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/Persistence/Configurations/CreditProposalConfiguration.cs
@@ -1587,15 +1751,18 @@ public static class ServiceCollectionExtensions
 
 ### 6.6 `launchSettings.json` — Required Port Configuration
 
-> **⚠️ Critical:** `dotnet new` auto-generates random ports in `launchSettings.json`. These must be overridden to the canonical ports before running any API locally. Using wrong ports will cause health check commands and integration tests to fail silently.
+> **⚠️ Critical:** Ports must be configured explicitly in `launchSettings.json` and in code via `ListenAnyIP`.
 
-The required ports for local development are:
+The canonical ports for local development are:
 
 | Module | Port | URL |
 |---|---|---|
-| IAM API | **5001** | `http://localhost:5001` |
-| Credit Analysis API | **5002** | `http://localhost:5002` |
-| Compliance API | **5003** | `http://localhost:5003` |
+| IAM API | **5000** | `http://localhost:5000` |
+| Credit Analysis API | **5001** | `http://localhost:5001` |
+| Compliance API | **5002** | `http://localhost:5002` |
+| Operations Server | **5003** | `http://localhost:5003` |
+| Bureau Mock Service | **8081** | `http://localhost:8081` |
+| Keycloak | **8080** | `http://localhost:8080` |
 
 Each API project's `Properties/launchSettings.json` must use these exact ports:
 
@@ -1607,7 +1774,7 @@ Each API project's `Properties/launchSettings.json` must use these exact ports:
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:5001",
+      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -1624,7 +1791,7 @@ Each API project's `Properties/launchSettings.json` must use these exact ports:
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:5002",
+      "applicationUrl": "http://localhost:5001",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -1641,7 +1808,7 @@ Each API project's `Properties/launchSettings.json` must use these exact ports:
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:5003",
+      "applicationUrl": "http://localhost:5002",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

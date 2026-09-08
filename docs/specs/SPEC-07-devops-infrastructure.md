@@ -28,11 +28,13 @@ This document specifies the complete infrastructure configuration for the Credit
 
 | Service | Image | Port | Description |
 |---|---|---|---|
-| `iam-api` | Custom AOT | 5001 | Identity & Access Management API |
-| `credit-api` | Custom AOT | 5002 | Credit Analysis API |
-| `compliance-api` | Custom AOT | 5003 | Compliance/AML API |
-| `operations-server` | Custom | 5004 | Operations Server + Blazor WASM host |
-| `worker` | Custom AOT | — | MassTransit background worker |
+| `iam-api` | Custom AOT | 5000 | Identity & Access Management API |
+| `credit-api` | Custom AOT | 5001 | Credit Analysis API |
+| `compliance-api` | Custom AOT | 5002 | Compliance/AML API |
+| `operations-server` | Custom | 5003 | Operations Server + Blazor WASM host |
+| `bureau-mock` | Custom | 8081 | Credit Bureau Mock Service |
+| `credit-worker` | Custom AOT | — | Credit Analysis background worker |
+| `compliance-worker` | Custom AOT | — | Compliance background worker |
 | `nginx` | nginx:1.27-alpine | 80/443 | Reverse proxy + TLS termination |
 | `postgres` | postgres:16-alpine | 5432 | Primary database |
 | `redis` | redis:7.4-alpine | 6379 | Token revocation + SignalR backplane |
@@ -41,7 +43,7 @@ This document specifies the complete infrastructure configuration for the Credit
 | `otel-collector` | otel/opentelemetry-collector-contrib:0.104.0 | 4317/4318 | Telemetry collector |
 | `prometheus` | prom/prometheus:v2.53.0 | 9090 | Metrics storage |
 | `grafana` | grafana/grafana:11.1.0 | 3000 | Dashboards |
-| `seq` | datalust/seq:2024.3 | 5341/8081 | Structured log viewer |
+| `seq` | datalust/seq:2024.3 | 5341 | Structured log viewer |
 | `jaeger` | jaegertracing/all-in-one:1.59 | 16686 | Distributed tracing UI |
 
 ---
@@ -52,7 +54,7 @@ This document specifies the complete infrastructure configuration for the Credit
 
 ```dockerfile
 # File: src/modules/iam/CreditRisk.IAM.Api/Dockerfile
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 # Install AOT prerequisites
@@ -76,7 +78,7 @@ RUN dotnet publish \
     --output /app/publish
 
 # ── Runtime stage ──────────────────────────────────────────────────────────
-FROM mcr.microsoft.com/dotnet/runtime-deps:10.0-noble-chiseled AS runtime
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-noble-chiseled AS runtime
 WORKDIR /app
 
 # Non-root user (chiseled image already uses app:app)
@@ -89,17 +91,17 @@ ENTRYPOINT ["./CreditRisk.IAM.Api"]
 ### 2.2 Credit Analysis API — AOT Dockerfile
 
 ```dockerfile
-# File: src/modules/credit/CreditRisk.CreditAnalysis.Api/Dockerfile
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+# File: src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/Dockerfile
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 RUN apt-get update && apt-get install -y clang zlib1g-dev && rm -rf /var/lib/apt/lists/*
 
 COPY Directory.Build.props Directory.Packages.props global.json ./
 COPY src/shared/ src/shared/
-COPY src/modules/credit/ src/modules/credit/
+COPY src/modules/credit-analysis/ src/modules/credit-analysis/
 
-WORKDIR /src/src/modules/credit/CreditRisk.CreditAnalysis.Api
+WORKDIR /src/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api
 RUN dotnet restore --runtime linux-x64
 RUN dotnet publish \
     --configuration Release \
@@ -109,7 +111,7 @@ RUN dotnet publish \
     -p:StripSymbols=true \
     --output /app/publish
 
-FROM mcr.microsoft.com/dotnet/runtime-deps:10.0-noble-chiseled AS runtime
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-noble-chiseled AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
 EXPOSE 8080
@@ -120,7 +122,7 @@ ENTRYPOINT ["./CreditRisk.CreditAnalysis.Api"]
 
 ```dockerfile
 # File: src/modules/compliance/CreditRisk.Compliance.Api/Dockerfile
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 RUN apt-get update && apt-get install -y clang zlib1g-dev && rm -rf /var/lib/apt/lists/*
@@ -139,7 +141,7 @@ RUN dotnet publish \
     -p:StripSymbols=true \
     --output /app/publish
 
-FROM mcr.microsoft.com/dotnet/runtime-deps:10.0-noble-chiseled AS runtime
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-noble-chiseled AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
 EXPOSE 8080
@@ -149,17 +151,18 @@ ENTRYPOINT ["./CreditRisk.Compliance.Api"]
 ### 2.4 Worker — AOT Dockerfile
 
 ```dockerfile
-# File: src/modules/worker/CreditRisk.Worker/Dockerfile
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+# File: src/workers/CreditRisk.CreditAnalysis.Worker/Dockerfile
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 RUN apt-get update && apt-get install -y clang zlib1g-dev && rm -rf /var/lib/apt/lists/*
 
 COPY Directory.Build.props Directory.Packages.props global.json ./
 COPY src/shared/ src/shared/
-COPY src/modules/worker/ src/modules/worker/
+COPY src/modules/credit-analysis/ src/modules/credit-analysis/
+COPY src/workers/CreditRisk.CreditAnalysis.Worker/ src/workers/CreditRisk.CreditAnalysis.Worker/
 
-WORKDIR /src/src/modules/worker/CreditRisk.Worker
+WORKDIR /src/src/workers/CreditRisk.CreditAnalysis.Worker
 RUN dotnet restore --runtime linux-x64
 RUN dotnet publish \
     --configuration Release \
@@ -169,10 +172,10 @@ RUN dotnet publish \
     -p:StripSymbols=true \
     --output /app/publish
 
-FROM mcr.microsoft.com/dotnet/runtime-deps:10.0-noble-chiseled AS runtime
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-noble-chiseled AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
-ENTRYPOINT ["./CreditRisk.Worker"]
+ENTRYPOINT ["./CreditRisk.CreditAnalysis.Worker"]
 ```
 
 ### 2.5 Operations Server — Standard Dockerfile (SignalR + Blazor WASM)
@@ -180,7 +183,7 @@ ENTRYPOINT ["./CreditRisk.Worker"]
 ```dockerfile
 # File: src/modules/operations/CreditRisk.Operations.Server/Dockerfile
 # Note: NOT AOT — SignalR hub requires reflection for dynamic hub dispatch
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
 COPY Directory.Build.props Directory.Packages.props global.json ./
@@ -193,7 +196,7 @@ RUN dotnet publish \
     --configuration Release \
     --output /app/publish
 
-FROM mcr.microsoft.com/dotnet/aspnet:10.0-noble-chiseled AS runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-noble-chiseled AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
 EXPOSE 8080
@@ -582,7 +585,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:8080
     ports:
-      - "5001:8080"
+      - "5000:8080"
     volumes:
       - ./src/modules/iam:/src/src/modules/iam
 
@@ -590,19 +593,19 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
     ports:
-      - "5002:8080"
+      - "5001:8080"
 
   compliance-api:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
     ports:
-      - "5003:8080"
+      - "5002:8080"
 
   operations-server:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
     ports:
-      - "5004:8080"
+      - "5003:8080"
 
   worker:
     environment:
@@ -1427,7 +1430,7 @@ on:
     branches: [main]
 
 env:
-  DOTNET_VERSION: "10.0.x"
+  DOTNET_VERSION: "8.0.x"
   REGISTRY: ghcr.io
   IMAGE_PREFIX: ${{ github.repository_owner }}/crcl
 
@@ -1710,9 +1713,9 @@ echo "  Private key: $CERT_DIR/server.key"
 - [ ] Seq at `http://localhost:8081` shows structured logs from all services
 - [ ] GitHub Actions pipeline runs on every push to `main` and `develop`
 - [ ] CI pipeline: build → unit tests → integration tests → publish images → deploy staging
-- [ ] All Docker images use `mcr.microsoft.com/dotnet/runtime-deps:10.0-noble-chiseled` (non-root, minimal attack surface)
+- [ ] All Docker images use `mcr.microsoft.com/dotnet/runtime-deps:8.0-noble-chiseled` (non-root, minimal attack surface)
 - [ ] AOT services (`iam-api`, `credit-api`, `compliance-api`, `worker`) publish with `PublishAot=true`
-- [ ] `operations-server` uses standard `aspnet:10.0` runtime (SignalR requires reflection)
+- [ ] `operations-server` uses standard `aspnet:8.0-noble-chiseled` runtime (SignalR requires reflection)
 - [ ] `.env.example` documents all required environment variables
 - [ ] `generate-certs.sh` creates self-signed certs for local HTTPS
 
@@ -1727,7 +1730,7 @@ echo "  Private key: $CERT_DIR/server.key"
 docker --version          # Docker 24+ (standalone docker-compose) or Docker 25+ (compose plugin)
 docker-compose --version  # Standalone binary — OR: docker compose version (Docker 25+ plugin)
 openssl version           # OpenSSL 3.x
-dotnet --version          # .NET 10 SDK
+dotnet --version          # .NET 8 SDK
 ```
 
 ### Step 2: Initial Setup
@@ -1831,7 +1834,7 @@ docker-compose down -v --remove-orphans
 | RabbitMQ DLQ growing | Consumer throwing exceptions | Check `docker-compose logs worker` |
 | `appsettings.Development.json` not loaded; services fail with `ArgumentNullException` on connection strings | `ASPNETCORE_ENVIRONMENT` not exported before `dotnet run` or `dotnet ef database update` — defaults to `Production` | Run `export ASPNETCORE_ENVIRONMENT=Development` before every local `dotnet` command. See `setup.md` §5.7.2. |
 | `ACCESS_REFUSED` connecting to RabbitMQ or `RedisConnectionException` when running APIs locally | `appsettings.Development.json` uses Docker service names (`rabbitmq`, `redis`) instead of `localhost`; or Redis missing `abortConnect=false` | Replace all Docker service names with `localhost` in `appsettings.Development.json`. Add `abortConnect=false` to Redis connection strings. See SPEC-02 §6.5. |
-| APIs respond on wrong ports (e.g., 5050, 5012, 5052) — health checks fail | `dotnet new` auto-generates random ports in `Properties/launchSettings.json` | Set canonical ports in `launchSettings.json`: IAM=5001, CreditAnalysis=5002, Compliance=5003. See SPEC-02 §6.6. |
+| APIs respond on wrong ports (e.g., 5050, 5012, 5052) — health checks fail | `dotnet new` auto-generates random ports in `Properties/launchSettings.json` | Set canonical ports in `launchSettings.json`: IAM=5000, CreditAnalysis=5001, Compliance=5002, Operations=5003, BureauMock=8081. See SPEC-02 §6.6. |
 | Routes with `{id:guid}` or `{id:int}` return 500 / `RegexErrorStubRouteConstraint` in logs | `WebApplication.CreateSlimBuilder(args)` uses `AddRoutingCore()` which does not register built-in route constraints | Add `builder.Services.AddRouting();` in every API `Program.cs` immediately after `CreateSlimBuilder`. See SPEC-02 §4.7. |
 
 ---
@@ -1847,10 +1850,10 @@ graph TB
         NginxProxy["TLS 1.3\nHSTS\nSPA Routing"]
     end
 
-    Nginx -->|/api/iam/| IAM["IAM API\nAOT :5001"]
-    Nginx -->|/api/credit/| Credit["Credit API\nAOT :5002"]
-    Nginx -->|/api/compliance/| Compliance["Compliance API\nAOT :5003"]
-    Nginx -->|/hubs/ WS| Ops["Operations Server\n:5004"]
+    Nginx -->|/api/iam/| IAM["IAM API\nAOT :5000"]
+    Nginx -->|/api/credit/| Credit["Credit API\nAOT :5001"]
+    Nginx -->|/api/compliance/| Compliance["Compliance API\nAOT :5002"]
+    Nginx -->|/hubs/ WS| Ops["Operations Server\n:5003"]
     Nginx -->|/| Ops
 
     subgraph Backend["Backend Services"]

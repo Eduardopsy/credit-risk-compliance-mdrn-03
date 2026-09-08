@@ -18,10 +18,28 @@ cleanup() {
     echo -e "\n${YELLOW}Stopping services...${NC}"
     # Kill all background processes
     jobs -p | xargs -r kill 2>/dev/null || true
+    # Free ports 5000-5003 and 8081
+    for port in 5000 5001 5002 5003 8081; do
+        if command -v fuser >/dev/null 2>&1; then
+            fuser -k "${port}/tcp" 2>/dev/null || true
+        elif command -v lsof >/dev/null 2>&1; then
+            lsof -ti ":${port}" | xargs -r kill -9 2>/dev/null || true
+        fi
+    done
     echo -e "${GREEN}Services stopped.${NC}"
 }
 
 trap cleanup EXIT
+
+echo -e "${BLUE}Step 0: Proactively clearing lingering port listeners...${NC}"
+for port in 5000 5001 5002 5003 8081; do
+    if command -v fuser >/dev/null 2>&1; then
+        fuser -k "${port}/tcp" 2>/dev/null || true
+    elif command -v lsof >/dev/null 2>&1; then
+        lsof -ti ":${port}" | xargs -r kill -9 2>/dev/null || true
+    fi
+done
+echo -e "  ${GREEN}✓ Ports 5000, 5001, 5002, 5003, 8081 verified clear${NC}"
 
 echo -e "${BLUE}Step 1: Starting infrastructure services...${NC}"
 echo -e "  ${YELLOW}• Stopping any existing containers...${NC}"

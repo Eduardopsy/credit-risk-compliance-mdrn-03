@@ -4,6 +4,22 @@
         <name>CreditRisk.Shared.Kernel</name>
     </assembly>
     <members>
+        <member name="T:CreditRisk.Shared.Kernel.Common.HealthResponse">
+            <summary>
+            Strongly-typed health response record.
+            Used for Native AOT-compliant JSON serialization across all Minimal APIs.
+            Anonymous types (e.g. Results.Ok(new { status = "healthy" })) throw runtime
+            serialization exceptions in Native AOT / CreateSlimBuilder.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Shared.Kernel.Common.HealthResponse.#ctor(System.String,System.String,System.Nullable{System.DateTimeOffset})">
+            <summary>
+            Strongly-typed health response record.
+            Used for Native AOT-compliant JSON serialization across all Minimal APIs.
+            Anonymous types (e.g. Results.Ok(new { status = "healthy" })) throw runtime
+            serialization exceptions in Native AOT / CreateSlimBuilder.
+            </summary>
+        </member>
         <member name="T:CreditRisk.Shared.Kernel.CQRS.ICommandHandler`2">
             <summary>
             Marker interface for command handlers that return a typed result.

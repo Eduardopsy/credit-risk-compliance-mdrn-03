@@ -2,6 +2,7 @@
 using System.Text.Json.Serialization;
 using CreditRisk.Compliance.Application.DTOs;
 using CreditRisk.Compliance.Api.Endpoints;
+using CreditRisk.Shared.Kernel.Common;
 using CreditRisk.Shared.Kernel.Result;
 
 namespace CreditRisk.Compliance.Api.Serialization;
@@ -11,6 +12,7 @@ namespace CreditRisk.Compliance.Api.Serialization;
 [JsonSerializable(typeof(TransactionDto))]
 [JsonSerializable(typeof(AmlAlertDto))]
 [JsonSerializable(typeof(PagedResult<AmlAlertDto>))]
+[JsonSerializable(typeof(HealthResponse))]
 [JsonSerializable(typeof(Microsoft.AspNetCore.Mvc.ProblemDetails))]
 [JsonSerializable(typeof(Dictionary<string, string[]>))]
 [JsonSourceGenerationOptions(

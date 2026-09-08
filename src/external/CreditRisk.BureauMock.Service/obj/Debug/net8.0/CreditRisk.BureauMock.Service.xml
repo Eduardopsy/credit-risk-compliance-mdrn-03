@@ -16,5 +16,11 @@
         <member name="M:CreditRisk.BureauMock.Service.QueryResponse.#ctor(System.Int32,System.Decimal,System.String)">
             <summary>Credit score response from bureau.</summary>
         </member>
+        <member name="T:CreditRisk.BureauMock.Service.BureauHealthResponse">
+            <summary>Health check response.</summary>
+        </member>
+        <member name="M:CreditRisk.BureauMock.Service.BureauHealthResponse.#ctor(System.String,System.DateTimeOffset)">
+            <summary>Health check response.</summary>
+        </member>
     </members>
 </doc>

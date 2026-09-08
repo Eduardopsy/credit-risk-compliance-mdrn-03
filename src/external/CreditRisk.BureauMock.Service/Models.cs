@@ -16,3 +16,8 @@ public record QueryResponse(
     decimal TotalMonthlyDebt,
     /// <summary>Query status.</summary>
     string Status);
+
+/// <summary>Health check response.</summary>
+public record BureauHealthResponse(
+    string Status,
+    DateTimeOffset Timestamp);

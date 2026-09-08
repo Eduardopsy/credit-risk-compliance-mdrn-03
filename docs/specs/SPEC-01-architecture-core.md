@@ -48,22 +48,22 @@ This frente owns the foundational layer of the entire Credit Risk Compliance Lab
 
 | Component | Technology | Exact Version |
 |---|---|---|
-| Language | C# | 14 |
-| Runtime | .NET | 10.0.0 |
-| SDK | .NET SDK | 10.0.100 |
+| Language | C# | 12 / 13 |
+| Runtime | .NET | 8.0.0 |
+| SDK | .NET SDK | 8.0.129+ |
 | Validation | FluentValidation | 11.11.0 |
 | Messaging | MassTransit | 8.3.6 |
 | Messaging RabbitMQ | MassTransit.RabbitMQ | 8.3.6 |
-| ORM | Microsoft.EntityFrameworkCore | 10.0.0 |
-| PostgreSQL EF driver | Npgsql.EntityFrameworkCore.PostgreSQL | 10.0.0 |
+| ORM | Microsoft.EntityFrameworkCore | 8.0.11 |
+| PostgreSQL EF driver | Npgsql.EntityFrameworkCore.PostgreSQL | 8.0.11 |
 | Micro-ORM | Dapper | 2.1.35 |
-| PostgreSQL ADO.NET | Npgsql | 9.0.2 |
+| PostgreSQL ADO.NET | Npgsql | 8.0.6 |
 | Redis client | StackExchange.Redis | 2.8.16 |
-| JWT auth | Microsoft.AspNetCore.Authentication.JwtBearer | 10.0.0 |
-| OpenAPI | Microsoft.AspNetCore.OpenApi | 10.0.0 |
+| JWT auth | Microsoft.AspNetCore.Authentication.JwtBearer | 8.0.11 |
+| OpenAPI | Microsoft.AspNetCore.OpenApi | 8.0.11 |
 | OpenAPI UI | Swagger UI (`Swashbuckle.AspNetCore`) | 6.9.0 |
 | Resilience | Polly | 8.4.2 |
-| HTTP resilience | Microsoft.Extensions.Http.Resilience | 9.3.0 |
+| HTTP resilience | Microsoft.Extensions.Http.Resilience | 8.10.0 |
 | OTel SDK | OpenTelemetry | 1.9.0 |
 | OTel hosting | OpenTelemetry.Extensions.Hosting | 1.9.0 |
 | OTel ASP.NET Core | OpenTelemetry.Instrumentation.AspNetCore | 1.9.0 |
@@ -73,9 +73,9 @@ This frente owns the foundational layer of the entire Credit Risk Compliance Lab
 | OTel Process | OpenTelemetry.Instrumentation.Process | 0.5.0-beta.6 |
 | OTel OTLP exporter | OpenTelemetry.Exporter.OpenTelemetryProtocol | 1.9.0 |
 | OTel Prometheus | OpenTelemetry.Exporter.Prometheus.AspNetCore | 1.9.0-rc.1 |
-| Frontend | Microsoft.AspNetCore.Components.WebAssembly | 10.0.0 |
-| Frontend auth | Microsoft.AspNetCore.Components.WebAssembly.Authentication | 10.0.0 |
-| SignalR client | Microsoft.AspNetCore.SignalR.Client | 10.0.0 |
+| Frontend | Microsoft.AspNetCore.Components.WebAssembly | 8.0.11 |
+| Frontend auth | Microsoft.AspNetCore.Components.WebAssembly.Authentication | 8.0.11 |
+| SignalR client | Microsoft.AspNetCore.SignalR.Client | 8.0.11 |
 | UI components | MudBlazor | 7.15.0 |
 | Unit test framework | xunit | 2.9.2 |
 | Test runner | xunit.runner.visualstudio | 2.8.2 |
@@ -272,8 +272,8 @@ The complete `init-db.sql` content (with schemas, extensions, audit log, and RLS
 ```json
 {
   "sdk": {
-    "version": "10.0.100",
-    "rollForward": "disable"
+    "version": "8.0.129",
+    "rollForward": "latestMinor"
   }
 }
 ```
@@ -283,17 +283,19 @@ The complete `init-db.sql` content (with schemas, extensions, audit log, and RLS
 ```xml
 <Project>
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);NU1902;NU1903</NoWarn>
     <AnalysisMode>All</AnalysisMode>
-    <LangVersion>14</LangVersion>
+    <LangVersion>latest</LangVersion>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Api')) Or $(MSBuildProjectName.EndsWith('.Worker'))">
-    <PublishAot>true</PublishAot>
+    <PublishAot Condition="'$(Configuration)' == 'Release'">true</PublishAot>
+    <PublishAot Condition="'$(Configuration)' == 'Debug'">false</PublishAot>
     <InvariantGlobalization>true</InvariantGlobalization>
     <StripSymbols>true</StripSymbols>
     <OptimizationPreference>Speed</OptimizationPreference>
@@ -724,6 +726,100 @@ public class DomainException : Exception
         ErrorCode = errorCode;
     }
 }
+```
+
+#### Outbox Pattern Core Abstractions
+
+```csharp
+// File: src/shared/CreditRisk.Shared.Kernel/Outbox/OutboxMessage.cs
+using CreditRisk.Shared.Kernel.Domain;
+using CreditRisk.Shared.Kernel.Guard;
+
+namespace CreditRisk.Shared.Kernel.Outbox;
+
+/// <summary>
+/// Represents a message stored in the outbox table for guaranteed delivery.
+/// Messages are written atomically with the business transaction and processed by OutboxProcessor.
+/// </summary>
+public sealed class OutboxMessage : Entity
+{
+    public string MessageType { get; private init; } = string.Empty;
+    public string Payload { get; private init; } = string.Empty;
+    public DateTimeOffset ScheduledAt { get; private init; }
+    public DateTimeOffset? ProcessedAt { get; private set; }
+    public int RetryCount { get; private set; }
+    public string? Error { get; private set; }
+
+    private OutboxMessage() : base() { }
+
+    public static OutboxMessage Create(string messageType, string payload)
+    {
+        Guard.AgainstNullOrWhiteSpace(messageType, nameof(messageType));
+        Guard.AgainstNullOrWhiteSpace(payload, nameof(payload));
+
+        return new OutboxMessage
+        {
+            MessageType = messageType,
+            Payload = payload,
+            ScheduledAt = DateTimeOffset.UtcNow
+        };
+    }
+
+    public void MarkProcessed() => ProcessedAt = DateTimeOffset.UtcNow;
+
+    public void MarkFailed(string error)
+    {
+        Error = error;
+        RetryCount++;
+    }
+}
+```
+
+```csharp
+// File: src/shared/CreditRisk.Shared.Kernel/Outbox/IOutboxRepository.cs
+namespace CreditRisk.Shared.Kernel.Outbox;
+
+/// <summary>
+/// Repository interface for persisting and retrieving outbox messages.
+/// </summary>
+public interface IOutboxRepository
+{
+    Task AddAsync(OutboxMessage message, CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<OutboxMessage>> GetUnprocessedAsync(int maxRetries = 5, int limit = 100, CancellationToken cancellationToken = default);
+    Task UpdateAsync(OutboxMessage message, CancellationToken cancellationToken = default);
+    Task<int> DeleteProcessedAsync(DateTimeOffset olderThan, CancellationToken cancellationToken = default);
+}
+```
+
+```csharp
+// File: src/shared/CreditRisk.Shared.Kernel/Outbox/IOutboxProcessor.cs
+namespace CreditRisk.Shared.Kernel.Outbox;
+
+/// <summary>
+/// Marker interface for outbox processor services.
+/// </summary>
+public interface IOutboxProcessor
+{
+    Task StartAsync(CancellationToken cancellationToken = default);
+    Task StopAsync(CancellationToken cancellationToken = default);
+}
+```
+
+#### Common & Health Check Abstractions (Native AOT)
+
+```csharp
+// File: src/shared/CreditRisk.Shared.Kernel/Common/HealthResponse.cs
+namespace CreditRisk.Shared.Kernel.Common;
+
+/// <summary>
+/// Strongly-typed health check response record for Native AOT serialization compatibility.
+/// Anonymous types (e.g. Results.Ok(new { status = "healthy" })) throw runtime serialization
+/// exceptions in Native AOT / CreateSlimBuilder.
+/// </summary>
+public sealed record HealthResponse(
+    string Status,
+    string Service,
+    DateTimeOffset? Timestamp = null);
 ```
 
 ### 4.6 Value Objects

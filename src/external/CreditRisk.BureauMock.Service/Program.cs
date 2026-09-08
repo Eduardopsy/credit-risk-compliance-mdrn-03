@@ -1,6 +1,11 @@
 using CreditRisk.BureauMock.Service;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(8081);
+});
+
 var app = builder.Build();
 
 // POST /query - Simulate bureau API
@@ -23,10 +28,10 @@ app.MapPost("/query", async (QueryRequest request) =>
 // GET /health - Health check
 app.MapGet("/health", () =>
 {
-    return Results.Ok(new { status = "healthy", timestamp = DateTimeOffset.UtcNow });
+    return Results.Ok(new BureauHealthResponse("healthy", DateTimeOffset.UtcNow));
 })
 .WithName("Health")
-.Produces(StatusCodes.Status200OK);
+.Produces<BureauHealthResponse>(StatusCodes.Status200OK);
 
 // POST /query/error/{statusCode} - Force errors for testing
 app.MapPost("/query/error/{statusCode}", (int statusCode) =>
@@ -36,4 +41,4 @@ app.MapPost("/query/error/{statusCode}", (int statusCode) =>
 .WithName("QueryError")
 .Produces(StatusCodes.Status500InternalServerError);
 
-app.Run("http://0.0.0.0:8081");
+app.Run();

@@ -71,7 +71,7 @@ tests/
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <IsPackable>false</IsPackable>
@@ -1457,7 +1457,7 @@ dotnet test tests/CreditRisk.Operations.Client.Tests/ \
 ### Expected Output
 
 ```
-Test run for CreditRisk.Operations.Client.Tests.dll (.NETCoreApp,Version=v10.0)
+Test run for CreditRisk.Operations.Client.Tests.dll (.NETCoreApp,Version=v8.0)
 Microsoft (R) Test Execution Command Line Tool Version 17.x
 
 Starting test execution, please wait...
