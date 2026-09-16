@@ -288,7 +288,7 @@ src/modules/compliance/
 | `POST` | `/auth/refresh` | None | `RefreshTokenRequest` | `LoginResponse` | 200, 401 |
 | `GET` | `/auth/jwks` | None | None | JWKS JSON | 200 |
 | `POST` | `/users` | None | `CreateUserRequest` | `UserDto` | 201, 400, 409, 422 |
-| `GET` | `/users/{id:guid}` | Admin | None | `UserDto` | 200, 401, 403, 404 |
+| `GET` | `/users/{id:guid}` | User (self) or Admin | None | `UserDto` | 200, 401, 403, 404 |
 | `PUT` | `/users/{id:guid}/roles` | Admin | `AssignRoleRequest` | `UserDto` | 200, 401, 403, 404, 422 |
 | `GET` | `/health` | None | None | Health JSON | 200, 503 |
 
@@ -311,6 +311,9 @@ src/modules/compliance/
 | `GET` | `/alerts` | ComplianceAnalyst | None (query params) | `PagedResult<AmlAlertDto>` | 200, 401, 403 |
 | `GET` | `/alerts/{id:guid}` | ComplianceAnalyst | None | `AmlAlertDto` | 200, 401, 403, 404 |
 | `PUT` | `/alerts/{id:guid}/review` | ComplianceAnalyst | `ReviewAlertRequest` | `AmlAlertDto` | 200, 401, 403, 404, 409 |
+| `POST` | `/compliance/checks` | ComplianceAnalyst | `CreateComplianceCheckRequest` | `ComplianceCheckResponse` | 201, 400, 401, 403 |
+| `GET` | `/compliance/checks` | ComplianceAnalyst | None | `List<ComplianceCheckResponse>` | 200, 401, 403 |
+| `GET` | `/compliance/checks/{id:guid}` | ComplianceAnalyst | None | `ComplianceCheckResponse` | 200, 401, 403, 404 |
 | `GET` | `/reports/str` | ComplianceAnalyst | None (query params) | `StrReportDto` | 200, 401, 403 |
 | `GET` | `/health` | None | None | Health JSON | 200, 503 |
 
@@ -414,6 +417,34 @@ public sealed record IngestTransactionRequest
     public required DateTimeOffset TransactionDate { get; init; }
     public required string OriginAccountId { get; init; }
     public required string DestinationAccountId { get; init; }
+}
+```
+
+```csharp
+// File: src/modules/compliance/CreditRisk.Compliance.Application/DTOs/ComplianceCheckDto.cs
+namespace CreditRisk.Compliance.Application.DTOs;
+
+public sealed record CreateComplianceCheckRequest
+{
+    public required Guid ProposalId { get; init; }
+    public required string ApplicantDocument { get; init; }
+    public required string ApplicantName { get; init; }
+}
+
+public sealed record ComplianceCheckDetails
+{
+    public required string PepScreening { get; init; }
+    public required string SanctionList { get; init; }
+    public required string AmlCheck { get; init; }
+}
+
+public sealed record ComplianceCheckResponse
+{
+    public required Guid Id { get; init; }
+    public required Guid ProposalId { get; init; }
+    public required string Status { get; init; }
+    public required ComplianceCheckDetails Checks { get; init; }
+    public required DateTimeOffset CreatedAt { get; init; }
 }
 ```
 
@@ -866,9 +897,9 @@ builder.Services.ConfigureHttpJsonOptions(options =>
     options.SerializerOptions.TypeInfoResolverChain.Insert(0, IamApiJsonContext.Default);
 });
 
-// Database with Outbox support
+// Database with Outbox support and schema isolation
 builder.Services.AddDbContext<IamDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres") ?? "Host=localhost;Database=creditrisk;Username=crcl;Password=crcl"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres") ?? "Host=localhost;Port=5432;Database=creditrisk;Username=crcl;Password=crcl;SearchPath=iam"));
 
 // Authentication — Keycloak OIDC
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -1061,6 +1092,98 @@ public sealed class IamDbContext(DbContextOptions<IamDbContext> options) : DbCon
         modelBuilder.Ignore<DomainEvent>();
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
+}
+```
+
+```csharp
+// File: src/modules/iam/CreditRisk.IAM.Infrastructure/Persistence/IamDbContextFactory.cs
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+
+namespace CreditRisk.IAM.Infrastructure.Persistence;
+
+/// <summary>
+/// Design-time factory for IamDbContext.
+/// Allows `dotnet ef` CLI migrations to execute in isolation without starting the Web Host
+/// or requiring active external connections (e.g. Redis, RabbitMQ) during design time.
+/// Enforces schema isolation via SearchPath and MigrationsHistoryTable.
+/// </summary>
+public sealed class IamDbContextFactory : IDesignTimeDbContextFactory<IamDbContext>
+{
+    public IamDbContext CreateDbContext(string[] args)
+    {
+        string connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__Postgres")
+            ?? Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING")
+            ?? "Host=localhost;Port=5432;Database=creditrisk;Username=crcl;Password=crcl;SearchPath=iam";
+
+        var optionsBuilder = new DbContextOptionsBuilder<IamDbContext>();
+        optionsBuilder.UseNpgsql(connectionString, o =>
+        {
+            o.MigrationsHistoryTable("__EFMigrationsHistory", "iam");
+        });
+
+        return new IamDbContext(optionsBuilder.Options);
+    }
+}
+```
+
+```csharp
+// File: src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/Persistence/CreditAnalysisDbContextFactory.cs
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+
+namespace CreditRisk.CreditAnalysis.Infrastructure.Persistence;
+
+/// <summary>
+/// Design-time factory for CreditAnalysisDbContext.
+/// Isolates credit analysis migrations to the 'credit' schema and prevents table name collisions.
+/// </summary>
+public sealed class CreditAnalysisDbContextFactory : IDesignTimeDbContextFactory<CreditAnalysisDbContext>
+{
+    public CreditAnalysisDbContext CreateDbContext(string[] args)
+    {
+        string connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__Postgres")
+            ?? Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING")
+            ?? "Host=localhost;Port=5432;Database=creditrisk;Username=crcl;Password=crcl;SearchPath=credit";
+
+        var optionsBuilder = new DbContextOptionsBuilder<CreditAnalysisDbContext>();
+        optionsBuilder.UseNpgsql(connectionString, o =>
+        {
+            o.MigrationsHistoryTable("__EFMigrationsHistory", "credit");
+        });
+
+        return new CreditAnalysisDbContext(optionsBuilder.Options);
+    }
+}
+```
+
+```csharp
+// File: src/modules/compliance/CreditRisk.Compliance.Infrastructure/Persistence/ComplianceDbContextFactory.cs
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
+
+namespace CreditRisk.Compliance.Infrastructure.Persistence;
+
+/// <summary>
+/// Design-time factory for ComplianceDbContext.
+/// Isolates compliance migrations to the 'compliance' schema and prevents table name collisions.
+/// </summary>
+public sealed class ComplianceDbContextFactory : IDesignTimeDbContextFactory<ComplianceDbContext>
+{
+    public ComplianceDbContext CreateDbContext(string[] args)
+    {
+        string connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__Postgres")
+            ?? Environment.GetEnvironmentVariable("POSTGRES_CONNECTION_STRING")
+            ?? "Host=localhost;Port=5432;Database=creditrisk;Username=crcl;Password=crcl;SearchPath=compliance";
+
+        var optionsBuilder = new DbContextOptionsBuilder<ComplianceDbContext>();
+        optionsBuilder.UseNpgsql(connectionString, o =>
+        {
+            o.MigrationsHistoryTable("__EFMigrationsHistory", "compliance");
+        });
+
+        return new ComplianceDbContext(optionsBuilder.Options);
     }
 }
 ```
@@ -2185,7 +2308,8 @@ public sealed class CreateProposalRequestValidatorTests
 - [ ] `POST /auth/logout` adds JWT `jti` to Redis revocation set with correct TTL
 - [ ] `POST /auth/refresh` returns new access token for valid refresh token
 - [ ] `GET /auth/jwks` returns Keycloak JWKS JSON without authentication
-- [ ] `POST /users` creates user and returns 201 — requires `administrator` role
+- [ ] `POST /users` creates user and returns 201 (public registration)
+- [ ] `GET /users/{id}` retrieves user — requires `administrator` role
 - [ ] `PUT /users/{id}/roles` assigns role and publishes `UserRoleChangedEvent`
 - [ ] `JwtRevocationMiddleware` returns 401 for revoked tokens on all protected endpoints
 - [ ] Rate limiter returns 429 after 5 auth requests per minute per IP
@@ -2372,8 +2496,19 @@ This section documents all build and runtime errors encountered during the initi
 | 25 | `ArgumentNullException: uriString` in `ObservabilityExtensions` | `OTEL_EXPORTER_OTLP_ENDPOINT` absent; `new Uri(null)` throws | Null-check endpoint before constructing `Uri`. See SPEC-01 §4.8 for corrected implementation. |
 | 26 | `appsettings.Development.json` not loaded; all connection strings null | `ASPNETCORE_ENVIRONMENT` not exported before `dotnet run` or `dotnet ef database update` | `export ASPNETCORE_ENVIRONMENT=Development` before every local command. See `setup.md` §5.7.2. |
 | 27 | `ACCESS_REFUSED` (RabbitMQ) or `RedisConnectionException` | `appsettings.Development.json` uses Docker service names; Redis missing `abortConnect=false` | Use `localhost` for all hostnames. Add `abortConnect=false` to Redis connection strings. See §6.5. |
-| 28 | APIs start on wrong ports (5050, 5012, 5052) | `dotnet new` auto-generates random ports in `launchSettings.json` | Set ports: IAM=5001, CreditAnalysis=5002, Compliance=5003 in `launchSettings.json`. See §6.6. |
+| 28 | APIs start on wrong ports (5050, 5012, 5052) | `dotnet new` auto-generates random ports in `launchSettings.json` | Set ports: IAM=5000, CreditAnalysis=5001, Compliance=5002, Operations=5003, BureauMock=8081. See §6.6. |
 | 29 | `RegexErrorStubRouteConstraint` / routes with `{id:guid}` return 500 | `CreateSlimBuilder` uses `AddRoutingCore()` — does not register built-in route constraints | Call `builder.Services.AddRouting()` in every API `Program.cs` after `CreateSlimBuilder`. See §4.7. |
+| 30 | `Unable to create a 'DbContext' of type '...DbContext'. Unable to resolve service for type 'DbContextOptions<...>'` / `NOAUTH Returned` | EF Core CLI attempts to run Web Host during migrations, triggering synchronous Redis/service connections that fail at design-time | Implement `IDesignTimeDbContextFactory<TContext>` in module Infrastructure layers (`IamDbContextFactory`, `CreditAnalysisDbContextFactory`, `ComplianceDbContextFactory`). See §4.8. |
+| 31 | `relation "outbox_messages" already exists` (SqlState: 42P07) | Multiple modules create tables with identical names targeting the default `public` schema | Configure PostgreSQL schema isolation via `SearchPath=<schema>` and `.MigrationsHistoryTable("__EFMigrationsHistory", "<schema>")`. |
+| 32 | `401 Unauthorized` on `POST /api/v1/users` | Endpoint incorrectly required admin authentication for test/user self-registration | Keep `POST /api/v1/users` unauthenticated/public, and secure `GET /api/v1/users/{id}` with `RequiresAdministrator`. |
+| 33 | `400 Bad Request` on user creation payload | Incorrect payload property names (legacy format with `username`, `password`, `roles: []`) | Use valid DTO contract: `{"email": "...", "fullName": "...", "role": "desk-operator", "temporaryPassword": "..."}`. |
+| 34 | `500 Internal Server Error: relation "users" does not exist` (SqlState: 42P01) on `POST /api/v1/users` | Connection string in `Program.cs` lacked `SearchPath=iam`, defaulting queries to PostgreSQL `public` schema instead of `iam`. | Add `SearchPath=iam` (and `SearchPath=credit`, `SearchPath=compliance` respectively) to DbContext connection strings in `Program.cs` and `ServiceCollectionExtensions.cs`. |
+| 35 | `Bearer error="invalid_token"` / `SecurityTokenMalformedException: JWT is not well formed` | `KeycloakTokenService` returned a raw string `mock-jwt-token-{id}` instead of a compact RFC 7519 signed JWT token. | Implement JWT signing with `JwtSecurityTokenHandler` using `HmacSha256`, include claims (`sub`, `roles`, `jti`, `email`), and set `MapInboundClaims = false` in `AddJwtBearer`. |
+| 36 | `405 Method Not Allowed` on `GET /api/v1/proposals` | Only `POST /`, `GET /{id}` and `PUT /{id}/submit` mapped in `ProposalEndpoints.cs`; listing endpoint was omitted | Implement `ListProposalsQueryHandler`, add `ListAsync`/`CountAsync` to repository, map `group.MapGet("/", ...)` and register in DI. |
+| 37 | `400 Bad Request` on `POST /api/v1/proposals` | Payload missing `required` C# properties, incorrect casing, or empty body | Ensure all properties of `CreateProposalRequest` (`customerDocument`, `customerDocumentType`, `customerName`, `customerEmail`, `monthlyIncome`, `requestedLimit`, `proposalType`, `bureauConsentGiven: true`, `bureauConsentIpAddress`) are supplied in camelCase. |
+| 38 | `404 Not Found` on `GET /statistics` (Bureau Mock) | Endpoint missing from Bureau Mock Minimal API | Map `GET /statistics` with `Interlocked` query counters in `CreditRisk.BureauMock.Service/Program.cs`. |
+| 39 | `404 Not Found` on `POST|GET /api/v1/compliance/checks` | Endpoint group missing in Compliance API | Map `ComplianceCheckEndpoints` in `CreditRisk.Compliance.Api` with screening integration and in-memory/persistence store. |
+| 40 | `403 Forbidden` on `GET /api/v1/users/{id}` | Endpoint restricted exclusively to `RequiresAdministrator`, blocking self-profile retrieval (`sub == id`) by operators and analysts | Allow self-lookup where `sub == id` or require `RequiresAdministrator` for accessing third-party user profiles. |
 
 ### 11.2 `.csproj` Package Reference Requirements
 
@@ -2429,5 +2564,9 @@ Before implementing any module, verify:
 - [ ] `ASPNETCORE_ENVIRONMENT=Development` exported before running migrations and `dotnet run`
 - [ ] All hostnames in `appsettings.Development.json` use `localhost` (not Docker service names)
 - [ ] Redis connection strings include `abortConnect=false`
-- [ ] `launchSettings.json` ports: IAM=5001, CreditAnalysis=5002, Compliance=5003
+- [ ] `launchSettings.json` ports: IAM=5000, CreditAnalysis=5001, Compliance=5002, Operations=5003, BureauMock=8081
 - [ ] Every API `Program.cs` calls `builder.Services.AddRouting()` after `WebApplication.CreateSlimBuilder(args)`
+- [ ] `KeycloakTokenService` emits valid compact signed JWTs with `roles` and `sub` claims
+- [ ] `AddJwtBearer` has `MapInboundClaims = false` and validates against shared signing key
+- [ ] `ProposalEndpoints` maps `GET /api/v1/proposals` returning `PagedResult<ProposalListItemDto>`
+- [ ] `ListProposalsQueryHandler` and `ICreditProposalRepository.ListAsync` are implemented and registered

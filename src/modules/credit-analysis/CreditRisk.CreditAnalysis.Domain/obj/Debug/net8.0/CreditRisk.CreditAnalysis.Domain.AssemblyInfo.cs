@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CreditRisk.CreditAnalysis.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6438fa9a5daef4a4ca91924d9b8964e2176467cc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4a8f89e32728c525d893a9500cb5d40ad582659f")]
 [assembly: System.Reflection.AssemblyProductAttribute("CreditRisk.CreditAnalysis.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CreditRisk.CreditAnalysis.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

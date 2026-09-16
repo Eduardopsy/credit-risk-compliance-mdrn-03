@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1ApFjD0OROVZhSlsp6GnutEmIxprO70g5wU2LEkCYnGdksHnVfEfBkkqFMSnE66gsmOF9ZFq07oi1Ccn4eMQqw==",
+  "dgSpecHash": "MW6HFJ24cBFS46qeL1N0WQuZMnhCQzplqjrZW4mJzHCcxH49iAViH6ptNnPI+q6geUvEva2gbjwGw2du87pnfg==",
   "success": true,
   "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Domain/CreditRisk.IAM.Domain.csproj",
   "expectedPackageFiles": [

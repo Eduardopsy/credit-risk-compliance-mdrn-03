@@ -41,16 +41,27 @@ public static class UserEndpoints
         group.MapGet("/{id:guid}", async (
             Guid id,
             GetUserByIdQueryHandler handler,
+            HttpContext context,
             CancellationToken ct) =>
         {
+            string? currentUserId = context.User.FindFirst("sub")?.Value;
+            bool isAdmin = context.User.HasClaim("roles", "administrator");
+
+            if (!isAdmin && !string.Equals(currentUserId, id.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                return Results.Forbid();
+            }
+
             var result = await handler.HandleAsync(new GetUserByIdQuery(id), ct).ConfigureAwait(false);
             return result.IsSuccess
                 ? Results.Ok(result.Value)
                 : Results.NotFound();
         })
         .WithName("GetUserById")
-        .RequireAuthorization("RequiresAdministrator")
+        .RequireAuthorization()
         .Produces<UserDto>()
+        .Produces(StatusCodes.Status401Unauthorized)
+        .Produces(StatusCodes.Status403Forbidden)
         .Produces(StatusCodes.Status404NotFound);
 
         return app;

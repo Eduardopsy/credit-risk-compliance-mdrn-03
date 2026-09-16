@@ -2308,8 +2308,17 @@ This section documents errors encountered during the initial SPEC-01 implementat
 | 9 | `ArgumentNullException: uriString` at startup in `ObservabilityExtensions` | `OTEL_EXPORTER_OTLP_ENDPOINT` absent; `new Uri(null)` throws | Null-check endpoint before constructing `Uri`. See §4.8 for the corrected implementation. |
 | 10 | `appsettings.Development.json` never loaded; connection strings are null | `ASPNETCORE_ENVIRONMENT` not exported before `dotnet run` or `dotnet ef database update` | `export ASPNETCORE_ENVIRONMENT=Development` before every local run command. See `setup.md` §5.7.2. |
 | 11 | `ACCESS_REFUSED` (RabbitMQ) or `RedisConnectionException` at startup | `appsettings.Development.json` uses Docker service names (`rabbitmq`, `redis`) instead of `localhost`; Redis missing `abortConnect=false` | Use `localhost` for all hostnames in `appsettings.Development.json`. Add `abortConnect=false` to Redis strings. See SPEC-02 §6.5. |
-| 12 | APIs start on wrong ports (5050, 5012, 5052) | `dotnet new` auto-generates random ports in `launchSettings.json` | Set ports explicitly: IAM=5001, CreditAnalysis=5002, Compliance=5003. See SPEC-02 §6.6. |
+| 12 | APIs start on wrong ports (5050, 5012, 5052) | `dotnet new` auto-generates random ports in `launchSettings.json` | Set ports explicitly: IAM=5000, CreditAnalysis=5001, Compliance=5002, Operations=5003, BureauMock=8081. See SPEC-02 §6.6. |
 | 13 | `RegexErrorStubRouteConstraint` / routes with `{id:guid}` return 500 | `CreateSlimBuilder` uses `AddRoutingCore()` — does not register built-in route constraints | Call `builder.Services.AddRouting()` in every API `Program.cs` after `CreateSlimBuilder`. See §5.7 invariant #7. |
+| 14 | `Conflict. The container name "/crcl-xxx" is already in use by container "..."` | Containers created by another project/workspace holding container names/ports | Remove conflicting containers with `docker rm -f crcl-redis crcl-postgres crcl-rabbitmq crcl-keycloak crcl-grafana crcl-prometheus crcl-seq` before starting Docker infrastructure. |
+| 15 | `Unable to create a 'DbContext' of type '...DbContext'. Unable to resolve service for type 'DbContextOptions<...>'` / `NOAUTH Returned` during `dotnet ef database update` | EF Core CLI attempts to build the Web Host (`Program.cs`) which executes synchronous service connections (e.g. Redis) that fail if unauthenticated or not ready. | Provide `IDesignTimeDbContextFactory<TContext>` in each module's Infrastructure layer (`IamDbContextFactory`, `CreditAnalysisDbContextFactory`, `ComplianceDbContextFactory`) to isolate design-time migrations from application startup dependencies. |
+| 16 | `relation "outbox_messages" already exists` (SqlState: 42P07) during EF database update | Multiple module migrations define tables with identical names targeting the default `public` schema. | Ensure schema isolation: specify `SearchPath=<schema>` in the connection string and configure `.MigrationsHistoryTable("__EFMigrationsHistory", "<schema>")` in `UseNpgsql`. |
+| 17 | `relation "users" does not exist` (SqlState: 42P01) on runtime API requests | Connection string in `Program.cs` lacked `SearchPath=iam`, defaulting queries to PostgreSQL `public` schema. | Add `SearchPath=<schema>` to DbContext connection strings in `Program.cs` and `ServiceCollectionExtensions.cs`. |
+| 18 | `Bearer error="invalid_token"` / `SecurityTokenMalformedException: JWT is not well formed` | `KeycloakTokenService` returned raw mock string (`mock-jwt-token-{id}`) instead of compact RFC 7519 signed JWT. | Generate signed JWT with `System.IdentityModel.Tokens.Jwt` and configure `AddJwtBearer` with `MapInboundClaims = false` and matching signing key. |
+| 19 | `405 Method Not Allowed` on `GET /api/v1/proposals` | Only POST route mapped; paged listing endpoint missing from `ProposalEndpoints.cs`. | Implement `ListProposalsQuery` and `ListProposalsQueryHandler`, add `ListAsync`/`CountAsync` to repository, and map `GET /` returning `PagedResult<ProposalListItemDto>`. |
+| 20 | `404 Not Found` on `GET /statistics` (Bureau Mock) | Bureau Mock Minimal API omitted the `/statistics` endpoint. | Implement `GET /statistics` with `Interlocked` query counters in `CreditRisk.BureauMock.Service/Program.cs`. |
+| 21 | `404 Not Found` on `POST|GET /api/v1/compliance/checks` | Compliance check endpoints omitted in Compliance API. | Map `ComplianceCheckEndpoints` in `CreditRisk.Compliance.Api` with screening integration and registration in `Program.cs`. |
+| 22 | `403 Forbidden` on `GET /api/v1/users/{id}` | Endpoint restricted exclusively to `RequiresAdministrator`, blocking self-profile retrieval (`sub == id`) by operators and analysts. | Allow self-lookup where `sub == id` or require `RequiresAdministrator` for accessing third-party user profiles. |
 
 ### 11.1 Pre-Implementation Checklist
 
@@ -2322,6 +2331,11 @@ Before implementing any SPEC that involves infrastructure, verify:
 - [ ] `infra/scripts/init-db.sql` uses only PostgreSQL syntax — no MySQL syntax
 - [ ] Keycloak healthcheck uses `start_period: 180s` and `retries: 20`
 - [ ] Keycloak healthcheck uses bash TCP check, not `curl` (not available in Keycloak image)
+- [ ] Every module infrastructure project has `IDesignTimeDbContextFactory<T>` configured with schema isolation
+- [ ] Runtime connection strings in `Program.cs` include `SearchPath=<schema>`
+- [ ] Token services generate valid signed JWTs and `AddJwtBearer` sets `MapInboundClaims = false`
+- [ ] Endpoints implement all expected CRUD and query verbs from specifications (e.g. GET list alongside POST create, `/statistics`, `/compliance/checks`)
+- [ ] `GET /api/v1/users/{id}` allows self-lookup (`sub == id`) alongside admin access
 
 ---
 

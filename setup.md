@@ -446,6 +446,8 @@ The following may be used but require a written ADR before adoption:
   });
   ```
 - **Dynamic code generation** (`Reflection.Emit`, `Expression.Compile` at runtime) is forbidden in AOT-published projects.
+- **`IDesignTimeDbContextFactory<T>` is mandatory for every `DbContext` in infrastructure projects.** When running `dotnet ef` CLI commands (`migrations add`, `database update`), EF Core attempts to build the ASP.NET Core web host by calling `Program.cs`. If any external dependency (e.g., synchronous `ConnectionMultiplexer.Connect(...)` to Redis or RabbitMQ) fails during Host creation, EF Core falls back to direct activation and fails with `Unable to resolve service for type DbContextOptions<T>`. Implementing `IDesignTimeDbContextFactory<T>` completely isolates EF Core design-time operations from the application Host, Redis, RabbitMQ, and external services, ensuring reliable migrations.
+- **PostgreSQL Schema Isolation and Migration History:** In multi-module architectures sharing a single database (`creditrisk`), each module must target its dedicated schema (e.g., `SearchPath=iam`, `SearchPath=credit`, `SearchPath=compliance`) and configure its migration history table in that schema via `.MigrationsHistoryTable("__EFMigrationsHistory", "schema_name")`. This prevents table collisions (such as `outbox_messages` existing across modules in the `public` schema).
 - **`Directory.Build.props`** must define shared properties for all projects to avoid duplication:
   ```xml
   <PropertyGroup>
@@ -1874,6 +1876,16 @@ The following bugs and edge cases were encountered during the implementation of 
 | 14 | Compliance API startup failure: `Unable to resolve service for type 'IDistributedCache'` | `PepScreeningService` required distributed caching in DI, but Redis/memory cache was not registered in `AddComplianceInfrastructure`. | Call `services.AddStackExchangeRedisCache(...)` or `services.AddDistributedMemoryCache()` in `AddComplianceInfrastructure`. |
 | 15 | Error 503 / runtime serialization failure on health checks: `NotSupportedException` | Returning anonymous objects like `Results.Ok(new { status = "healthy" })` under Native AOT / `CreateSlimBuilder`. Anonymous types cannot be registered in source-generated `JsonSerializerContext`. | Define and return strongly-typed records such as `HealthResponse(string Status, string Service, DateTimeOffset? Timestamp = null)` and register them in each module's `JsonSerializerContext`. |
 | 16 | Startup failure: `Address already in use` or stale endpoints responding on ports 5000-5003 / 8081 | Lingering background `dotnet` processes from previous runs or other workspaces holding the ports. | In `run-services.sh` and startup scripts, proactively release ports 5000-5003 and 8081 using `fuser -k "${port}/tcp"` or `lsof -ti ":${port}" | xargs kill -9` before launching new processes. |
+| 17 | `Conflict. The container name "/crcl-xxx" is already in use by container "..."` | Containers created by another project/workspace (e.g. sibling modernizations `...-mdrn-04`) occupying container names and ports with divergent credentials or dead instances. | Remove conflicting containers with `docker rm -f crcl-redis crcl-postgres crcl-rabbitmq crcl-keycloak crcl-grafana crcl-prometheus crcl-seq` before starting the project stack via `./start-all-services.sh infra-only`. |
+| 18 | `Unable to create a 'DbContext' of type '...DbContext'. Unable to resolve service for type 'DbContextOptions<...>'` / `NOAUTH Returned - connection has not yet authenticated` on `dotnet ef database update` | `dotnet ef` attempts to run `Program.cs` to resolve the service provider. Synchronous external calls (e.g. `ConnectionMultiplexer.Connect` to Redis without credentials) throw on startup, causing EF Core to fall back and fail. | Implement `IDesignTimeDbContextFactory<T>` in each Infrastructure project (`IamDbContextFactory`, `CreditAnalysisDbContextFactory`, `ComplianceDbContextFactory`). This bypasses `Program.cs` entirely during migrations. |
+| 19 | `relation "outbox_messages" already exists` (SqlState: 42P07) when applying migrations to multiple modules | Multiple modules (IAM, CreditAnalysis, Compliance) define an `outbox_messages` table without schema isolation, causing both to attempt creating it in PostgreSQL `public` schema. | Specify `SearchPath=<schema>` in the connection string and configure `.MigrationsHistoryTable("__EFMigrationsHistory", "<schema>")` in `UseNpgsql(...)` inside the `IDesignTimeDbContextFactory`. |
+| 20 | `500 Internal Server Error: relation "users" does not exist` (SqlState: 42P01) on API runtime requests | Connection strings in `Program.cs` or `appsettings.json` lacked `SearchPath=iam`, causing EF Core to run runtime queries against `public` instead of `iam`. | Ensure all runtime connection strings in `Program.cs` and `appsettings*.json` specify `SearchPath=<schema>` (e.g. `SearchPath=iam`, `SearchPath=credit`, `SearchPath=compliance`). |
+| 21 | `Bearer error="invalid_token"` / `SecurityTokenMalformedException: JWT is not well formed` (401 Unauthorized) | Service generating non-JWT string mock token (`mock-jwt-token-{id}`) that fails ASP.NET Core `JwtBearerHandler` format and signature validation. | Implement RFC 7519 signed JWT generation in `KeycloakTokenService` with standard claims (`sub`, `roles`, `jti`, `name`) and configure `AddJwtBearer` with symmetric key and `MapInboundClaims = false`. |
+| 22 | `405 Method Not Allowed` on `GET /api/v1/proposals` | Only `POST /` and `GET /{id}` were registered in `ProposalEndpoints.cs`; listing endpoint route was missing. | Implement `ListProposalsQuery` and `ListProposalsQueryHandler`, add `ListAsync`/`CountAsync` to repository and map `group.MapGet("/", ...)` in `ProposalEndpoints.cs`. |
+| 23 | `400 Bad Request` on `POST /api/v1/proposals` | Payload missing `required` C# record properties or using incorrect field names/types during Minimal API model binding. | Send complete camelCase payload matching `CreateProposalRequest` (`customerDocument`, `customerDocumentType`, `customerName`, `customerEmail`, `monthlyIncome`, `requestedLimit`, `proposalType`, `bureauConsentGiven: true`, `bureauConsentIpAddress`). |
+| 24 | `404 Not Found` on `GET /statistics` (Bureau Mock) | Bureau Mock Minimal API omitted the `/statistics` endpoint. | Implement `GET /statistics` with `Interlocked` query counters in `CreditRisk.BureauMock.Service/Program.cs`. |
+| 25 | `404 Not Found` on `POST|GET /api/v1/compliance/checks` | Compliance check endpoints omitted in Compliance API. | Map `ComplianceCheckEndpoints` in `CreditRisk.Compliance.Api` with screening integration and registration in `Program.cs`. |
+| 26 | `403 Forbidden` on `GET /api/v1/users/{id}` | Endpoint restricted exclusively to `RequiresAdministrator`, blocking self-profile retrieval (`sub == id`) by operators and analysts. | Allow self-lookup where `sub == id` or require `RequiresAdministrator` for accessing third-party user profiles. |
 
 ### Appendix C.1 — Pre-Implementation Checklist (All Modules)
 
@@ -1881,13 +1893,22 @@ Before implementing any new API module, verify:
 
 - [ ] Every `*JsonContext.cs` file has `using System.Text.Json.Serialization;` at the top and registers all DTOs, collections (`PagedResult<T>`, `ProblemDetails`, etc.), and `HealthResponse`
 - [ ] No anonymous types (e.g. `new { status = "healthy" }`) are returned in any endpoint; use strongly-typed records exclusively
+- [ ] `KeycloakTokenService` generates well-formed, RFC 7519 signed JWTs with `roles` and `sub` claims
+- [ ] `AddJwtBearer` options configure `MapInboundClaims = false` and validate the shared signing key
+- [ ] `ProposalEndpoints` maps both `POST /` (create) and `GET /` (paged list) alongside `GET /{id}` and `PUT /{id}/submit`
+- [ ] `ComplianceCheckEndpoints` maps `POST /` and `GET /` under `/api/v1/compliance/checks`
+- [ ] `BureauMock` exposes `/query`, `/health`, and `/statistics`
+- [ ] `GET /api/v1/users/{id}` allows self-lookup (`sub == id`) or requires `administrator` role
 - [ ] Every `DbContext.OnModelCreating()` calls `modelBuilder.Ignore<DomainEvent>()` before `ApplyConfigurationsFromAssembly`
 - [ ] Every `DbContext` includes `DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();` and `OutboxMessageConfiguration`
+- [ ] Every module Infrastructure project implements `IDesignTimeDbContextFactory<TContext>` configured with schema isolation and `MigrationsHistoryTable`
+- [ ] Runtime connection strings in `Program.cs` and configuration files include `SearchPath=<schema>` for schema isolation
+- [ ] `POST /api/v1/users` is configured as a public self-registration/user-creation endpoint without admin authorization required
 - [ ] `ObservabilityExtensions` null-checks `OTEL_EXPORTER_OTLP_ENDPOINT` before constructing `Uri`
 - [ ] `ASPNETCORE_ENVIRONMENT=Development` is exported before running migrations and `dotnet run`
 - [ ] All hostnames in `appsettings.Development.json` use `localhost` (not Docker service names)
 - [ ] Redis connection strings include `abortConnect=false`
 - [ ] Ports are configured explicitly via `builder.WebHost.ConfigureKestrel(opts => opts.ListenAnyIP(PORT))`
-- [ ] `run-services.sh` proactively clears lingering processes on ports 5000-5003 and 8081
+- [ ] `run-services.sh` / `start-all-services.sh` proactively clears lingering processes on ports 5000-5003 and 8081
 - [ ] Every API `Program.cs` calls `builder.Services.AddRouting()` after `WebApplication.CreateSlimBuilder(args)`
 - [ ] EF Core migrations are executed (`dotnet ef database update`) for all DB contexts prior to handling requests

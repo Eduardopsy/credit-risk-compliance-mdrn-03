@@ -2288,7 +2288,8 @@
           "Microsoft.AspNetCore.Identity": "2.3.0",
           "Microsoft.EntityFrameworkCore": "8.0.11",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "8.0.11",
-          "StackExchange.Redis": "2.8.16"
+          "StackExchange.Redis": "2.8.16",
+          "System.IdentityModel.Tokens.Jwt": "7.1.2"
         },
         "compile": {
           "bin/placeholder/CreditRisk.IAM.Infrastructure.dll": {}
@@ -5918,7 +5919,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.130/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.131/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

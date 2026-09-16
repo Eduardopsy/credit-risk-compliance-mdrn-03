@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "EKlRKkp2jK6uYTvxzH8E8/wa/3B8p3Jajmqxam4GSH96kET+r3Lu0hW2P/q3B9dOwoDQ0wajh5A317bC3sHAsg==",
+  "dgSpecHash": "1iiLqA3l6egySAc27kt6w8pk0PqmAyxENOUjBdPHhZCxYefZg7xS5CV4Sf6utwJ8PJgoixW/1B5LCPHr1xnopQ==",
   "success": true,
   "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.CreditAnalysis.Domain.Tests/CreditRisk.CreditAnalysis.Domain.Tests.csproj",
   "expectedPackageFiles": [

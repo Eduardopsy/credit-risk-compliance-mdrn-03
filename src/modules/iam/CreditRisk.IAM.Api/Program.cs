@@ -30,16 +30,27 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 });
 
 builder.Services.AddDbContext<IamDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres") ?? "Host=localhost;Database=creditrisk;Username=crcl;Password=crcl"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres") ?? "Host=localhost;Port=5432;Database=creditrisk;Username=crcl;Password=crcl;SearchPath=iam"));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = builder.Configuration["Keycloak__Authority"] ?? "http://localhost:8080/realms/credit-risk";
-        options.Audience = builder.Configuration["Keycloak__Audience"] ?? "crcl-api";
+        string signingKey = builder.Configuration["Jwt__SecretKey"]
+            ?? builder.Configuration["Keycloak__SigningKey"]
+            ?? "CreditRiskComplianceLabSecretKeyForJwtSigning2026!";
+
         options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters.ValidateIssuerSigningKey = true;
-        options.TokenValidationParameters.ClockSkew = TimeSpan.FromSeconds(30);
+        options.SaveToken = true;
+        options.MapInboundClaims = false;
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(signingKey)),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromSeconds(30)
+        };
     });
 
 builder.Services.AddAuthorization(options =>

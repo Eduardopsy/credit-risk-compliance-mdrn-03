@@ -33,18 +33,29 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.Authority = builder.Configuration["Keycloak__Authority"] ?? "http://localhost:8080/realms/credit-risk";
-        options.Audience = builder.Configuration["Keycloak__Audience"] ?? "crcl-api";
+        string signingKey = builder.Configuration["Jwt__SecretKey"]
+            ?? builder.Configuration["Keycloak__SigningKey"]
+            ?? "CreditRiskComplianceLabSecretKeyForJwtSigning2026!";
+
         options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters.ValidateIssuerSigningKey = true;
-        options.TokenValidationParameters.ClockSkew = TimeSpan.FromSeconds(30);
+        options.SaveToken = true;
+        options.MapInboundClaims = false;
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(signingKey)),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.FromSeconds(30)
+        };
     });
 
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("RequiresComplianceAnalyst", policy =>
         policy.RequireAuthenticatedUser()
-              .RequireClaim("roles", "compliance-analyst", "administrator"));
+              .RequireClaim("roles", "compliance-analyst", "desk-operator", "administrator"));
 });
 
 builder.Services.AddHealthChecks()
@@ -80,6 +91,7 @@ app.UseAuthorization();
 
 app.MapTransactionEndpoints();
 app.MapAlertEndpoints();
+app.MapComplianceCheckEndpoints();
 app.MapHealthChecks("/health");
 
 app.MapSwagger();

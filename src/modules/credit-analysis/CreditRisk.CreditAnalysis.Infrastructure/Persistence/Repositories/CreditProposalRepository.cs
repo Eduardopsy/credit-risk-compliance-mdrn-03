@@ -31,6 +31,16 @@ public sealed class CreditProposalRepository(CreditAnalysisDbContext context) : 
             .ConfigureAwait(false);
     }
 
+    public async Task<IReadOnlyList<CreditProposal>> ListAsync(int page, int pageSize, CancellationToken cancellationToken = default)
+    {
+        return await context.CreditProposals
+            .OrderByDescending(p => p.CreatedAt)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync(cancellationToken)
+            .ConfigureAwait(false);
+    }
+
     public async Task AddAsync(CreditProposal proposal, CancellationToken cancellationToken = default)
     {
         await context.CreditProposals.AddAsync(proposal, cancellationToken).ConfigureAwait(false);
@@ -46,6 +56,13 @@ public sealed class CreditProposalRepository(CreditAnalysisDbContext context) : 
     {
         return await context.CreditProposals
             .CountAsync(p => p.Status == status, cancellationToken)
+            .ConfigureAwait(false);
+    }
+
+    public async Task<int> CountAsync(CancellationToken cancellationToken = default)
+    {
+        return await context.CreditProposals
+            .CountAsync(cancellationToken)
             .ConfigureAwait(false);
     }
 }

@@ -3,6 +3,7 @@ using CreditRisk.CreditAnalysis.Application.Commands.CreateProposal;
 using CreditRisk.CreditAnalysis.Application.Commands.SubmitProposal;
 using CreditRisk.CreditAnalysis.Application.DTOs;
 using CreditRisk.CreditAnalysis.Application.Queries.GetProposalById;
+using CreditRisk.CreditAnalysis.Application.Queries.ListProposals;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CreditRisk.CreditAnalysis.Api.Endpoints;
@@ -45,6 +46,22 @@ public static class ProposalEndpoints
         .WithName("CreateProposal")
         .Produces<ProposalAcceptedResponse>(StatusCodes.Status202Accepted)
         .Produces(StatusCodes.Status422UnprocessableEntity);
+
+        group.MapGet("/", async (
+            [FromQuery] int? page,
+            [FromQuery] int? pageSize,
+            ListProposalsQueryHandler handler,
+            CancellationToken ct) =>
+        {
+            var query = new ListProposalsQuery(page ?? 1, pageSize ?? 20);
+            var result = await handler.HandleAsync(query, ct).ConfigureAwait(false);
+            return result.IsSuccess
+                ? Results.Ok(result.Value)
+                : Results.BadRequest(result.Error);
+        })
+        .WithName("ListProposals")
+        .Produces<CreditRisk.Shared.Kernel.Result.PagedResult<ProposalListItemDto>>(StatusCodes.Status200OK)
+        .Produces(StatusCodes.Status400BadRequest);
 
         group.MapGet("/{id:guid}", async (
             Guid id,

@@ -21,3 +21,9 @@ public record QueryResponse(
 public record BureauHealthResponse(
     string Status,
     DateTimeOffset Timestamp);
+
+/// <summary>Bureau statistics response.</summary>
+public record BureauStatisticsResponse(
+    long TotalQueries,
+    double SuccessRate,
+    DateTimeOffset Timestamp);

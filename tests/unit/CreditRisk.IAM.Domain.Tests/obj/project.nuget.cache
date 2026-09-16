@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "h5f8jRzliPmCi/03va/WL/EUIeZ/5ESmr9yomdxGnNety5LzplF5UmwmAqN1dTVaaslzcKbN4sUGdKkf4SmUIA==",
+  "dgSpecHash": "WZ27FVXMhCUcQTlSeTbGltbnUAWYrs83buUK5ojTyeb4+QElbEnbKQ5UZxdbgcAo4kNe3gyKCrdCqz7z9BCa5Q==",
   "success": true,
   "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.IAM.Domain.Tests/CreditRisk.IAM.Domain.Tests.csproj",
   "expectedPackageFiles": [
@@ -48,6 +48,10 @@
     "/home/jorge.eduardo/.nuget/packages/microsoft.extensions.options/8.0.2/microsoft.extensions.options.8.0.2.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/microsoft.extensions.primitives/8.0.0/microsoft.extensions.primitives.8.0.0.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/microsoft.extensions.webencoders/8.0.11/microsoft.extensions.webencoders.8.0.11.nupkg.sha512",
+    "/home/jorge.eduardo/.nuget/packages/microsoft.identitymodel.abstractions/7.1.2/microsoft.identitymodel.abstractions.7.1.2.nupkg.sha512",
+    "/home/jorge.eduardo/.nuget/packages/microsoft.identitymodel.jsonwebtokens/7.1.2/microsoft.identitymodel.jsonwebtokens.7.1.2.nupkg.sha512",
+    "/home/jorge.eduardo/.nuget/packages/microsoft.identitymodel.logging/7.1.2/microsoft.identitymodel.logging.7.1.2.nupkg.sha512",
+    "/home/jorge.eduardo/.nuget/packages/microsoft.identitymodel.tokens/7.1.2/microsoft.identitymodel.tokens.7.1.2.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/microsoft.net.http.headers/2.3.0/microsoft.net.http.headers.2.3.0.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/microsoft.net.test.sdk/17.12.0/microsoft.net.test.sdk.17.12.0.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/microsoft.testplatform.objectmodel/17.12.0/microsoft.testplatform.objectmodel.17.12.0.nupkg.sha512",
@@ -64,6 +68,7 @@
     "/home/jorge.eduardo/.nuget/packages/system.componentmodel.annotations/5.0.0/system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/system.configuration.configurationmanager/6.0.0/system.configuration.configurationmanager.6.0.0.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/system.drawing.common/6.0.0/system.drawing.common.6.0.0.nupkg.sha512",
+    "/home/jorge.eduardo/.nuget/packages/system.identitymodel.tokens.jwt/7.1.2/system.identitymodel.tokens.jwt.7.1.2.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/system.io.pipelines/8.0.0/system.io.pipelines.8.0.0.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/system.reflection.metadata/1.6.0/system.reflection.metadata.1.6.0.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/system.security.accesscontrol/6.0.0/system.security.accesscontrol.6.0.0.nupkg.sha512",

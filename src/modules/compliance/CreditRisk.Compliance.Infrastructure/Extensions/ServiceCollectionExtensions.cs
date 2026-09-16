@@ -17,11 +17,14 @@ public static class ServiceCollectionExtensions
     {
         // Database
         services.AddDbContext<ComplianceDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("Postgres") ?? "Host=localhost;Database=creditrisk;Username=crcl;Password=crcl"));
+            options.UseNpgsql(configuration.GetConnectionString("Postgres") ?? "Host=localhost;Port=5432;Database=creditrisk;Username=crcl;Password=crcl;SearchPath=compliance"));
 
         // Repositories
         services.AddScoped<ITransactionRepository, TransactionRepository>();
         services.AddScoped<IAmlAlertRepository, AmlAlertRepository>();
+
+        // Cache
+        services.AddDistributedMemoryCache();
 
         // Services
         services.AddScoped<IPepScreeningService, PepScreeningService>();

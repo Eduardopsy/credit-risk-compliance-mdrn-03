@@ -780,6 +780,12 @@ public record QueryRequest(string Document, string DocumentType);
 
 /// <summary>Credit score response from bureau.</summary>
 public record QueryResponse(int Score, decimal TotalMonthlyDebt, string Status);
+
+/// <summary>Health check response.</summary>
+public record BureauHealthResponse(string Status, DateTimeOffset Timestamp);
+
+/// <summary>Bureau statistics response.</summary>
+public record BureauStatisticsResponse(long TotalQueries, double SuccessRate, DateTimeOffset Timestamp);
 ```
 
 ```csharp
@@ -795,24 +801,35 @@ builder.WebHost.ConfigureKestrel(options =>
 
 var app = builder.Build();
 
+long totalQueries = 0;
+long successfulQueries = 0;
+
 app.MapPost("/query", async (QueryRequest request) =>
 {
+    Interlocked.Increment(ref totalQueries);
     await Task.Delay(Random.Shared.Next(50, 200));
     int score = Math.Abs(request.Document.GetHashCode()) % 1000;
     var response = new QueryResponse(score, Random.Shared.Next(0, 50000), "Success");
+    Interlocked.Increment(ref successfulQueries);
     return Results.Ok(response);
 })
 .WithName("QueryBureau")
 .Produces<QueryResponse>(StatusCodes.Status200OK)
 .Produces(StatusCodes.Status400BadRequest);
 
-app.MapGet("/health", () => Results.Ok(new { status = "healthy", timestamp = DateTimeOffset.UtcNow }))
+app.MapGet("/health", () => Results.Ok(new BureauHealthResponse("healthy", DateTimeOffset.UtcNow)))
 .WithName("Health")
-.Produces(StatusCodes.Status200OK);
+.Produces<BureauHealthResponse>(StatusCodes.Status200OK);
 
-app.MapGet("/statistics", () => Results.Ok(new { totalQueries = 100, successRate = 99.5 }))
+app.MapGet("/statistics", () =>
+{
+    long total = Interlocked.Read(ref totalQueries);
+    long success = Interlocked.Read(ref successfulQueries);
+    double rate = total == 0 ? 100.0 : Math.Round((double)success / total * 100.0, 2);
+    return Results.Ok(new BureauStatisticsResponse(total, rate, DateTimeOffset.UtcNow));
+})
 .WithName("Statistics")
-.Produces(StatusCodes.Status200OK);
+.Produces<BureauStatisticsResponse>(StatusCodes.Status200OK);
 
 app.Run();
 ```
@@ -1238,13 +1255,23 @@ docker compose ps
 ### Step 2: Apply Migrations
 
 ```bash
+# IAM module (isolated to schema 'iam')
+dotnet ef database update \
+  --project src/modules/iam/CreditRisk.IAM.Infrastructure/ \
+  --startup-project src/modules/iam/CreditRisk.IAM.Api/ \
+  --context IamDbContext
+
+# Credit Analysis module (isolated to schema 'credit')
 dotnet ef database update \
   --project src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/ \
-  --startup-project src/modules/credit-analysis/CreditRisk.CreditAnalysis.Worker/
+  --startup-project src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/ \
+  --context CreditAnalysisDbContext
 
+# Compliance module (isolated to schema 'compliance')
 dotnet ef database update \
   --project src/modules/compliance/CreditRisk.Compliance.Infrastructure/ \
-  --startup-project src/modules/compliance/CreditRisk.Compliance.Worker/
+  --startup-project src/modules/compliance/CreditRisk.Compliance.Api/ \
+  --context ComplianceDbContext
 ```
 
 ### Step 3: Run Workers Locally

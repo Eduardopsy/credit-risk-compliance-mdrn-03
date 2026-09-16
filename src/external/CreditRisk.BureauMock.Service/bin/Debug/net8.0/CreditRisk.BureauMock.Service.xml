@@ -22,5 +22,11 @@
         <member name="M:CreditRisk.BureauMock.Service.BureauHealthResponse.#ctor(System.String,System.DateTimeOffset)">
             <summary>Health check response.</summary>
         </member>
+        <member name="T:CreditRisk.BureauMock.Service.BureauStatisticsResponse">
+            <summary>Bureau statistics response.</summary>
+        </member>
+        <member name="M:CreditRisk.BureauMock.Service.BureauStatisticsResponse.#ctor(System.Int64,System.Double,System.DateTimeOffset)">
+            <summary>Bureau statistics response.</summary>
+        </member>
     </members>
 </doc>

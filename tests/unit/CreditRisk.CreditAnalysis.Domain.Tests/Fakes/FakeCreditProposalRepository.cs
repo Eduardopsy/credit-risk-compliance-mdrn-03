@@ -41,6 +41,18 @@ internal sealed class FakeCreditProposalRepository : ICreditProposalRepository
         return Task.FromResult(result);
     }
 
+    public Task<IReadOnlyList<CreditProposal>> ListAsync(int page, int pageSize, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        IReadOnlyList<CreditProposal> result = _store.Values
+            .OrderByDescending(p => p.CreatedAt)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList()
+            .AsReadOnly();
+        return Task.FromResult(result);
+    }
+
     public Task AddAsync(CreditProposal proposal, CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -59,6 +71,12 @@ internal sealed class FakeCreditProposalRepository : ICreditProposalRepository
     {
         cancellationToken.ThrowIfCancellationRequested();
         return Task.FromResult(_store.Values.Count(p => p.Status == status));
+    }
+
+    public Task<int> CountAsync(CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        return Task.FromResult(_store.Values.Count);
     }
 
     // Test helpers

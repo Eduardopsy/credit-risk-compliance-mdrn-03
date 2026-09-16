@@ -8,6 +8,7 @@ namespace CreditRisk.CreditAnalysis.Api.Serialization;
 [JsonSerializable(typeof(CreateProposalRequest))]
 [JsonSerializable(typeof(CreditProposalDto))]
 [JsonSerializable(typeof(ProposalListItemDto))]
+[JsonSerializable(typeof(CreditRisk.Shared.Kernel.Result.PagedResult<ProposalListItemDto>))]
 [JsonSerializable(typeof(ProposalAcceptedResponse))]
 [JsonSerializable(typeof(HealthResponse))]
 [JsonSerializable(typeof(Microsoft.AspNetCore.Mvc.ProblemDetails))]

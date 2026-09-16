@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "wX0ohfh8HE4H0VK+O5aScecADNWe4AgZmSeQ80EUfs7PfTgu/fWiTDShYRqdeepREYfrGp90DojTy0LkqhAvxg==",
+  "dgSpecHash": "hYc0wWYg1wYdUYUs21GJwFL1ugxDMK1mqow3JgzYYbJ+VuhvW7B6k+gnOZWOD86mrDHkF97MVx3PxIPfb3fbDA==",
   "success": true,
   "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj",
   "expectedPackageFiles": [
