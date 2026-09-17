@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yH2Q3twz1UBg+6/21FcI5Tf0+zNyENgAoyrSIXnhc/EGvgeMKy1eM0Ow9BT5mprcnayl5shvyBpeqYTWs/VYHg==",
+  "dgSpecHash": "RlK4v0BFyksZxlxykzauE/5oFzbG2/ofUfhM4QrCRLHMwWiXh+tFqv7G4sAh44G7MuVCfZbrgqyB/ofnqLh1tA==",
   "success": true,
-  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Api/CreditRisk.IAM.Api.csproj",
+  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/iam/CreditRisk.IAM.Api/CreditRisk.IAM.Api.csproj",
   "expectedPackageFiles": [
     "/home/jorge.eduardo/.nuget/packages/aspnetcore.healthchecks.npgsql/8.0.2/aspnetcore.healthchecks.npgsql.8.0.2.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/aspnetcore.healthchecks.redis/8.0.1/aspnetcore.healthchecks.redis.8.0.1.nupkg.sha512",

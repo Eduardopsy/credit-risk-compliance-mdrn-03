@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hYc0wWYg1wYdUYUs21GJwFL1ugxDMK1mqow3JgzYYbJ+VuhvW7B6k+gnOZWOD86mrDHkF97MVx3PxIPfb3fbDA==",
+  "dgSpecHash": "zUJ/FZ+25mnOH6Lvwnf4j/Wc2HrfgLZPowz0aVEGkhesK8fy6bHa+TzW/oSLkqvakXGwnqSA8LMfuQt6I/e78Q==",
   "success": true,
-  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj",
+  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj",
   "expectedPackageFiles": [
     "/home/jorge.eduardo/.nuget/packages/fluentvalidation/11.11.0/fluentvalidation.11.11.0.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/8.0.0/microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",

@@ -1,0 +1,31 @@
+<CascadingAuthenticationState>
+    <Router AppAssembly="@typeof(App).Assembly">
+        <Found Context="routeData">
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    <div style="max-width: 500px; margin: 80px auto; padding: 32px; text-align: center; font-family: Roboto, sans-serif; background: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                        <div style="font-size: 48px; color: #1976d2; margin-bottom: 16px;">🔐</div>
+                        <h2 style="margin-bottom: 8px; color: #212121;">Credit Risk Compliance Lab</h2>
+                        <p style="color: #666; margin-bottom: 24px; font-size: 14px;">
+                            Sign in with your Keycloak credentials to access your operator dashboard.
+                        </p>
+                        <a href="authentication/login" style="display: inline-block; padding: 12px 28px; background-color: #1976d2; color: white; text-decoration: none; border-radius: 6px; font-weight: 500; font-size: 15px;">
+                            Sign In with Keycloak
+                        </a>
+                    </div>
+                </NotAuthorized>
+            </AuthorizeRouteView>
+            <FocusOnNavigate RouteData="@routeData" Selector="h1" />
+        </Found>
+        <NotFound>
+            <PageTitle>Not found</PageTitle>
+            <LayoutView Layout="@typeof(MainLayout)">
+                <div style="max-width: 600px; margin: 80px auto; text-align: center; font-family: Roboto, sans-serif;">
+                    <h2 style="color: #d32f2f;">404 - Page Not Found</h2>
+                    <p style="color: #666; margin-bottom: 24px;">Sorry, there is nothing at this address.</p>
+                    <a href="/risk-dashboard" style="display: inline-block; padding: 10px 20px; background-color: #1976d2; color: white; text-decoration: none; border-radius: 4px;">Return to Dashboard</a>
+                </div>
+            </LayoutView>
+        </NotFound>
+    </Router>
+</CascadingAuthenticationState>

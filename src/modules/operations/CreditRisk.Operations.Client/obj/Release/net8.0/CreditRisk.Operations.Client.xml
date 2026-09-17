@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CreditRisk.Operations.Client</name>
+    </assembly>
+    <members>
+        <member name="T:CreditRisk.Operations.Client.Models.AmlAlertViewModel">
+            <summary>
+            ViewModel representing an AML/CFT Alert in the UI.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Client.Models.AmlAlertViewModel.MaskedDocument">
+            <summary>
+            Returns masked document for LGPD/compliance (e.g. 529.***.***-25).
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.Models.AuditLogEntryViewModel">
+            <summary>
+            ViewModel representing an audit log entry.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.Models.Common.PagedResult`1">
+            <summary>
+            Paged query result envelope.
+            </summary>
+            <typeparam name="T">The item type.</typeparam>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.Models.CreateProposalRequest">
+            <summary>
+            DTO for creating a new Credit Proposal.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.Models.CreditProposalViewModel">
+            <summary>
+            ViewModel representing a Credit Proposal in the UI.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Client.Models.CreditProposalViewModel.MaskedDocument">
+            <summary>
+            Returns masked document for LGPD/compliance (e.g. 529.***.***-25).
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.Models.DashboardMetricsViewModel">
+            <summary>
+            Aggregated metrics for Risk Dashboard.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.Models.OperationsMetricsViewModel">
+            <summary>
+            Aggregated metrics for Operations Dashboard.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.Models.ProposalAcceptedResponse">
+            <summary>
+            Response payload after submitting a proposal (HTTP 202 Accepted).
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.Models.ReviewAlertRequest">
+            <summary>
+            DTO for reviewing an AML alert.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.Pages.Proposals.CreateProposalRequestClientValidator">
+            <summary>Client-side FluentValidation validator for CreateProposalRequest.</summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.Services.ApiClient">
+            <summary>
+            Typed HTTP client for all back-end API calls.
+            Uses the "crcl-api" named client with JWT bearer token injection.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Client.Services.ApiClient.#ctor(System.Net.Http.HttpClient)">
+            <summary>
+            Typed HTTP client for all back-end API calls.
+            Uses the "crcl-api" named client with JWT bearer token injection.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.Services.NotificationService">
+            <summary>
+            Service wrapping MudBlazor's ISnackbar for unified application alerts and notifications.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Client.Services.NotificationService.#ctor(MudBlazor.ISnackbar)">
+            <summary>
+            Service wrapping MudBlazor's ISnackbar for unified application alerts and notifications.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.Services.OperationsHubClient">
+            <summary>
+            Manages the SignalR connection to OperationsHub.
+            Handles automatic reconnection with exponential backoff.
+            Subscribes to events and updates AppStateService.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Client.Services.OperationsHubClient.#ctor(Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider,CreditRisk.Operations.Client.State.AppStateService,Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{CreditRisk.Operations.Client.Services.OperationsHubClient})">
+            <summary>
+            Manages the SignalR connection to OperationsHub.
+            Handles automatic reconnection with exponential backoff.
+            Subscribes to events and updates AppStateService.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Client.Services.OperationsHubClient.StartAsync(System.String,System.Threading.CancellationToken)">
+            <summary>Starts the SignalR connection and registers event handlers.</summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Client.Services.OperationsHubClient.State">
+            <summary>Gets the current connection state.</summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Client.Services.OperationsHubClient.DisposeAsync">
+            <inheritdoc/>
+        </member>
+        <member name="T:CreditRisk.Operations.Client.State.AppStateService">
+            <summary>
+            Global application state service. Components subscribe to StateChanged to re-render.
+            Injected as Scoped — one instance per browser tab.
+            </summary>
+        </member>
+        <member name="E:CreditRisk.Operations.Client.State.AppStateService.StateChanged">
+            <summary>Raised when any state property changes. Components call StateHasChanged in response.</summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Client.State.AppStateService.PendingAlerts">
+            <summary>Gets the current list of pending AML alerts.</summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Client.State.AppStateService.RecentProposals">
+            <summary>Gets the recent credit proposals for the current operator.</summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Client.State.AppStateService.ConnectionStatus">
+            <summary>Gets the current SignalR connection status.</summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Client.State.AppStateService.UnreadAlertCount">
+            <summary>Gets the count of unread alerts.</summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Client.State.AppStateService.AddAlert(CreditRisk.Operations.Client.Models.AmlAlertViewModel)">
+            <summary>Adds a new AML alert received from SignalR.</summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Client.State.AppStateService.MarkAlertRead(System.Guid)">
+            <summary>Marks an alert as read.</summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Client.State.AppStateService.SetConnectionStatus(System.String)">
+            <summary>Updates the SignalR connection status.</summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Client.State.AppStateService.UpsertProposal(CreditRisk.Operations.Client.Models.CreditProposalViewModel)">
+            <summary>Adds or updates a proposal in the recent proposals list.</summary>
+        </member>
+    </members>
+</doc>

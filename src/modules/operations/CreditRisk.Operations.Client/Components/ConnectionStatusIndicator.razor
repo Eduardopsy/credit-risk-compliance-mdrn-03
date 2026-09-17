@@ -1,0 +1,37 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Components/ConnectionStatusIndicator.razor *@
+@inject AppStateService AppState
+@implements IDisposable
+
+<MudChip T="string"
+         Color="@GetColor()"
+         Icon="@GetIcon()"
+         Size="Size.Small">
+    @AppState.ConnectionStatus
+</MudChip>
+
+@code {
+    [Parameter] public string Status { get; set; } = "Disconnected";
+
+    protected override void OnInitialized()
+    {
+        AppState.StateChanged += OnStateChanged;
+    }
+
+    private Color GetColor() => AppState.ConnectionStatus switch
+    {
+        "Connected" => Color.Success,
+        "Reconnecting..." => Color.Warning,
+        _ => Color.Error
+    };
+
+    private string GetIcon() => AppState.ConnectionStatus switch
+    {
+        "Connected" => Icons.Material.Filled.Wifi,
+        "Reconnecting..." => Icons.Material.Filled.WifiFind,
+        _ => Icons.Material.Filled.WifiOff
+    };
+
+    private void OnStateChanged() => InvokeAsync(StateHasChanged);
+
+    public void Dispose() => AppState.StateChanged -= OnStateChanged;
+}

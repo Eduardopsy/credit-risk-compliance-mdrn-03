@@ -128,8 +128,14 @@ credit-risk-compliance-lab/
 │   │   │   ├── CreditRisk.Compliance.Api/
 │   │   │   └── CreditRisk.Compliance.Worker/
 │   │   └── operations/
-│   │       ├── CreditRisk.Operations.Client/
-│   │       └── CreditRisk.Operations.Server/
+│   │       └── CreditRisk.Operations.Client/
+│   ├── servers/
+│   │   └── CreditRisk.Operations.Server/
+│   ├── workers/
+│   │   ├── CreditRisk.CreditAnalysis.Worker/
+│   │   └── CreditRisk.Compliance.Worker/
+│   ├── external/
+│   │   └── CreditRisk.BureauMock.Service/
 │   └── shared/
 │       ├── CreditRisk.Shared.Kernel/
 │       │   ├── CreditRisk.Shared.Kernel.csproj
@@ -2319,6 +2325,9 @@ This section documents errors encountered during the initial SPEC-01 implementat
 | 20 | `404 Not Found` on `GET /statistics` (Bureau Mock) | Bureau Mock Minimal API omitted the `/statistics` endpoint. | Implement `GET /statistics` with `Interlocked` query counters in `CreditRisk.BureauMock.Service/Program.cs`. |
 | 21 | `404 Not Found` on `POST|GET /api/v1/compliance/checks` | Compliance check endpoints omitted in Compliance API. | Map `ComplianceCheckEndpoints` in `CreditRisk.Compliance.Api` with screening integration and registration in `Program.cs`. |
 | 22 | `403 Forbidden` on `GET /api/v1/users/{id}` | Endpoint restricted exclusively to `RequiresAdministrator`, blocking self-profile retrieval (`sub == id`) by operators and analysts. | Allow self-lookup where `sub == id` or require `RequiresAdministrator` for accessing third-party user profiles. |
+| 23 | `relation "users" does not exist` (SqlState: 42P01) or other module tables missing on fresh startup | PostgreSQL container recreated/started with `init-db.sql` but EF Core migrations were not executed across modules | Execute `dotnet ef database update` for all module DbContexts (`iam`, `credit`, `compliance`) after containers start. Automated in `start-all-services.sh`. |
+| 24 | `Access Denied` on Blazor WASM routes after Keycloak login | Keycloak sends roles in nested JSON arrays/objects (`roles`, `realm_access.roles`) which Blazor WASM does not map to `ClaimTypes.Role` by default | Implement `CustomUserFactory` extending `AccountClaimsPrincipalFactory<RemoteUserAccount>` to flatten and register roles into `ClaimTypes.Role`. |
+| 25 | `NullReferenceException` at `CustomUserFactory.CreateUserAsync` / Blazor `#blazor-error-ui` | `account` parameter is `null` during anonymous state initialization in Blazor WASM | Check `if (account is null) return user;` before accessing `account.AdditionalProperties`. |
 
 ### 11.1 Pre-Implementation Checklist
 
@@ -2334,6 +2343,8 @@ Before implementing any SPEC that involves infrastructure, verify:
 - [ ] Every module infrastructure project has `IDesignTimeDbContextFactory<T>` configured with schema isolation
 - [ ] Runtime connection strings in `Program.cs` include `SearchPath=<schema>`
 - [ ] Token services generate valid signed JWTs and `AddJwtBearer` sets `MapInboundClaims = false`
+- [ ] EF Core database migrations across all modules (`iam`, `credit`, `compliance`) are executed during startup
+- [ ] Blazor WASM client registers `CustomUserFactory` to map Keycloak realm roles to `ClaimTypes.Role` with null-check on `RemoteUserAccount account`
 - [ ] Endpoints implement all expected CRUD and query verbs from specifications (e.g. GET list alongside POST create, `/statistics`, `/compliance/checks`)
 - [ ] `GET /api/v1/users/{id}` allows self-lookup (`sub == id`) alongside admin access
 

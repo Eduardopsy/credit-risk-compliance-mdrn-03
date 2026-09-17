@@ -1,0 +1,65 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Pages/Alerts/AlertList.razor *@
+@page "/alerts"
+@attribute [Authorize(Roles = "compliance-analyst,administrator")]
+
+<PageTitle>AML Alerts — Credit Risk Compliance Lab</PageTitle>
+
+<div class="d-flex justify-space-between align-center mb-4">
+    <MudText Typo="Typo.h4">AML Compliance Alerts</MudText>
+    @if (AppState.UnreadAlertCount > 0)
+    {
+        <MudChip T="string" Color="Color.Error" Icon="@Icons.Material.Filled.NotificationsActive">
+            @AppState.UnreadAlertCount unread
+        </MudChip>
+    }
+</div>
+
+<MudPaper Class="pa-4" Elevation="2">
+    <MudDataGrid T="AmlAlertViewModel"
+                 ServerData="@ServerReloadAsync"
+                 Dense="true"
+                 Hover="true"
+                 @ref="_dataGrid"
+                 RowsPerPage="20"
+                 RowClick="@OnRowClick">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">All Alerts</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchString" Placeholder="Search alerts by type, document..." Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"
+                          Clearable="true" OnClearButtonClick="@OnSearchClear" TextChanged="@OnSearchChanged" Immediate="true" />
+        </ToolBarContent>
+        <Columns>
+            <PropertyColumn Property="x => x.Id" Title="ID">
+                <CellTemplate>
+                    @context.Item.Id.ToString()[..8]...
+                </CellTemplate>
+            </PropertyColumn>
+            <PropertyColumn Property="x => x.AlertType" Title="Rule / Type" />
+            <TemplateColumn Title="Severity">
+                <CellTemplate>
+                    <AlertSeverityChip Severity="@context.Item.Severity" />
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="Customer Document">
+                <CellTemplate>
+                    @context.Item.MaskedDocument
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.TransactionAmount" Title="Amount" Format="C2" />
+            <PropertyColumn Property="x => x.Status" Title="Status" />
+            <PropertyColumn Property="x => x.CreatedAt" Title="Raised At" Format="yyyy-MM-dd HH:mm:ss" />
+            <TemplateColumn Title="Actions">
+                <CellTemplate>
+                    <MudButton Variant="Variant.Outlined" Size="Size.Small" Color="Color.Primary"
+                               OnClick="@(() => NavigateToDetail(context.Item.Id))">
+                        Investigate
+                    </MudButton>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="AmlAlertViewModel" />
+        </PagerContent>
+    </MudDataGrid>
+</MudPaper>

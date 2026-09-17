@@ -1,0 +1,30 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Pages/Authentication.razor *@
+@page "/authentication/{action}"
+@layout EmptyLayout
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+
+<RemoteAuthenticatorView Action="@Action">
+    <LoggingIn>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;flex-direction:column;font-family:sans-serif;">
+            <h3>Connecting to Keycloak...</h3>
+        </div>
+    </LoggingIn>
+    <CompletingLoggingIn>
+        <div style="display:flex;justify-content:center;align-items:center;height:80vh;flex-direction:column;font-family:sans-serif;">
+            <h3>Completing authentication...</h3>
+        </div>
+    </CompletingLoggingIn>
+    <LogInFailed Context="logInContext">
+        <div style="max-width: 500px; margin: 60px auto; padding: 24px; text-align: center; font-family: sans-serif; border: 1px solid #ffcdd2; background-color: #ffebee; border-radius: 8px;">
+            <h3 style="color: #c62828;">Authentication Notice</h3>
+            <p style="color: #333; margin: 16px 0;">@logInContext</p>
+            <a href="authentication/login" style="display: inline-block; padding: 10px 20px; background-color: #1976d2; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                Proceed to Keycloak Login
+            </a>
+        </div>
+    </LogInFailed>
+</RemoteAuthenticatorView>
+
+@code {
+    [Parameter] public string? Action { get; set; }
+}

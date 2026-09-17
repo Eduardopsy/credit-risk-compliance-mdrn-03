@@ -2719,11 +2719,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/CreditRisk.IAM.Infrastructure.csproj",
+      "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/iam/CreditRisk.IAM.Infrastructure/CreditRisk.IAM.Infrastructure.csproj",
       "projectName": "CreditRisk.IAM.Infrastructure",
-      "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/CreditRisk.IAM.Infrastructure.csproj",
+      "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/iam/CreditRisk.IAM.Infrastructure/CreditRisk.IAM.Infrastructure.csproj",
       "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
-      "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/",
+      "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/iam/CreditRisk.IAM.Infrastructure/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
@@ -2738,11 +2738,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/CreditRisk.IAM.Application.csproj": {
-              "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/CreditRisk.IAM.Application.csproj"
+            "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/iam/CreditRisk.IAM.Application/CreditRisk.IAM.Application.csproj": {
+              "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/iam/CreditRisk.IAM.Application/CreditRisk.IAM.Application.csproj"
             },
-            "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Domain/CreditRisk.IAM.Domain.csproj": {
-              "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Domain/CreditRisk.IAM.Domain.csproj"
+            "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/iam/CreditRisk.IAM.Domain/CreditRisk.IAM.Domain.csproj": {
+              "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/iam/CreditRisk.IAM.Domain/CreditRisk.IAM.Domain.csproj"
             }
           }
         }

@@ -9,31 +9,37 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
-    
+    <!-- Blazor WASM Hosting -->
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.11" />
+
+    <!-- Authentication & SignalR -->
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="8.0.11" />
+
     <!-- MassTransit -->
     <PackageReference Include="MassTransit" Version="8.3.6" />
     <PackageReference Include="MassTransit.RabbitMQ" Version="8.3.6" />
-    
+
     <!-- EntityFramework -->
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.0" />
-    
+
     <!-- Logging -->
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
     <PackageReference Include="Serilog" Version="4.0.0" />
-    
+
     <!-- Observability -->
     <PackageReference Include="OpenTelemetry" Version="1.10.0" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.10.0" />
     <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.10.0" />
-    
-    <!-- Internal -->
+
+    <!-- Internal Projects -->
     <ProjectReference Include="../../shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj" />
     <ProjectReference Include="../../shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj" />
     <ProjectReference Include="../../shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj" />
     <ProjectReference Include="../../modules/compliance/CreditRisk.Compliance.Domain/CreditRisk.Compliance.Domain.csproj" />
     <ProjectReference Include="../../modules/compliance/CreditRisk.Compliance.Infrastructure/CreditRisk.Compliance.Infrastructure.csproj" />
+    <ProjectReference Include="../../modules/operations/CreditRisk.Operations.Client/CreditRisk.Operations.Client.csproj" />
   </ItemGroup>
 
 </Project>

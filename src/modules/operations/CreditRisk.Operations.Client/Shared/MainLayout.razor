@@ -1,0 +1,49 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Shared/MainLayout.razor *@
+@inherits LayoutComponentBase
+
+<MudThemeProvider Theme="_customTheme" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+        <MudText Typo="Typo.h6" Class="ml-3">Credit Risk Compliance Lab</MudText>
+        <MudSpacer />
+        
+        <div class="d-flex align-center gap-4">
+            <ConnectionStatusIndicator />
+
+            <AuthorizeView Roles="compliance-analyst,administrator">
+                <Authorized>
+                    <MudBadge Content="@AppState.UnreadAlertCount" Color="Color.Error" Overlap="true" Visible="@(AppState.UnreadAlertCount > 0)">
+                        <MudIconButton Icon="@Icons.Material.Filled.Notifications" Color="Color.Inherit" Link="/compliance-dashboard" />
+                    </MudBadge>
+                </Authorized>
+            </AuthorizeView>
+
+            <AuthorizeView>
+                <Authorized>
+                    <MudMenu Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" Direction="Direction.Left" OffsetY="true">
+                        <MudMenuItem Disabled="true">
+                            <MudText Typo="Typo.body2"><b>@context.User.Identity?.Name</b></MudText>
+                        </MudMenuItem>
+                        <MudDivider />
+                        <MudMenuItem Icon="@Icons.Material.Filled.Logout" OnClick="@BeginSignOut">Logout</MudMenuItem>
+                    </MudMenu>
+                </Authorized>
+                <NotAuthorized>
+                    <MudButton Variant="Variant.Text" Color="Color.Inherit" Link="authentication/login">Login</MudButton>
+                </NotAuthorized>
+            </AuthorizeView>
+        </div>
+    </MudAppBar>
+
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+        <NavMenu />
+    </MudDrawer>
+
+    <MudMainContent Class="pa-6">
+        @Body
+    </MudMainContent>
+</MudLayout>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QtPf7DMsrKgXnWhtLGW+jK4rC8CZnMcCSzh6k/JlhLgt1021zIfmnyvTTbSXlJg7g9Bz4O99SMohXpsAMA87Tw==",
+  "dgSpecHash": "TRuosBeaM2sPh66rGvh4UC8bS6zV6HC1ZrwUGm5M0pCSxCR97dj5l1YU2zk2Ast8rrT5hHlcIVKZlRKS8nF0zw==",
   "success": true,
-  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.Compliance.Domain.Tests/CreditRisk.Compliance.Domain.Tests.csproj",
+  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/tests/unit/CreditRisk.Compliance.Domain.Tests/CreditRisk.Compliance.Domain.Tests.csproj",
   "expectedPackageFiles": [
     "/home/jorge.eduardo/.nuget/packages/coverlet.collector/6.0.2/coverlet.collector.6.0.2.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/fluentassertions/7.0.0/fluentassertions.7.0.0.nupkg.sha512",

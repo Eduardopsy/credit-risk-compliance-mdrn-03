@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/CreditRisk.CreditAnalysis.Api.csproj": {}
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/CreditRisk.CreditAnalysis.Api.csproj": {}
   },
   "projects": {
-    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/CreditRisk.CreditAnalysis.Api.csproj": {
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/CreditRisk.CreditAnalysis.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/CreditRisk.CreditAnalysis.Api.csproj",
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/CreditRisk.CreditAnalysis.Api.csproj",
         "projectName": "CreditRisk.CreditAnalysis.Api",
-        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/CreditRisk.CreditAnalysis.Api.csproj",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/CreditRisk.CreditAnalysis.Api.csproj",
         "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
-        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/obj/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
@@ -26,14 +26,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj": {
-                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj"
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj"
               },
-              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj": {
-                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj"
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj"
               },
-              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj": {
-                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj"
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj"
               }
             }
           }
@@ -100,14 +100,14 @@
         }
       }
     },
-    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj": {
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj",
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj",
         "projectName": "CreditRisk.CreditAnalysis.Application",
-        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj",
         "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
-        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
@@ -122,14 +122,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj": {
-                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj"
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj"
               },
-              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj": {
-                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj"
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj"
               },
-              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj": {
-                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj"
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj"
               }
             }
           }
@@ -177,14 +177,14 @@
         }
       }
     },
-    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj": {
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj",
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj",
         "projectName": "CreditRisk.CreditAnalysis.Domain",
-        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj",
         "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
-        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/obj/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
@@ -199,8 +199,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj": {
-                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj"
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj"
               }
             }
           }
@@ -238,14 +238,14 @@
         }
       }
     },
-    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj": {
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj",
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj",
         "projectName": "CreditRisk.CreditAnalysis.Infrastructure",
-        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/CreditRisk.CreditAnalysis.Infrastructure.csproj",
         "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
-        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/obj/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
@@ -260,11 +260,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj": {
-                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj"
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Application/CreditRisk.CreditAnalysis.Application.csproj"
               },
-              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj": {
-                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj"
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/credit-analysis/CreditRisk.CreditAnalysis.Domain/CreditRisk.CreditAnalysis.Domain.csproj"
               }
             }
           }
@@ -316,14 +316,14 @@
         }
       }
     },
-    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj": {
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj",
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj",
         "projectName": "CreditRisk.Shared.Contracts",
-        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Contracts/CreditRisk.Shared.Contracts.csproj",
         "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
-        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Contracts/obj/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Contracts/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
@@ -338,8 +338,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj": {
-                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj"
+              "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj": {
+                "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj"
               }
             }
           }
@@ -377,14 +377,14 @@
         }
       }
     },
-    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj": {
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj",
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj",
         "projectName": "CreditRisk.Shared.Kernel",
-        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Kernel/CreditRisk.Shared.Kernel.csproj",
         "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
-        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Kernel/obj/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Kernel/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"
@@ -444,14 +444,14 @@
         }
       }
     },
-    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj": {
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj",
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj",
         "projectName": "CreditRisk.Shared.Observability",
-        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj",
         "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
-        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/obj/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Observability/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"

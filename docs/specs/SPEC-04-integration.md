@@ -91,7 +91,7 @@ src/modules/compliance/CreditRisk.Compliance.Worker/
 └── Services/
     └── PepScreeningService.cs
 
-src/modules/operations/CreditRisk.Operations.Server/
+src/servers/CreditRisk.Operations.Server/
 ├── CreditRisk.Operations.Server.csproj
 ├── Program.cs
 ├── Hubs/
@@ -470,7 +470,7 @@ public sealed class TransactionReceivedCommandConsumer(
 ### 4.5 Operations Hub — SignalR Consumers
 
 ```csharp
-// File: src/modules/operations/CreditRisk.Operations.Server/Hubs/OperationsHub.cs
+// File: src/servers/CreditRisk.Operations.Server/Hubs/OperationsHub.cs
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 
@@ -513,7 +513,7 @@ public sealed class OperationsHub : Hub
 ```
 
 ```csharp
-// File: src/modules/operations/CreditRisk.Operations.Server/Consumers/AmlAlertCreatedEventConsumer.cs
+// File: src/servers/CreditRisk.Operations.Server/Consumers/AmlAlertCreatedEventConsumer.cs
 using CreditRisk.Operations.Server.Hubs;
 using CreditRisk.Shared.Contracts.Compliance.Events;
 using MassTransit;
@@ -1284,7 +1284,7 @@ dotnet run --project src/modules/credit-analysis/CreditRisk.CreditAnalysis.Worke
 dotnet run --project src/modules/compliance/CreditRisk.Compliance.Worker/
 
 # Terminal 3 — Operations Server (SignalR Hub)
-dotnet run --project src/modules/operations/CreditRisk.Operations.Server/
+dotnet run --project src/servers/CreditRisk.Operations.Server/
 ```
 
 ### Step 4: Verify RabbitMQ Topology

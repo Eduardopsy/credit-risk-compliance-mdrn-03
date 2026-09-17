@@ -1,0 +1,110 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.MudDebugAnalyzer = 
+build_property.MudAllowedAttributePattern = 
+build_property.MudIllegalParameters = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = CreditRisk.Operations.Client
+build_property.RootNamespace = CreditRisk.Operations.Client
+build_property.ProjectDir = /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client
+build_property._RazorSourceGeneratorDebug = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Components/AlertSeverityChip.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BbGVydFNldmVyaXR5Q2hpcC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Components/ConnectionStatusIndicator.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Db25uZWN0aW9uU3RhdHVzSW5kaWNhdG9yLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Components/ProposalStatusStepper.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Qcm9wb3NhbFN0YXR1c1N0ZXBwZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Components/RiskRatingBadge.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9SaXNrUmF0aW5nQmFkZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Pages/Alerts/AlertDetail.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWxlcnRzL0FsZXJ0RGV0YWlsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Pages/Alerts/AlertList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWxlcnRzL0FsZXJ0TGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Pages/AuditLog/AuditLogViewer.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXVkaXRMb2cvQXVkaXRMb2dWaWV3ZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Pages/Authentication.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQXV0aGVudGljYXRpb24ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Pages/Dashboard/ComplianceDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGFzaGJvYXJkL0NvbXBsaWFuY2VEYXNoYm9hcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Pages/Dashboard/OperationsDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGFzaGJvYXJkL09wZXJhdGlvbnNEYXNoYm9hcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Pages/Dashboard/RiskDashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGFzaGJvYXJkL1Jpc2tEYXNoYm9hcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Pages/Proposals/CreateProposal.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJvcG9zYWxzL0NyZWF0ZVByb3Bvc2FsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Pages/Proposals/ProposalDetail.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJvcG9zYWxzL1Byb3Bvc2FsRGV0YWlsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Pages/Proposals/ProposalList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUHJvcG9zYWxzL1Byb3Bvc2FsTGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Shared/EmptyLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0VtcHR5TGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL05hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Shared/NotAuthorized.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL05vdEF1dGhvcml6ZWQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/Shared/RedirectToLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1JlZGlyZWN0VG9Mb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/operations/CreditRisk.Operations.Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 

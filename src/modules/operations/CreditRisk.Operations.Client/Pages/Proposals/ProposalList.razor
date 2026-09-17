@@ -1,0 +1,69 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Pages/Proposals/ProposalList.razor *@
+@page "/proposals"
+@attribute [Authorize(Roles = "desk-operator,compliance-analyst,administrator")]
+
+<PageTitle>Credit Proposals — Credit Risk Compliance Lab</PageTitle>
+
+<div class="d-flex justify-space-between align-center mb-4">
+    <MudText Typo="Typo.h4">Credit Proposals</MudText>
+    <AuthorizeView Roles="desk-operator,administrator">
+        <Authorized>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="/proposals/create" StartIcon="@Icons.Material.Filled.Add">
+                New Proposal
+            </MudButton>
+        </Authorized>
+    </AuthorizeView>
+</div>
+
+<MudPaper Class="pa-4" Elevation="2">
+    <MudDataGrid T="CreditProposalViewModel"
+                 ServerData="@ServerReloadAsync"
+                 Dense="true"
+                 Hover="true"
+                 @ref="_dataGrid"
+                 RowsPerPage="20"
+                 RowClick="@OnRowClick">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">All Proposals</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchString" Placeholder="Search proposals..." Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"
+                          Clearable="true" OnClearButtonClick="@OnSearchClear" TextChanged="@OnSearchChanged" Immediate="true" />
+        </ToolBarContent>
+        <Columns>
+            <PropertyColumn Property="x => x.Id" Title="ID">
+                <CellTemplate>
+                    @context.Item.Id.ToString()[..8]...
+                </CellTemplate>
+            </PropertyColumn>
+            <PropertyColumn Property="x => x.CustomerName" Title="Customer" />
+            <TemplateColumn Title="Document (Masked)">
+                <CellTemplate>
+                    @context.Item.MaskedDocument
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.RequestedLimit" Title="Requested" Format="C2" />
+            <PropertyColumn Property="x => x.ApprovedLimit" Title="Approved" Format="C2">
+                <CellTemplate>
+                    @(context.Item.ApprovedLimit.HasValue ? context.Item.ApprovedLimit.Value.ToString("C2") : "—")
+                </CellTemplate>
+            </PropertyColumn>
+            <TemplateColumn Title="Rating">
+                <CellTemplate>
+                    <RiskRatingBadge Rating="@context.Item.RiskRating" />
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.Status" Title="Status" />
+            <PropertyColumn Property="x => x.CreatedAt" Title="Created At" Format="yyyy-MM-dd HH:mm" />
+            <TemplateColumn Title="Actions">
+                <CellTemplate>
+                    <MudIconButton Icon="@Icons.Material.Filled.Visibility" Size="Size.Small" Color="Color.Primary"
+                                   OnClick="@(() => NavigateToDetail(context.Item.Id))" />
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="CreditProposalViewModel" />
+        </PagerContent>
+    </MudDataGrid>
+</MudPaper>

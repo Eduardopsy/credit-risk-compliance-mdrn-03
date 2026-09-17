@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CBBC9msNvwdhVG4O4QZ3vV9/vfmEnx9TlMqsHuN0gvN+okBCerSKz06p2V8SqocxmHy27WEgVTT7LsETi9YODg==",
+  "dgSpecHash": "+DcdFAEOt2ycFr3FL+N5Qe2MCsZq3J156C78Enurk+0yNTZ2HI8M4kdrX5e0FJYJGqxR+FeWsHmnbrzwkLAN7g==",
   "success": true,
-  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/iam/CreditRisk.IAM.Application/CreditRisk.IAM.Application.csproj",
+  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/iam/CreditRisk.IAM.Application/CreditRisk.IAM.Application.csproj",
   "expectedPackageFiles": [
     "/home/jorge.eduardo/.nuget/packages/fluentvalidation/11.11.0/fluentvalidation.11.11.0.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/masstransit/8.3.6/masstransit.8.3.6.nupkg.sha512",

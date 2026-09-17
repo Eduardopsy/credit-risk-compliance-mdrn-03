@@ -181,7 +181,7 @@ ENTRYPOINT ["./CreditRisk.CreditAnalysis.Worker"]
 ### 2.5 Operations Server — Standard Dockerfile (SignalR + Blazor WASM)
 
 ```dockerfile
-# File: src/modules/operations/CreditRisk.Operations.Server/Dockerfile
+# File: src/servers/CreditRisk.Operations.Server/Dockerfile
 # Note: NOT AOT — SignalR hub requires reflection for dynamic hub dispatch
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
@@ -189,8 +189,9 @@ WORKDIR /src
 COPY Directory.Build.props Directory.Packages.props global.json ./
 COPY src/shared/ src/shared/
 COPY src/modules/operations/ src/modules/operations/
+COPY src/servers/CreditRisk.Operations.Server/ src/servers/CreditRisk.Operations.Server/
 
-WORKDIR /src/src/modules/operations/CreditRisk.Operations.Server
+WORKDIR /src/src/servers/CreditRisk.Operations.Server
 RUN dotnet restore
 RUN dotnet publish \
     --configuration Release \
@@ -421,7 +422,7 @@ services:
   operations-server:
     build:
       context: .
-      dockerfile: src/modules/operations/CreditRisk.Operations.Server/Dockerfile
+      dockerfile: src/servers/CreditRisk.Operations.Server/Dockerfile
     container_name: crcl-operations-server
     restart: unless-stopped
     environment:
@@ -1601,7 +1602,7 @@ jobs:
           - name: worker
             dockerfile: src/modules/worker/CreditRisk.Worker/Dockerfile
           - name: operations-server
-            dockerfile: src/modules/operations/CreditRisk.Operations.Server/Dockerfile
+            dockerfile: src/servers/CreditRisk.Operations.Server/Dockerfile
 
     steps:
       - name: Checkout
@@ -1827,7 +1828,9 @@ docker-compose down -v --remove-orphans
 | `unknown shorthand flag: 'd' in -d` | `docker compose` (space) on Docker 24 or earlier | Replace with `docker-compose` (hyphenated) in all scripts |
 | `Conflict. The container name "/crcl-xxx" is already in use` | Previous containers or containers from another project workspace occupying names and ports | Remove conflicting containers with `docker rm -f crcl-redis crcl-postgres crcl-rabbitmq crcl-keycloak crcl-grafana crcl-prometheus crcl-seq` before running `docker-compose up` or `./start-all-services.sh infra-only` |
 | `Unable to create a 'DbContext' of type '...DbContext'. Unable to resolve service for type 'DbContextOptions<...>'` / `NOAUTH Returned` during `dotnet ef database update` | `dotnet ef` attempts to run Web Host during migrations, triggering synchronous Redis/service connections that fail at design-time | Implement `IDesignTimeDbContextFactory<TContext>` in module Infrastructure layers to isolate migrations from Web Host startup dependencies. |
-| `relation "outbox_messages" already exists` (SqlState: 42P07) during EF database update | Multiple module migrations define tables with identical names targeting the default `public` schema | Ensure schema isolation: specify `SearchPath=<schema>` in the connection string and configure `.MigrationsHistoryTable("__EFMigrationsHistory", "<schema>")` in `UseNpgsql`. |
+| `relation "users" does not exist` (SqlState: 42P01) or other missing tables during API calls | PostgreSQL container was started/restarted without applying EF Core migrations across modules | Run database migrations across modules: `dotnet ef database update --project src/modules/iam/CreditRisk.IAM.Infrastructure --startup-project src/modules/iam/CreditRisk.IAM.Api`, `dotnet ef database update --project src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure --startup-project src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api`, and `dotnet ef database update --project src/modules/compliance/CreditRisk.Compliance.Infrastructure --startup-project src/modules/compliance/CreditRisk.Compliance.Api`. The script `./start-all-services.sh` automatically performs this step. |
+| `Access Denied` after logging into Blazor WASM with valid credentials | Keycloak sends roles in `roles` or `realm_access.roles` JSON arrays which are not automatically converted to `ClaimTypes.Role` | Use `CustomUserFactory : AccountClaimsPrincipalFactory<RemoteUserAccount>` in `CreditRisk.Operations.Client` and configure `options.UserOptions.RoleClaim = ClaimTypes.Role`. |
+| `NullReferenceException` at `CustomUserFactory.CreateUserAsync` / `#blazor-error-ui` | `account` parameter is `null` during anonymous state initialization in Blazor WASM | Add guard clause `if (account is null) return user;` before accessing `account.AdditionalProperties`. |
 | PostgreSQL init fails / container unhealthy | MySQL syntax in `init-db.sql` (`CREATE DATABASE IF NOT EXISTS`) | Use `CREATE SCHEMA IF NOT EXISTS` or `\gexec` pattern. See §10.1. |
 | `ssl_error_rx_record_too_long` | HTTP request to HTTPS port | Ensure browser uses `https://` |
 | SignalR connection fails | CORS or WebSocket proxy issue | Check Nginx `/hubs/` location block |

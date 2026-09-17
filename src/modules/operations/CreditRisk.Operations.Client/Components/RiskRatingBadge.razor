@@ -1,0 +1,24 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Components/RiskRatingBadge.razor *@
+
+<MudChip T="string"
+         Color="@GetColor()"
+         Variant="Variant.Filled"
+         Size="Size.Small">
+    @RatingText
+</MudChip>
+
+@code {
+    [Parameter] public string? Rating { get; set; }
+
+    private string RatingText => string.IsNullOrWhiteSpace(Rating) ? "N/A" : Rating;
+
+    private Color GetColor() => Rating switch
+    {
+        "A" => Color.Success,
+        "B" => Color.Info,
+        "C" => Color.Warning,
+        "D" => Color.Warning,
+        "E" => Color.Error,
+        _ => Color.Default
+    };
+}

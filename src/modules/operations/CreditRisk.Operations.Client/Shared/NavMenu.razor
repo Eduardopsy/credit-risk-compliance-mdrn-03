@@ -1,0 +1,64 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Shared/NavMenu.razor *@
+
+<MudNavMenu>
+    <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="px-4 pt-2">Dashboards</MudText>
+    
+    <AuthorizeView Roles="desk-operator,compliance-analyst,administrator">
+        <Authorized>
+            <MudNavLink Href="/risk-dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">
+                Risk Dashboard
+            </MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+
+    <AuthorizeView Roles="compliance-analyst,administrator">
+        <Authorized>
+            <MudNavLink Href="/compliance-dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Shield">
+                Compliance Dashboard
+            </MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+
+    <AuthorizeView Roles="administrator">
+        <Authorized>
+            <MudNavLink Href="/operations-dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Speed">
+                Operations Dashboard
+            </MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+
+    <MudDivider Class="my-2" />
+    <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="px-4 pt-2">Operations</MudText>
+
+    <AuthorizeView Roles="desk-operator,administrator">
+        <Authorized>
+            <MudNavLink Href="/proposals/create" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.AddCard">
+                New Proposal
+            </MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+
+    <AuthorizeView Roles="desk-operator,compliance-analyst,administrator">
+        <Authorized>
+            <MudNavLink Href="/proposals" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Assignment">
+                Proposals List
+            </MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+
+    <AuthorizeView Roles="compliance-analyst,administrator">
+        <Authorized>
+            <MudNavLink Href="/alerts" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.NotificationsActive">
+                AML Alerts
+            </MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+
+    <AuthorizeView Roles="compliance-analyst,administrator">
+        <Authorized>
+            <MudNavLink Href="/audit-logs" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.ReceiptLong">
+                Audit Log
+            </MudNavLink>
+        </Authorized>
+    </AuthorizeView>
+</MudNavMenu>

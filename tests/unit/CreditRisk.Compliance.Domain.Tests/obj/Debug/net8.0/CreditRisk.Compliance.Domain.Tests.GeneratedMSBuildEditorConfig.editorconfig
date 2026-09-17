@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = CreditRisk.Compliance.Domain.Tests
-build_property.ProjectDir = /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/tests/unit/CreditRisk.Compliance.Domain.Tests/
+build_property.ProjectDir = /home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/tests/unit/CreditRisk.Compliance.Domain.Tests/
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

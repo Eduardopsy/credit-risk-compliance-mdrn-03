@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "46uvNv1GEBa1EKuVq1MxdsZ3kVeFjlntGYNHpPpRlhh1ibqIp0AXdK/JIl4Tzo4grBeRsZbVmDoxsW+RvuBNfw==",
+  "dgSpecHash": "fdX83CRJYM/he6UNWJynYVdmH/XR6j/hFhIAeDc/9lI4UBsek/MqzaiIKWFV2761sW/JxkgjnhyXnUHcr8M7rg==",
   "success": true,
-  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/modules/compliance/CreditRisk.Compliance.Api/CreditRisk.Compliance.Api.csproj",
+  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/modules/compliance/CreditRisk.Compliance.Api/CreditRisk.Compliance.Api.csproj",
   "expectedPackageFiles": [
     "/home/jorge.eduardo/.nuget/packages/aspnetcore.healthchecks.npgsql/8.0.2/aspnetcore.healthchecks.npgsql.8.0.2.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/fluentvalidation/11.11.0/fluentvalidation.11.11.0.nupkg.sha512",

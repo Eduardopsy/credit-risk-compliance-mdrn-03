@@ -1,0 +1,42 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Pages/AuditLog/AuditLogViewer.razor *@
+@page "/audit-logs"
+@attribute [Authorize(Roles = "compliance-analyst,administrator")]
+
+<PageTitle>Audit Logs — Credit Risk Compliance Lab</PageTitle>
+
+<div class="d-flex justify-space-between align-center mb-4">
+    <MudText Typo="Typo.h4">Compliance Audit Trail</MudText>
+</div>
+
+<MudPaper Class="pa-4" Elevation="2">
+    <MudDataGrid T="AuditLogEntryViewModel"
+                 ServerData="@ServerReloadAsync"
+                 Dense="true"
+                 Hover="true"
+                 @ref="_dataGrid"
+                 RowsPerPage="20">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Audit Trail Entries</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchString" Placeholder="Filter by operator, entity or action..." Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"
+                          Clearable="true" OnClearButtonClick="@OnSearchClear" TextChanged="@OnSearchChanged" Immediate="true" />
+        </ToolBarContent>
+        <Columns>
+            <PropertyColumn Property="x => x.Id" Title="ID">
+                <CellTemplate>
+                    @context.Item.Id.ToString()[..8]...
+                </CellTemplate>
+            </PropertyColumn>
+            <PropertyColumn Property="x => x.Timestamp" Title="Timestamp" Format="yyyy-MM-dd HH:mm:ss" />
+            <PropertyColumn Property="x => x.Action" Title="Action" />
+            <PropertyColumn Property="x => x.EntityType" Title="Entity" />
+            <PropertyColumn Property="x => x.EntityId" Title="Entity ID" />
+            <PropertyColumn Property="x => x.PerformedBy" Title="Performed By" />
+            <PropertyColumn Property="x => x.Details" Title="Details" />
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="AuditLogEntryViewModel" />
+        </PagerContent>
+    </MudDataGrid>
+</MudPaper>

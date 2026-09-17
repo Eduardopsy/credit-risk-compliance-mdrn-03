@@ -1,0 +1,116 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Pages/Alerts/AlertDetail.razor *@
+@page "/alerts/{Id:guid}"
+@attribute [Authorize(Roles = "compliance-analyst,administrator")]
+
+<PageTitle>AML Alert Investigation — Credit Risk Compliance Lab</PageTitle>
+
+<div class="d-flex justify-space-between align-center mb-4">
+    <div>
+        <MudText Typo="Typo.h4">Alert Investigation</MudText>
+        <MudText Typo="Typo.caption" Color="Color.Secondary">ID: @Id</MudText>
+    </div>
+    <MudButton Variant="Variant.Outlined" Color="Color.Primary" Link="/alerts" StartIcon="@Icons.Material.Filled.ArrowBack">
+        Back to Alerts
+    </MudButton>
+</div>
+
+@if (_isLoading)
+{
+    <div class="d-flex justify-center align-center pa-12">
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Large" />
+    </div>
+}
+else if (_alert is null)
+{
+    <MudAlert Severity="Severity.Error">Alert with ID @Id was not found.</MudAlert>
+}
+else
+{
+    <MudGrid>
+        <MudItem xs="12" md="7">
+            <MudPaper Class="pa-6" Elevation="2">
+                <div class="d-flex justify-space-between align-center mb-4">
+                    <MudText Typo="Typo.h6">Incident Details</MudText>
+                    <AlertSeverityChip Severity="@_alert.Severity" />
+                </div>
+                <MudList T="string" Dense="true">
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Alert Rule / Pattern</MudText>
+                        <MudText Typo="Typo.body1"><b>@_alert.AlertType</b></MudText>
+                    </MudListItem>
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Flagged Transaction Amount</MudText>
+                        <MudText Typo="Typo.h5" Color="Color.Error"><b>@_alert.TransactionAmount.ToString("C2")</b></MudText>
+                    </MudListItem>
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Customer Document (LGPD Masked)</MudText>
+                        <MudText Typo="Typo.body1"><b>@_alert.MaskedDocument</b></MudText>
+                    </MudListItem>
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Transaction ID</MudText>
+                        <MudText Typo="Typo.body2">@_alert.TransactionId</MudText>
+                    </MudListItem>
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Trigger Timestamp</MudText>
+                        <MudText Typo="Typo.body2">@_alert.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss UTC")</MudText>
+                    </MudListItem>
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Current Status</MudText>
+                        <MudChip T="string" Size="Size.Small" Variant="Variant.Outlined">@_alert.Status</MudChip>
+                    </MudListItem>
+                    @if (!string.IsNullOrWhiteSpace(_alert.Description))
+                    {
+                        <MudListItem T="string">
+                            <MudText Typo="Typo.body2" Color="Color.Secondary">Description / Rule Triggers</MudText>
+                            <MudText Typo="Typo.body2">@_alert.Description</MudText>
+                        </MudListItem>
+                    }
+                </MudList>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="5">
+            <MudPaper Class="pa-6" Elevation="2">
+                <MudText Typo="Typo.h6" Class="mb-4">Analyst Decision & Review</MudText>
+                @if (_alert.Status != "Pending")
+                {
+                    <MudAlert Severity="Severity.Info" Class="mb-4">
+                        This alert has already been resolved with status: <b>@_alert.Status</b>.
+                    </MudAlert>
+                    @if (!string.IsNullOrWhiteSpace(_alert.ReviewerComments))
+                    {
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Reviewer Notes:</MudText>
+                        <MudText Typo="Typo.body1" Class="mb-4">@_alert.ReviewerComments</MudText>
+                    }
+                }
+                else
+                {
+                    <MudSelect @bind-Value="_reviewRequest.Decision" Label="Investigation Verdict" Class="mb-4">
+                        <MudSelectItem Value="@("Dismissed")">Dismiss False Positive</MudSelectItem>
+                        <MudSelectItem Value="@("Escalated")">Escalate to Senior Compliance</MudSelectItem>
+                        <MudSelectItem Value="@("ConfirmedFraud")">Confirm AML/Fraud Violation</MudSelectItem>
+                    </MudSelect>
+
+                    <MudTextField @bind-Value="_reviewRequest.Notes"
+                                  Label="Investigation Notes & Justification"
+                                  Lines="4"
+                                  Variant="Variant.Outlined"
+                                  Class="mb-4"
+                                  Required="true" />
+
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               OnClick="@SubmitReviewAsync"
+                               Disabled="@_isSubmitting"
+                               FullWidth="true">
+                        @if (_isSubmitting)
+                        {
+                            <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                        }
+                        Submit Compliance Determination
+                    </MudButton>
+                }
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+}

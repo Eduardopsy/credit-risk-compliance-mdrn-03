@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/external/CreditRisk.BureauMock.Service/CreditRisk.BureauMock.Service.csproj": {}
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/external/CreditRisk.BureauMock.Service/CreditRisk.BureauMock.Service.csproj": {}
   },
   "projects": {
-    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/external/CreditRisk.BureauMock.Service/CreditRisk.BureauMock.Service.csproj": {
+    "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/external/CreditRisk.BureauMock.Service/CreditRisk.BureauMock.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/external/CreditRisk.BureauMock.Service/CreditRisk.BureauMock.Service.csproj",
+        "projectUniqueName": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/external/CreditRisk.BureauMock.Service/CreditRisk.BureauMock.Service.csproj",
         "projectName": "CreditRisk.BureauMock.Service",
-        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/external/CreditRisk.BureauMock.Service/CreditRisk.BureauMock.Service.csproj",
+        "projectPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/external/CreditRisk.BureauMock.Service/CreditRisk.BureauMock.Service.csproj",
         "packagesPath": "/home/jorge.eduardo/.nuget/packages/",
-        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/external/CreditRisk.BureauMock.Service/obj/",
+        "outputPath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/external/CreditRisk.BureauMock.Service/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/jorge.eduardo/.nuget/NuGet/NuGet.Config"

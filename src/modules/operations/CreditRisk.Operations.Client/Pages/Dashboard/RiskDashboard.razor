@@ -1,0 +1,97 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Pages/Dashboard/RiskDashboard.razor *@
+@page "/risk-dashboard"
+@page "/"
+@attribute [Authorize(Roles = "desk-operator,compliance-analyst,administrator")]
+
+<PageTitle>Risk Dashboard — Credit Risk Compliance Lab</PageTitle>
+
+<MudText Typo="Typo.h4" Class="mb-4">Risk Dashboard</MudText>
+
+@if (_isDisconnected)
+{
+    <MudAlert Severity="Severity.Warning" Variant="Variant.Filled" Class="mb-4">
+        Real-time connection is currently unavailable. Displaying cached dashboard data.
+    </MudAlert>
+}
+
+<MudGrid>
+    @* KPI Cards *@
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.subtitle2" Color="Color.Secondary">Active Proposals</MudText>
+            <MudText Typo="Typo.h4">@(_metrics?.ActiveProposals ?? 0)</MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.subtitle2" Color="Color.Secondary">Pending Review</MudText>
+            <MudText Typo="Typo.h4" Color="Color.Warning">@(_metrics?.PendingReview ?? 0)</MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.subtitle2" Color="Color.Secondary">Approved Today</MudText>
+            <MudText Typo="Typo.h4" Color="Color.Success">@(_metrics?.ApprovedToday ?? 0)</MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.subtitle2" Color="Color.Secondary">Rejected Today</MudText>
+            <MudText Typo="Typo.h4" Color="Color.Error">@(_metrics?.RejectedToday ?? 0)</MudText>
+        </MudPaper>
+    </MudItem>
+
+    @* Risk Rating Distribution Chart *@
+    <MudItem xs="12" md="6">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-2">Risk Rating Distribution</MudText>
+            @if (_ratingChartData.Length > 0 && _ratingChartData.Any(v => v > 0))
+            {
+                <MudChart ChartType="ChartType.Donut"
+                          InputData="@_ratingChartData"
+                          InputLabels="@_ratingChartLabels"
+                          Width="300px" Height="300px" />
+            }
+            else
+            {
+                <div class="d-flex justify-center align-center" style="height: 250px;">
+                    <MudText Typo="Typo.body2" Color="Color.Secondary">No proposal ratings recorded yet</MudText>
+                </div>
+            }
+        </MudPaper>
+    </MudItem>
+
+    @* Recent Proposals Table *@
+    <MudItem xs="12" md="6">
+        <MudPaper Class="pa-4" Elevation="2">
+            <div class="d-flex justify-space-between align-center mb-2">
+                <MudText Typo="Typo.h6">Recent Proposals</MudText>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" Link="/proposals">View All</MudButton>
+            </div>
+            <MudDataGrid T="CreditProposalViewModel"
+                         Items="@AppState.RecentProposals"
+                         Dense="true"
+                         Hover="true"
+                         RowClick="@OnProposalRowClick"
+                         RowsPerPage="20">
+                <Columns>
+                    <PropertyColumn Property="x => x.Id" Title="ID">
+                        <CellTemplate>
+                            @context.Item.Id.ToString()[..8]...
+                        </CellTemplate>
+                    </PropertyColumn>
+                    <PropertyColumn Property="x => x.Status" Title="Status" />
+                    <TemplateColumn Title="Rating">
+                        <CellTemplate>
+                            <RiskRatingBadge Rating="@context.Item.RiskRating" />
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <PropertyColumn Property="x => x.RequestedLimit" Title="Limit" Format="C2" />
+                </Columns>
+                <NoRecordsContent>
+                    <MudText Typo="Typo.body2" Class="pa-4 text-center">No proposals found</MudText>
+                </NoRecordsContent>
+            </MudDataGrid>
+        </MudPaper>
+    </MudItem>
+</MudGrid>

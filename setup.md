@@ -171,8 +171,17 @@ credit-risk-compliance-lab/
 │   │   │   └── CreditRisk.Compliance.Worker/
 │   │   │
 │   │   └── operations/               ← Operations Panel (Blazor WASM)
-│   │       ├── CreditRisk.Operations.Client/   ← Blazor WASM project
-│   │       └── CreditRisk.Operations.Server/   ← Blazor host / SignalR hub
+│   │       └── CreditRisk.Operations.Client/   ← Blazor WASM project
+│   │
+│   ├── servers/
+│   │   └── CreditRisk.Operations.Server/   ← Blazor host / SignalR hub
+│   │
+│   ├── workers/
+│   │   ├── CreditRisk.CreditAnalysis.Worker/
+│   │   └── CreditRisk.Compliance.Worker/
+│   │
+│   ├── external/
+│   │   └── CreditRisk.BureauMock.Service/
 │   │
 │   └── shared/
 │       ├── CreditRisk.Shared.Contracts/        ← Message contracts (MassTransit)
@@ -537,7 +546,8 @@ All generated code must use constructor injection. No `ServiceLocator` pattern, 
 - **Always use source-generated JSON serialization** when generating API endpoint code.
 - **Never generate hardcoded configuration values.** Use `IOptions<T>` pattern with environment variable binding.
 - **Always use PostgreSQL-specific SQL syntax.** Never use MySQL syntax (`CREATE DATABASE IF NOT EXISTS`, `SHOW DATABASES`, `AUTO_INCREMENT`). For conditional schema creation use `CREATE SCHEMA IF NOT EXISTS`. For conditional database creation use the `\gexec` pattern: `SELECT 'CREATE DATABASE name' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'name')\gexec`. Prefer schemas within a single database over multiple databases.
-- **Always include runnable automation scripts (`run-services.sh` and `stop-services.sh`)** at the repository root as an inherent deliverable of any core, infrastructure, or back-end implementation (`SPEC-01` / `SPEC-02`). These scripts must orchestrate both infrastructure containers (Docker Compose) and build/launch background processes for all implemented API modules, verifying database readiness and providing health check and OpenAPI endpoint URLs.
+- **Always include runnable automation scripts (`start-all-services.sh`, `run-services.sh` and `stop-services.sh`)** at the repository root as an inherent deliverable of any core, infrastructure, or back-end implementation (`SPEC-01` / `SPEC-02` / `SPEC-05`). These scripts must orchestrate both infrastructure containers (Docker Compose) and build/launch background processes for all implemented API modules, automatically apply EF Core database migrations across all modules (`iam`, `credit`, `compliance`), verify database and service readiness, and provide health check and frontend URLs.
+- **Always preserve existing module tables and database migrations** when running subsequent specs. Never reset or overwrite database schemas without applying migrations for all dependent modules.
 
 ### 4.4 Assumption Rules
 
@@ -1699,7 +1709,7 @@ RabbitMQ ──► ComplianceWorker
 
 ### 8.8 Operations Panel — SignalR Integration
 
-The Operations Panel receives real-time updates via SignalR. The hub is hosted in `CreditRisk.Operations.Server`:
+The Operations Panel receives real-time updates via SignalR. The hub is hosted in `CreditRisk.Operations.Server` (`src/servers/CreditRisk.Operations.Server`):
 
 ```csharp
 // Hub definition
@@ -1710,6 +1720,12 @@ public sealed class OperationsHub : Hub
     public async Task JoinRoleGroup(string role)
         => await Groups.AddToGroupAsync(Context.ConnectionId, $"role:{role}");
 }
+
+// Client OIDC claims factory mappings:
+// Keycloak realm roles ('roles' and 'realm_access.roles') are mapped to standard ClaimTypes.Role
+// via CustomUserFactory in CreditRisk.Operations.Client.Services.CustomUserFactory
+// Note: Must guard against `account is null` during initial anonymous state evaluation to prevent NullReferenceException.
+```
 
 // MassTransit consumer that pushes to SignalR
 public sealed class AmlAlertCreatedEventConsumer(

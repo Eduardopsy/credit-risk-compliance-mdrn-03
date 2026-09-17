@@ -1,0 +1,14 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Shared/NotAuthorized.razor *@
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="mt-16 text-center">
+    <MudPaper Class="pa-8" Elevation="3">
+        <MudIcon Icon="@Icons.Material.Filled.Lock" Color="Color.Error" Size="Size.Large" Class="mb-4" />
+        <MudText Typo="Typo.h4" Color="Color.Error" GutterBottom="true">Access Denied</MudText>
+        <MudText Typo="Typo.body1" Class="mb-6">
+            You do not have the required permissions or role to access this resource.
+        </MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Link="/risk-dashboard">
+            Back to Safe Page
+        </MudButton>
+    </MudPaper>
+</MudContainer>

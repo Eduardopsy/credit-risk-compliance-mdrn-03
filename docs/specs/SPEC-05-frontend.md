@@ -29,7 +29,7 @@
 This frente owns the complete Blazor WebAssembly front-end application:
 
 - **`CreditRisk.Operations.Client`**: Blazor WASM SPA with MudBlazor components, OIDC authentication, SignalR client, and all dashboard pages.
-- **`CreditRisk.Operations.Server`**: ASP.NET Core host serving the WASM app, SignalR hub, and MassTransit consumers (see SPEC-04).
+- **`CreditRisk.Operations.Server`**: ASP.NET Core host serving the WASM app, SignalR hub, and MassTransit consumers (located in `src/servers/CreditRisk.Operations.Server/`, see SPEC-04).
 - **Dashboards**: Risk Dashboard, Compliance Dashboard, Operations Dashboard, Audit Log viewer.
 - **Authentication**: OIDC client with Keycloak, role-based UI rendering, JWT bearer token injection.
 - **Real-time updates**: SignalR client with automatic reconnection and event-driven state updates.
@@ -37,7 +37,7 @@ This frente owns the complete Blazor WebAssembly front-end application:
 
 ### 1.2 Boundaries
 
-**Owns:** `src/modules/operations/CreditRisk.Operations.Client/`, `src/modules/operations/CreditRisk.Operations.Server/`.
+**Owns:** `src/modules/operations/CreditRisk.Operations.Client/`, `src/servers/CreditRisk.Operations.Server/`.
 
 **Does NOT own:** SignalR hub consumers (SPEC-04), API endpoints (SPEC-02), Docker/CI (SPEC-07), frontend tests (SPEC-06).
 
@@ -73,56 +73,63 @@ This frente owns the complete Blazor WebAssembly front-end application:
 
 ```
 src/modules/operations/
-├── CreditRisk.Operations.Client/
-│   ├── CreditRisk.Operations.Client.csproj
-│   ├── Program.cs
-│   ├── wwwroot/
-│   │   ├── index.html
-│   │   ├── appsettings.json
-│   │   └── appsettings.Development.json
-│   ├── Pages/
-│   │   ├── Dashboard/
-│   │   │   ├── RiskDashboard.razor
-│   │   │   ├── RiskDashboard.razor.cs
-│   │   │   ├── ComplianceDashboard.razor
-│   │   │   ├── ComplianceDashboard.razor.cs
-│   │   │   ├── OperationsDashboard.razor
-│   │   │   └── OperationsDashboard.razor.cs
-│   │   ├── Proposals/
-│   │   │   ├── ProposalList.razor
-│   │   │   ├── ProposalList.razor.cs
-│   │   │   ├── ProposalDetail.razor
-│   │   │   ├── ProposalDetail.razor.cs
-│   │   │   ├── CreateProposal.razor
-│   │   │   └── CreateProposal.razor.cs
-│   │   ├── Alerts/
-│   │   │   ├── AlertList.razor
-│   │   │   ├── AlertList.razor.cs
-│   │   │   ├── AlertDetail.razor
-│   │   │   └── AlertDetail.razor.cs
-│   │   └── AuditLog/
-│   │       ├── AuditLogViewer.razor
-│   │       └── AuditLogViewer.razor.cs
-│   ├── Shared/
-│   │   ├── MainLayout.razor
-│   │   ├── NavMenu.razor
-│   │   ├── RedirectToLogin.razor
-│   │   └── NotAuthorized.razor
-│   ├── Components/
-│   │   ├── RiskRatingBadge.razor
-│   │   ├── AlertSeverityChip.razor
-│   │   ├── ProposalStatusStepper.razor
-│   │   └── ConnectionStatusIndicator.razor
-│   ├── Services/
-│   │   ├── ApiClient.cs
-│   │   ├── OperationsHubClient.cs
-│   │   └── NotificationService.cs
-│   ├── State/
-│   │   └── AppStateService.cs
-│   └── Models/
-│       ├── CreditProposalViewModel.cs
-│       ├── AmlAlertViewModel.cs
-│       └── DashboardMetricsViewModel.cs
+└── CreditRisk.Operations.Client/
+    ├── CreditRisk.Operations.Client.csproj
+    ├── Program.cs
+    ├── App.razor
+    ├── _Imports.razor
+    ├── wwwroot/
+    │   ├── index.html
+    │   ├── appsettings.json
+    │   └── appsettings.Development.json
+    ├── Pages/
+    │   ├── Authentication.razor
+    │   ├── Dashboard/
+    │   │   ├── RiskDashboard.razor
+    │   │   ├── RiskDashboard.razor.cs
+    │   │   ├── ComplianceDashboard.razor
+    │   │   ├── ComplianceDashboard.razor.cs
+    │   │   ├── OperationsDashboard.razor
+    │   │   └── OperationsDashboard.razor.cs
+    │   ├── Proposals/
+    │   │   ├── ProposalList.razor
+    │   │   ├── ProposalList.razor.cs
+    │   │   ├── ProposalDetail.razor
+    │   │   ├── ProposalDetail.razor.cs
+    │   │   ├── CreateProposal.razor
+    │   │   └── CreateProposal.razor.cs
+    │   ├── Alerts/
+    │   │   ├── AlertList.razor
+    │   │   ├── AlertList.razor.cs
+    │   │   ├── AlertDetail.razor
+    │   │   └── AlertDetail.razor.cs
+    │   └── AuditLog/
+    │       ├── AuditLogViewer.razor
+    │       └── AuditLogViewer.razor.cs
+    ├── Shared/
+    │   ├── MainLayout.razor
+    │   ├── MainLayout.razor.cs
+    │   ├── NavMenu.razor
+    │   ├── RedirectToLogin.razor
+    │   └── NotAuthorized.razor
+    ├── Components/
+    │   ├── RiskRatingBadge.razor
+    │   ├── AlertSeverityChip.razor
+    │   ├── ProposalStatusStepper.razor
+    │   └── ConnectionStatusIndicator.razor
+    ├── Services/
+    │   ├── ApiClient.cs
+    │   ├── CustomUserFactory.cs
+    │   ├── OperationsHubClient.cs
+    │   └── NotificationService.cs
+    ├── State/
+    │   └── AppStateService.cs
+    └── Models/
+        ├── CreditProposalViewModel.cs
+        ├── AmlAlertViewModel.cs
+        └── DashboardMetricsViewModel.cs
+
+src/servers/
 └── CreditRisk.Operations.Server/
     ├── CreditRisk.Operations.Server.csproj
     ├── Program.cs
@@ -176,35 +183,46 @@ src/modules/operations/
 
 ```csharp
 // File: src/modules/operations/CreditRisk.Operations.Client/Program.cs
+using System.Security.Claims;
+using CreditRisk.Operations.Client;
 using CreditRisk.Operations.Client.Services;
 using CreditRisk.Operations.Client.State;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MudBlazor;
 using MudBlazor.Services;
 
 WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-// OIDC authentication with Keycloak
+// OIDC authentication with Keycloak and CustomUserFactory for role claim mapping
 builder.Services.AddOidcAuthentication(options =>
 {
-    builder.Configuration.Bind("Oidc", options.ProviderOptions);
-    options.ProviderOptions.ResponseType = "code";
+    var oidcConfig = builder.Configuration.GetSection("Oidc");
+    options.ProviderOptions.Authority = oidcConfig["Authority"] ?? "http://localhost:8080/realms/crcl";
+    options.ProviderOptions.MetadataUrl = $"{options.ProviderOptions.Authority}/.well-known/openid-configuration";
+    options.ProviderOptions.ClientId = oidcConfig["ClientId"] ?? "crcl-blazor-client";
+    options.ProviderOptions.ResponseType = oidcConfig["ResponseType"] ?? "code";
+
+    options.ProviderOptions.DefaultScopes.Clear();
     options.ProviderOptions.DefaultScopes.Add("openid");
     options.ProviderOptions.DefaultScopes.Add("profile");
     options.ProviderOptions.DefaultScopes.Add("email");
     options.ProviderOptions.DefaultScopes.Add("roles");
+
+    options.ProviderOptions.RedirectUri = oidcConfig["RedirectUri"] ?? "http://localhost:5003/authentication/login-callback";
+    options.ProviderOptions.PostLogoutRedirectUri = oidcConfig["PostLogoutRedirectUri"] ?? "http://localhost:5003/";
+
+    options.UserOptions.RoleClaim = ClaimTypes.Role;
+}).AddAccountClaimsPrincipalFactory<CustomUserFactory>();
+
+// HTTP client
+builder.Services.AddScoped(sp => new HttpClient
+{
+    BaseAddress = new Uri(builder.Configuration["ApiBaseUrl"] ?? "http://localhost:5000/api")
 });
-
-// HTTP client with JWT bearer token injection
-builder.Services.AddHttpClient("crcl-api", client =>
-    client.BaseAddress = new Uri(builder.Configuration["ApiBaseUrl"]!))
-    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
-
-builder.Services.AddScoped(sp =>
-    sp.GetRequiredService<IHttpClientFactory>().CreateClient("crcl-api"));
 
 // MudBlazor
 builder.Services.AddMudServices(config =>
@@ -479,6 +497,85 @@ public sealed class ApiClient(HttpClient httpClient)
 }
 ```
 
+### 4.5.1 `CustomUserFactory.cs` — OIDC Role Mapping
+
+```csharp
+// File: src/modules/operations/CreditRisk.Operations.Client/Services/CustomUserFactory.cs
+using System.Security.Claims;
+using System.Text.Json;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
+
+namespace CreditRisk.Operations.Client.Services;
+
+/// <summary>
+/// Custom ClaimsPrincipalFactory for Keycloak OIDC authentication.
+/// Flattens 'roles' array and 'realm_access.roles' into standard ClaimTypes.Role claims.
+/// </summary>
+public sealed class CustomUserFactory(IAccessTokenProviderAccessor accessor)
+    : AccountClaimsPrincipalFactory<RemoteUserAccount>(accessor)
+{
+    public override async ValueTask<ClaimsPrincipal> CreateUserAsync(
+        RemoteUserAccount account,
+        RemoteAuthenticationUserOptions options)
+    {
+        var user = await base.CreateUserAsync(account, options);
+
+        // Account is null during anonymous initialization in Blazor WASM — must check to avoid NullReferenceException
+        if (account is null)
+        {
+            return user;
+        }
+
+        if (user.Identity is ClaimsIdentity claimsIdentity)
+        {
+            if (account.AdditionalProperties is not null &&
+                account.AdditionalProperties.TryGetValue("roles", out var rolesObj))
+            {
+                AddRolesFromElement(claimsIdentity, rolesObj);
+            }
+
+            if (account.AdditionalProperties is not null &&
+                account.AdditionalProperties.TryGetValue("realm_access", out var realmAccessObj) &&
+                realmAccessObj is JsonElement realmElement &&
+                realmElement.ValueKind == JsonValueKind.Object &&
+                realmElement.TryGetProperty("roles", out var realmRoles))
+            {
+                AddRolesFromElement(claimsIdentity, realmRoles);
+            }
+        }
+
+        return user;
+    }
+
+    private static void AddRolesFromElement(ClaimsIdentity identity, object elementObj)
+    {
+        if (elementObj is JsonElement element)
+        {
+            if (element.ValueKind == JsonValueKind.Array)
+            {
+                foreach (var role in element.EnumerateArray())
+                {
+                    var roleStr = role.GetString();
+                    if (!string.IsNullOrWhiteSpace(roleStr) && !identity.HasClaim(identity.RoleClaimType, roleStr))
+                    {
+                        identity.AddClaim(new Claim(identity.RoleClaimType, roleStr));
+                    }
+                }
+            }
+            else if (element.ValueKind == JsonValueKind.String)
+            {
+                var roleStr = element.GetString();
+                if (!string.IsNullOrWhiteSpace(roleStr) && !identity.HasClaim(identity.RoleClaimType, roleStr))
+                {
+                    identity.AddClaim(new Claim(identity.RoleClaimType, roleStr));
+                }
+            }
+        }
+    }
+}
+```
+
 ### 4.6 Dashboard Pages
 
 #### Risk Dashboard
@@ -486,6 +583,7 @@ public sealed class ApiClient(HttpClient httpClient)
 ```razor
 @* File: src/modules/operations/CreditRisk.Operations.Client/Pages/Dashboard/RiskDashboard.razor *@
 @page "/risk-dashboard"
+@page "/"
 @attribute [Authorize(Roles = "desk-operator,compliance-analyst,administrator")]
 @inject AppStateService AppState
 @inject ApiClient Api
@@ -581,7 +679,14 @@ public sealed partial class RiskDashboard : IDisposable
     protected override async Task OnInitializedAsync()
     {
         AppState.StateChanged += OnStateChanged;
-        await LoadMetricsAsync();
+        try
+        {
+            await LoadMetricsAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[RiskDashboard] Error loading metrics: {ex.Message}");
+        }
     }
 
     private async Task LoadMetricsAsync()
@@ -906,15 +1011,15 @@ internal sealed class CreateProposalRequestClientValidator : AbstractValidator<C
 
 ```json
 {
-  "ApiBaseUrl": "https://localhost:443/api",
-  "HubUrl": "https://localhost:443/hubs/operations",
+  "ApiBaseUrl": "http://localhost:5000/api",
+  "HubUrl": "http://localhost:5003/hubs/operations",
   "Oidc": {
     "Authority": "http://localhost:8080/realms/crcl",
     "ClientId": "crcl-blazor-client",
     "ResponseType": "code",
     "DefaultScopes": ["openid", "profile", "email", "roles"],
-    "PostLogoutRedirectUri": "https://localhost:443/",
-    "RedirectUri": "https://localhost:443/authentication/login-callback"
+    "PostLogoutRedirectUri": "http://localhost:5003/",
+    "RedirectUri": "http://localhost:5003/authentication/login-callback"
   }
 }
 ```
@@ -926,7 +1031,7 @@ internal sealed class CreateProposalRequestClientValidator : AbstractValidator<C
 ### 5.1 Authentication Rules
 
 1. All pages except `/authentication/*` require authentication — unauthenticated users are redirected to Keycloak login.
-2. Role-based page access is enforced via `[Authorize(Roles = "...")]` attribute.
+2. Role-based page access is enforced via `[Authorize(Roles = "...")]` attribute. Roles from Keycloak are mapped into `ClaimTypes.Role` via `CustomUserFactory`.
 3. Desk operators can only see their own proposals — the API enforces this, but the UI must not show other operators' data.
 4. Compliance analysts see all alerts and transactions.
 5. Administrators see everything.
@@ -948,7 +1053,7 @@ internal sealed class CreateProposalRequestClientValidator : AbstractValidator<C
 
 ### 5.4 Dashboard Layout Rules
 
-1. Risk Dashboard is the default landing page for desk operators.
+1. Risk Dashboard is the default landing page for desk operators (mapped to `/` and `/risk-dashboard`).
 2. Compliance Dashboard is the default landing page for compliance analysts.
 3. All dashboards auto-refresh every 60 seconds via `System.Timers.Timer`.
 4. `MudDataGrid` pagination: default 20 rows per page.
@@ -990,11 +1095,11 @@ internal sealed class CreateProposalRequestClientValidator : AbstractValidator<C
 
 | Key | Type | Dev Default | Description |
 |---|---|---|---|
-| `ApiBaseUrl` | `string` | `https://localhost:443/api` | Back-end API base URL |
-| `HubUrl` | `string` | `https://localhost:443/hubs/operations` | SignalR hub URL |
+| `ApiBaseUrl` | `string` | `http://localhost:5000/api` | Back-end API base URL |
+| `HubUrl` | `string` | `http://localhost:5003/hubs/operations` | SignalR hub URL |
 | `Oidc:Authority` | `string` | `http://localhost:8080/realms/crcl` | Keycloak realm URL |
 | `Oidc:ClientId` | `string` | `crcl-blazor-client` | Keycloak client ID |
-| `Oidc:RedirectUri` | `string` | `https://localhost:443/authentication/login-callback` | OIDC redirect URI |
+| `Oidc:RedirectUri` | `string` | `http://localhost:5003/authentication/login-callback` | OIDC redirect URI |
 
 ### 7.2 Server Configuration (Environment Variables)
 
@@ -1025,7 +1130,8 @@ Key scenarios to verify manually:
 ## 9. Acceptance Criteria and Definition of Done
 
 - [ ] `dotnet build` succeeds for both Client and Server projects with 0 warnings
-- [ ] `Program.cs` configures OIDC with Keycloak, MudBlazor, `AppStateService`, `OperationsHubClient`, `ApiClient`
+- [ ] `Program.cs` configures OIDC with Keycloak, MudBlazor, `AppStateService`, `OperationsHubClient`, `ApiClient`, and `CustomUserFactory`
+- [ ] Keycloak realm roles (`roles` and `realm_access.roles`) are mapped into `ClaimTypes.Role`
 - [ ] All 4 dashboard pages exist with correct `@page` routes and `[Authorize]` attributes
 - [ ] `CreateProposal` form validates CPF/CNPJ format, required fields, bureau consent client-side
 - [ ] `AppStateService.StateChanged` triggers re-render in all subscribed components
@@ -1048,18 +1154,24 @@ Key scenarios to verify manually:
 cd credit-risk-compliance-lab
 docker compose up -d postgres redis rabbitmq keycloak
 # Wait for Keycloak to be healthy (up to 90 seconds)
+# Ensure realm is imported:
+# docker exec crcl-keycloak /opt/keycloak/bin/kc.sh import --file /opt/keycloak/data/import/realm-export.json
 
-# Start Operations Server (SignalR Hub)
-dotnet run --project src/modules/operations/CreditRisk.Operations.Server/ \
+# Ensure database migrations are applied across modules before running services:
+# dotnet ef database update --project src/modules/iam/CreditRisk.IAM.Infrastructure --startup-project src/modules/iam/CreditRisk.IAM.Api
+# dotnet ef database update --project src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure --startup-project src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api
+# dotnet ef database update --project src/modules/compliance/CreditRisk.Compliance.Infrastructure --startup-project src/modules/compliance/CreditRisk.Compliance.Api
+
+# Start Operations Server (SignalR Hub & WASM Host)
+dotnet run --project src/servers/CreditRisk.Operations.Server/ \
   --launch-profile Development
 ```
 
 ### Step 2: Run Blazor WASM Client
 
 ```bash
-# The Client is served by the Server project in development
-# The Server project serves the WASM app at http://localhost:5003
-dotnet run --project src/modules/operations/CreditRisk.Operations.Server/ \
+# The Client is served directly by the Server project in development at http://localhost:5003
+dotnet run --project src/servers/CreditRisk.Operations.Server/ \
   --launch-profile Development
 ```
 

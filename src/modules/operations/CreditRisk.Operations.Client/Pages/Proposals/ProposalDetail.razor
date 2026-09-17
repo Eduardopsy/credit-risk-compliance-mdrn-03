@@ -1,0 +1,84 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Pages/Proposals/ProposalDetail.razor *@
+@page "/proposals/{Id:guid}"
+@attribute [Authorize(Roles = "desk-operator,compliance-analyst,administrator")]
+
+<PageTitle>Proposal Details — Credit Risk Compliance Lab</PageTitle>
+
+<div class="d-flex justify-space-between align-center mb-4">
+    <div>
+        <MudText Typo="Typo.h4">Proposal Details</MudText>
+        <MudText Typo="Typo.caption" Color="Color.Secondary">ID: @Id</MudText>
+    </div>
+    <MudButton Variant="Variant.Outlined" Color="Color.Primary" Link="/proposals" StartIcon="@Icons.Material.Filled.ArrowBack">
+        Back to List
+    </MudButton>
+</div>
+
+@if (_isLoading)
+{
+    <div class="d-flex justify-center align-center pa-12">
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" Size="Size.Large" />
+    </div>
+}
+else if (_proposal is null)
+{
+    <MudAlert Severity="Severity.Error">Proposal with ID @Id was not found.</MudAlert>
+}
+else
+{
+    <ProposalStatusStepper Status="@_proposal.Status" />
+
+    <MudGrid Class="mt-4">
+        <MudItem xs="12" md="6">
+            <MudPaper Class="pa-6" Elevation="2">
+                <MudText Typo="Typo.h6" Class="mb-4">Customer Information</MudText>
+                <MudList T="string" Dense="true">
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Full Name</MudText>
+                        <MudText Typo="Typo.body1"><b>@_proposal.CustomerName</b></MudText>
+                    </MudListItem>
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Document (LGPD Masked)</MudText>
+                        <MudText Typo="Typo.body1"><b>@_proposal.MaskedDocument</b></MudText>
+                    </MudListItem>
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Customer ID</MudText>
+                        <MudText Typo="Typo.body2">@_proposal.CustomerId</MudText>
+                    </MudListItem>
+                </MudList>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" md="6">
+            <MudPaper Class="pa-6" Elevation="2">
+                <MudText Typo="Typo.h6" Class="mb-4">Credit Analysis & Limit</MudText>
+                <MudList T="string" Dense="true">
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Requested Limit</MudText>
+                        <MudText Typo="Typo.h5" Color="Color.Primary"><b>@_proposal.RequestedLimit.ToString("C2")</b></MudText>
+                    </MudListItem>
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Approved Limit</MudText>
+                        <MudText Typo="Typo.h5" Color="Color.Success">
+                            <b>@(_proposal.ApprovedLimit.HasValue ? _proposal.ApprovedLimit.Value.ToString("C2") : "Under Evaluation")</b>
+                        </MudText>
+                    </MudListItem>
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Risk Rating</MudText>
+                        <div class="mt-1">
+                            <RiskRatingBadge Rating="@_proposal.RiskRating" />
+                        </div>
+                    </MudListItem>
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Submission Timestamp</MudText>
+                        <MudText Typo="Typo.body2">@_proposal.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss UTC")</MudText>
+                    </MudListItem>
+                    <MudListItem T="string">
+                        <MudText Typo="Typo.body2" Color="Color.Secondary">Evaluated Timestamp</MudText>
+                        <MudText Typo="Typo.body2">@(_proposal.EvaluatedAt.HasValue ? _proposal.EvaluatedAt.Value.ToString("yyyy-MM-dd HH:mm:ss UTC") : "—")</MudText>
+                    </MudListItem>
+                </MudList>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+}

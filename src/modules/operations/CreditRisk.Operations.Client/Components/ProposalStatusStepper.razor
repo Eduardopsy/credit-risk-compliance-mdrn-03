@@ -1,0 +1,64 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Components/ProposalStatusStepper.razor *@
+
+<MudPaper Class="pa-4 my-2" Elevation="1">
+    <MudText Typo="Typo.subtitle2" Class="mb-3">Pipeline Status</MudText>
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+        @foreach (var step in Steps)
+        {
+            var isCurrent = step.Name.Equals(Status, StringComparison.OrdinalIgnoreCase);
+            var isPassed = IsStepCompleted(step.Order);
+            
+            <div style="display: flex; align-items: center; gap: 8px;">
+                @if (isCurrent)
+                {
+                    <MudAvatar Color="Color.Primary" Size="Size.Small">@step.Order</MudAvatar>
+                    <MudText Typo="Typo.body2" Color="Color.Primary"><b>@step.Label</b></MudText>
+                }
+                else if (isPassed)
+                {
+                    <MudAvatar Color="Color.Success" Size="Size.Small">
+                        <MudIcon Icon="@Icons.Material.Filled.Check" Size="Size.Small" />
+                    </MudAvatar>
+                    <MudText Typo="Typo.body2" Color="Color.Success">@step.Label</MudText>
+                }
+                else
+                {
+                    <MudAvatar Color="Color.Default" Size="Size.Small">@step.Order</MudAvatar>
+                    <MudText Typo="Typo.body2" Color="Color.Secondary">@step.Label</MudText>
+                }
+            </div>
+            @if (step.Order < Steps.Count)
+            {
+                <MudDivider Vertical="true" FlexItem="true" Style="height: 24px;" />
+            }
+        }
+    </div>
+</MudPaper>
+
+@code {
+    [Parameter] public string Status { get; set; } = "Submitted";
+
+    private sealed record StepInfo(int Order, string Name, string Label);
+
+    private static readonly List<StepInfo> Steps =
+    [
+        new(1, "Submitted", "Submitted"),
+        new(2, "UnderReview", "Under Review"),
+        new(3, "Evaluated", "Evaluated"),
+        new(4, "Approved", "Completed")
+    ];
+
+    private bool IsStepCompleted(int stepOrder)
+    {
+        int currentOrder = Status switch
+        {
+            "Submitted" => 1,
+            "UnderReview" => 2,
+            "Evaluated" => 3,
+            "Approved" or "Rejected" => 4,
+            _ => 1
+        };
+
+        return stepOrder < currentOrder;
+    }
+}

@@ -1,0 +1,77 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Pages/Proposals/CreateProposal.razor *@
+@page "/proposals/create"
+@attribute [Authorize(Roles = "desk-operator,administrator")]
+
+<PageTitle>New Credit Proposal — Credit Risk Compliance Lab</PageTitle>
+
+<MudText Typo="Typo.h5" Class="mb-4">New Credit Proposal</MudText>
+
+<MudPaper Class="pa-6" Elevation="2">
+    <MudForm @ref="_form" Model="@_request" Validation="@_validator.ValidateValue">
+        <MudGrid>
+            <MudItem xs="12" md="6">
+                <MudTextField @bind-Value="_request.CustomerDocument"
+                              Label="CPF / CNPJ"
+                              For="@(() => _request.CustomerDocument)"
+                              Immediate="true"
+                              Required="true" />
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudSelect @bind-Value="_request.CustomerDocumentType"
+                           Label="Document Type"
+                           For="@(() => _request.CustomerDocumentType)">
+                    <MudSelectItem Value="@("CPF")">CPF (Individual)</MudSelectItem>
+                    <MudSelectItem Value="@("CNPJ")">CNPJ (Legal Entity)</MudSelectItem>
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudTextField @bind-Value="_request.CustomerName"
+                              Label="Full Name"
+                              For="@(() => _request.CustomerName)"
+                              Required="true" />
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudTextField @bind-Value="_request.CustomerEmail"
+                              Label="Email"
+                              For="@(() => _request.CustomerEmail)"
+                              InputType="InputType.Email"
+                              Required="true" />
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudNumericField @bind-Value="_request.MonthlyIncome"
+                                 Label="Monthly Income (BRL)"
+                                 For="@(() => _request.MonthlyIncome)"
+                                 Format="C2"
+                                 Min="0m"
+                                 Required="true" />
+            </MudItem>
+            <MudItem xs="12" md="6">
+                <MudNumericField @bind-Value="_request.RequestedLimit"
+                                 Label="Requested Credit Limit (BRL)"
+                                 For="@(() => _request.RequestedLimit)"
+                                 Format="C2"
+                                 Min="1m"
+                                 Max="500000m"
+                                 Required="true" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudCheckBox @bind-Value="_request.BureauConsentGiven"
+                             For="@(() => _request.BureauConsentGiven)"
+                             Label="I confirm the customer has given explicit consent for credit bureau queries (LGPD Art. 7)" />
+            </MudItem>
+            <MudItem xs="12" Class="d-flex align-center mt-4">
+                <MudButton Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           OnClick="@SubmitAsync"
+                           Disabled="@_isSubmitting">
+                    @if (_isSubmitting)
+                    {
+                        <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-2" />
+                    }
+                    Submit Proposal
+                </MudButton>
+                <MudButton Variant="Variant.Text" OnClick="@Cancel" Class="ml-2">Cancel</MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudForm>
+</MudPaper>

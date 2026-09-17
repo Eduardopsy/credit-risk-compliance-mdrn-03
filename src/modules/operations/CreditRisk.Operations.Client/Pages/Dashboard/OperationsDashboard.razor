@@ -1,0 +1,81 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Pages/Dashboard/OperationsDashboard.razor *@
+@page "/operations-dashboard"
+@attribute [Authorize(Roles = "administrator")]
+
+<PageTitle>Operations Dashboard — Credit Risk Compliance Lab</PageTitle>
+
+<MudText Typo="Typo.h4" Class="mb-4">Operations Dashboard</MudText>
+
+@if (_isDisconnected)
+{
+    <MudAlert Severity="Severity.Warning" Variant="Variant.Filled" Class="mb-4">
+        Real-time connection is currently unavailable. Displaying cached operational telemetry.
+    </MudAlert>
+}
+
+<MudGrid>
+    @* Status & Summary Cards *@
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.subtitle2" Color="Color.Secondary">System Status</MudText>
+            <MudText Typo="Typo.h5" Color="@GetHealthColor(_metrics?.SystemHealth)">
+                @(_metrics?.SystemHealth ?? "Unknown")
+            </MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.subtitle2" Color="Color.Secondary">Proposals Processed</MudText>
+            <MudText Typo="Typo.h4">@_metrics?.TotalProposalsProcessed</MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.subtitle2" Color="Color.Secondary">Total AML Alerts</MudText>
+            <MudText Typo="Typo.h4" Color="Color.Warning">@_metrics?.TotalAlertsRaised</MudText>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.subtitle2" Color="Color.Secondary">Avg Latency (ms)</MudText>
+            <MudText Typo="Typo.h4" Color="Color.Info">@_metrics?.AverageProcessingTimeMs.ToString("F1")</MudText>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" md="6">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-4">Connection & Queue Topology</MudText>
+            <MudList T="string">
+                <MudListItem T="string" Icon="@Icons.Material.Filled.Hub">
+                    SignalR Status: <b>@AppState.ConnectionStatus</b>
+                </MudListItem>
+                <MudListItem T="string" Icon="@Icons.Material.Filled.Layers">
+                    Active Operators Online: <b>@_metrics?.ActiveOperators</b>
+                </MudListItem>
+                <MudListItem T="string" Icon="@Icons.Material.Filled.Inbox">
+                    Message Queue Depth: <b>@_metrics?.QueueDepth msgs</b>
+                </MudListItem>
+                <MudListItem T="string" Icon="@Icons.Material.Filled.Schedule">
+                    Telemetry Updated: <b>@_metrics?.LastUpdated.ToString("yyyy-MM-dd HH:mm:ss")</b>
+                </MudListItem>
+            </MudList>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" md="6">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-4">System Shortcuts & Governance</MudText>
+            <div class="d-flex flex-column gap-3">
+                <MudButton Variant="Variant.Outlined" Color="Color.Primary" Link="/audit-logs" StartIcon="@Icons.Material.Filled.Security">
+                    Inspect Global Audit Trail
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Link="/alerts" StartIcon="@Icons.Material.Filled.Warning">
+                    Investigate Pending Escalations
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" Color="Color.Info" Link="/proposals" StartIcon="@Icons.Material.Filled.ListAlt">
+                    Browse All Credit Proposals
+                </MudButton>
+            </div>
+        </MudPaper>
+    </MudItem>
+</MudGrid>

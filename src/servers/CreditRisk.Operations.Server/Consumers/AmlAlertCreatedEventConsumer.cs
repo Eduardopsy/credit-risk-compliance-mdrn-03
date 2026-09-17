@@ -1,59 +1,36 @@
 // File: src/servers/CreditRisk.Operations.Server/Consumers/AmlAlertCreatedEventConsumer.cs
-using CreditRisk.Operations.Server.Services;
+using CreditRisk.Operations.Server.Hubs;
 using CreditRisk.Shared.Contracts.Compliance.Events;
 using MassTransit;
-using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.SignalR;
 
 namespace CreditRisk.Operations.Server.Consumers;
 
 /// <summary>
-/// Consumes AmlAlertCreatedEvent and broadcasts to connected clients via SignalR.
-/// Triggered by compliance worker when alerts are created and published.
+/// Consumes AmlAlertCreatedEvent and pushes it to compliance-analyst and administrator SignalR groups.
+/// Queue: operations-hub_aml-alert-created-event
 /// </summary>
-public sealed class AmlAlertCreatedEventConsumer : IConsumer<AmlAlertCreatedEvent>
+public sealed class AmlAlertCreatedEventConsumer(
+    IHubContext<OperationsHub> hubContext,
+    ILogger<AmlAlertCreatedEventConsumer> logger)
+    : IConsumer<AmlAlertCreatedEvent>
 {
-    private readonly ILogger<AmlAlertCreatedEventConsumer> _logger;
-    private readonly AlertNotificationService _notificationService;
-
-    public AmlAlertCreatedEventConsumer(
-        ILogger<AmlAlertCreatedEventConsumer> logger,
-        AlertNotificationService notificationService)
-    {
-        _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _notificationService = notificationService ?? throw new ArgumentNullException(nameof(notificationService));
-    }
-
-    /// <summary>
-    /// Handles incoming AmlAlertCreatedEvent.
-    /// Broadcasts to operations dashboard via SignalR hub.
-    /// </summary>
     public async Task Consume(ConsumeContext<AmlAlertCreatedEvent> context)
     {
-        var evt = context.Message;
-        _logger.LogInformation(
-            "Processing AmlAlertCreatedEvent AlertId={AlertId} TransactionId={TransactionId} Severity={Severity} CorrelationId={CorrelationId}",
-            evt.AlertId, evt.TransactionId, evt.Severity, evt.CorrelationId);
+        var message = context.Message;
 
-        try
-        {
-            // Broadcast alert to all connected clients
-            await _notificationService.BroadcastAmlAlertAsync(
-                alertId: evt.AlertId,
-                transactionId: evt.TransactionId,
-                customerId: evt.CustomerId,
-                alertType: evt.AlertType,
-                severity: evt.Severity,
-                transactionAmount: evt.TransactionAmount,
-                createdAt: evt.CreatedAt);
+        await hubContext.Clients
+            .Group("role:compliance-analyst")
+            .SendAsync("AmlAlertReceived", message, context.CancellationToken)
+            .ConfigureAwait(false);
 
-            _logger.LogInformation(
-                "AmlAlertCreatedEvent broadcasted successfully AlertId={AlertId}",
-                evt.AlertId);
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error processing AmlAlertCreatedEvent AlertId={AlertId}", evt.AlertId);
-            throw;
-        }
+        await hubContext.Clients
+            .Group("role:administrator")
+            .SendAsync("AmlAlertReceived", message, context.CancellationToken)
+            .ConfigureAwait(false);
+
+        logger.LogInformation(
+            "AML alert {AlertId} pushed to compliance-analyst & administrator groups. Severity={Severity}",
+            message.AlertId, message.Severity);
     }
 }

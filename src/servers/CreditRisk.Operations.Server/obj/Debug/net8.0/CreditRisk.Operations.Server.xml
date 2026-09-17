@@ -6,43 +6,51 @@
     <members>
         <member name="T:CreditRisk.Operations.Server.Consumers.AmlAlertCreatedEventConsumer">
             <summary>
-            Consumes AmlAlertCreatedEvent and broadcasts to connected clients via SignalR.
-            Triggered by compliance worker when alerts are created and published.
+            Consumes AmlAlertCreatedEvent and pushes it to compliance-analyst and administrator SignalR groups.
+            Queue: operations-hub_aml-alert-created-event
             </summary>
         </member>
-        <member name="M:CreditRisk.Operations.Server.Consumers.AmlAlertCreatedEventConsumer.Consume(MassTransit.ConsumeContext{CreditRisk.Shared.Contracts.Compliance.Events.AmlAlertCreatedEvent})">
+        <member name="M:CreditRisk.Operations.Server.Consumers.AmlAlertCreatedEventConsumer.#ctor(Microsoft.AspNetCore.SignalR.IHubContext{CreditRisk.Operations.Server.Hubs.OperationsHub},Microsoft.Extensions.Logging.ILogger{CreditRisk.Operations.Server.Consumers.AmlAlertCreatedEventConsumer})">
             <summary>
-            Handles incoming AmlAlertCreatedEvent.
-            Broadcasts to operations dashboard via SignalR hub.
+            Consumes AmlAlertCreatedEvent and pushes it to compliance-analyst and administrator SignalR groups.
+            Queue: operations-hub_aml-alert-created-event
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Server.Consumers.CreditLimitApprovedEventConsumer">
+            <summary>
+            Consumes CreditLimitApprovedEvent and pushes it to desk-operator and administrator SignalR groups.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Consumers.CreditLimitApprovedEventConsumer.#ctor(Microsoft.AspNetCore.SignalR.IHubContext{CreditRisk.Operations.Server.Hubs.OperationsHub},Microsoft.Extensions.Logging.ILogger{CreditRisk.Operations.Server.Consumers.CreditLimitApprovedEventConsumer})">
+            <summary>
+            Consumes CreditLimitApprovedEvent and pushes it to desk-operator and administrator SignalR groups.
+            </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Server.Consumers.TransactionFlaggedEventConsumer">
+            <summary>
+            Consumes TransactionFlaggedEvent and pushes it to compliance-analyst and administrator SignalR groups.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Consumers.TransactionFlaggedEventConsumer.#ctor(Microsoft.AspNetCore.SignalR.IHubContext{CreditRisk.Operations.Server.Hubs.OperationsHub},Microsoft.Extensions.Logging.ILogger{CreditRisk.Operations.Server.Consumers.TransactionFlaggedEventConsumer})">
+            <summary>
+            Consumes TransactionFlaggedEvent and pushes it to compliance-analyst and administrator SignalR groups.
             </summary>
         </member>
         <member name="T:CreditRisk.Operations.Server.Hubs.OperationsHub">
             <summary>
-            SignalR hub for real-time operations updates.
-            Broadcasts compliance alerts, transaction flags, and operational events to connected clients.
+            SignalR hub for real-time operations dashboard updates.
+            Clients join role-based groups on connection.
+            Requires authentication — JWT validated by Keycloak.
             </summary>
         </member>
-        <member name="M:CreditRisk.Operations.Server.Hubs.OperationsHub.BroadcastAmlAlert(CreditRisk.Operations.Server.Hubs.AmlAlertNotification)">
+        <member name="M:CreditRisk.Operations.Server.Hubs.OperationsHub.JoinRoleGroup(System.String)">
             <summary>
-            Broadcasts an AML alert to all connected clients.
-            Called by AlertNotificationService when AmlAlertCreatedEvent is received.
+            Adds the connected client to the role-based group.
+            Called by the Blazor client on connection.
             </summary>
         </member>
-        <member name="M:CreditRisk.Operations.Server.Hubs.OperationsHub.BroadcastUrgentAlert(CreditRisk.Operations.Server.Hubs.AmlAlertNotification)">
-            <summary>
-            Broadcasts an urgent alert (Critical severity) to all connected clients.
-            Used for immediate escalation notifications.
-            </summary>
-        </member>
-        <member name="M:CreditRisk.Operations.Server.Hubs.OperationsHub.NotifyTransactionFlagged(CreditRisk.Operations.Server.Hubs.TransactionFlaggedNotification)">
-            <summary>
-            Notifies compliance officers of a flagged transaction.
-            </summary>
-        </member>
-        <member name="M:CreditRisk.Operations.Server.Hubs.OperationsHub.UpdateDashboard(CreditRisk.Operations.Server.Hubs.DashboardUpdateNotification)">
-            <summary>
-            Sends a dashboard update with alert statistics.
-            </summary>
+        <member name="M:CreditRisk.Operations.Server.Hubs.OperationsHub.OnDisconnectedAsync(System.Exception)">
+            <summary>Removes the client from all role groups on disconnect.</summary>
         </member>
         <member name="T:CreditRisk.Operations.Server.Hubs.AmlAlertNotification">
             <summary>
@@ -73,6 +81,95 @@
             <summary>
             Notification payload for dashboard updates.
             </summary>
+        </member>
+        <member name="T:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext">
+            <summary>
+            Source-generated JsonSerializerContext for Operations Server and SignalR payloads.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.Decimal">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.AmlAlertNotification">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.DashboardUpdateNotification">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.TransactionFlaggedNotification">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.AmlAlertCreatedEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.TransactionFlaggedEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.CreditLimitApprovedEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.ListString">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.DateTimeOffset">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.Guid">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.Int32">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.String">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.StringArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.Default">
+            <summary>
+            The default <see cref="T:System.Text.Json.Serialization.JsonSerializerContext"/> associated with a default <see cref="T:System.Text.Json.JsonSerializerOptions"/> instance.
+            </summary>
+        </member>
+        <member name="P:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.GeneratedSerializerOptions">
+            <summary>
+            The source-generated options associated with this context.
+            </summary>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.#ctor(System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CreditRisk.Operations.Server.Serialization.OperationsServerJsonContext.GetTypeInfo(System.Type)">
+            <inheritdoc/>
         </member>
         <member name="T:CreditRisk.Operations.Server.Services.AlertNotificationService">
             <summary>

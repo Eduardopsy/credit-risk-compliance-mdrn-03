@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/jsqL6rzSyVrZzuQgnMANhEoQFtjsNw3Rj2knHgWnmXsUQNAo0zI+ixgdBOOojCkoS6mzkpCRRc7ZLYAWeKwXw==",
+  "dgSpecHash": "1Gj9e9WUQv7KNmV8KdijObr3VmFgnVMgccVn1jDlFH/IxlQlPMUctLoGko2sBqLUFdAaooOhuPe//mvIyMNFoQ==",
   "success": true,
-  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/workers/CreditRisk.CreditAnalysis.Worker/CreditRisk.CreditAnalysis.Worker.csproj",
+  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/workers/CreditRisk.CreditAnalysis.Worker/CreditRisk.CreditAnalysis.Worker.csproj",
   "expectedPackageFiles": [
     "/home/jorge.eduardo/.nuget/packages/fluentvalidation/11.11.0/fluentvalidation.11.11.0.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/google.protobuf/3.22.5/google.protobuf.3.22.5.nupkg.sha512",

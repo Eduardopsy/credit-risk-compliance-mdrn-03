@@ -1,0 +1,23 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Components/AlertSeverityChip.razor *@
+
+<MudChip T="string"
+         Color="@GetColor()"
+         Variant="Variant.Filled"
+         Size="Size.Small">
+    @SeverityText
+</MudChip>
+
+@code {
+    [Parameter] public string? Severity { get; set; }
+
+    private string SeverityText => string.IsNullOrWhiteSpace(Severity) ? "Low" : Severity;
+
+    private Color GetColor() => SeverityText switch
+    {
+        "Critical" => Color.Error,
+        "High" => Color.Warning,
+        "Medium" => Color.Info,
+        "Low" => Color.Default,
+        _ => Color.Default
+    };
+}

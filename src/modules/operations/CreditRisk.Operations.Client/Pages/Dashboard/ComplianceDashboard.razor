@@ -1,0 +1,86 @@
+@* File: src/modules/operations/CreditRisk.Operations.Client/Pages/Dashboard/ComplianceDashboard.razor *@
+@page "/compliance-dashboard"
+@attribute [Authorize(Roles = "compliance-analyst,administrator")]
+
+<PageTitle>Compliance Dashboard — Credit Risk Compliance Lab</PageTitle>
+
+<MudText Typo="Typo.h4" Class="mb-4">
+    Compliance Dashboard
+    @if (AppState.UnreadAlertCount > 0)
+    {
+        <MudBadge Content="@AppState.UnreadAlertCount" Color="Color.Error" Class="ml-2">
+            <MudIcon Icon="@Icons.Material.Filled.NotificationsActive" />
+        </MudBadge>
+    }
+</MudText>
+
+@if (_isDisconnected)
+{
+    <MudAlert Severity="Severity.Warning" Variant="Variant.Filled" Class="mb-4">
+        Real-time connection is currently unavailable. Displaying cached dashboard data.
+    </MudAlert>
+}
+
+<MudGrid>
+    @* Connection Status *@
+    <MudItem xs="12">
+        <ConnectionStatusIndicator Status="@AppState.ConnectionStatus" />
+    </MudItem>
+
+    @* AML Alert Queue *@
+    <MudItem xs="12" md="8">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-2">Pending AML Alerts</MudText>
+            <MudDataGrid T="AmlAlertViewModel"
+                         Items="@AppState.PendingAlerts"
+                         Dense="true"
+                         Hover="true"
+                         SortMode="SortMode.Multiple"
+                         Filterable="true"
+                         RowsPerPage="20">
+                <Columns>
+                    <PropertyColumn Property="x => x.AlertType" Title="Type" />
+                    <TemplateColumn Title="Severity">
+                        <CellTemplate>
+                            <AlertSeverityChip Severity="@context.Item.Severity" />
+                        </CellTemplate>
+                    </TemplateColumn>
+                    <PropertyColumn Property="x => x.TransactionAmount" Title="Amount" Format="C2" />
+                    <PropertyColumn Property="x => x.CreatedAt" Title="Time" Format="HH:mm:ss" />
+                    <TemplateColumn Title="Actions">
+                        <CellTemplate>
+                            <MudButton Variant="Variant.Outlined" Size="Size.Small" Color="Color.Primary"
+                                       OnClick="@(() => OpenReviewDialog(context.Item))">
+                                Review
+                            </MudButton>
+                        </CellTemplate>
+                    </TemplateColumn>
+                </Columns>
+                <NoRecordsContent>
+                    <MudText Typo="Typo.body2" Class="pa-4 text-center">No pending AML alerts</MudText>
+                </NoRecordsContent>
+            </MudDataGrid>
+        </MudPaper>
+    </MudItem>
+
+    @* Alert Statistics *@
+    <MudItem xs="12" md="4">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-2">Alert Statistics (24h)</MudText>
+            <MudList T="string" Dense="true">
+                <MudListItem T="string" Icon="@Icons.Material.Filled.Warning" IconColor="Color.Error">
+                    Critical: @AppState.PendingAlerts.Count(a => a.Severity == "Critical")
+                </MudListItem>
+                <MudListItem T="string" Icon="@Icons.Material.Filled.Warning" IconColor="Color.Warning">
+                    High: @AppState.PendingAlerts.Count(a => a.Severity == "High")
+                </MudListItem>
+                <MudListItem T="string" Icon="@Icons.Material.Filled.Info" IconColor="Color.Info">
+                    Medium: @AppState.PendingAlerts.Count(a => a.Severity == "Medium")
+                </MudListItem>
+                <MudListItem T="string" Icon="@Icons.Material.Filled.Info" IconColor="Color.Default">
+                    Low: @AppState.PendingAlerts.Count(a => a.Severity == "Low")
+                </MudListItem>
+            </MudList>
+        </MudPaper>
+    </MudItem>
+</MudGrid>

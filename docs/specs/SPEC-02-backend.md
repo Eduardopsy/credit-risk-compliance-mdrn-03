@@ -2509,6 +2509,7 @@ This section documents all build and runtime errors encountered during the initi
 | 38 | `404 Not Found` on `GET /statistics` (Bureau Mock) | Endpoint missing from Bureau Mock Minimal API | Map `GET /statistics` with `Interlocked` query counters in `CreditRisk.BureauMock.Service/Program.cs`. |
 | 39 | `404 Not Found` on `POST|GET /api/v1/compliance/checks` | Endpoint group missing in Compliance API | Map `ComplianceCheckEndpoints` in `CreditRisk.Compliance.Api` with screening integration and in-memory/persistence store. |
 | 40 | `403 Forbidden` on `GET /api/v1/users/{id}` | Endpoint restricted exclusively to `RequiresAdministrator`, blocking self-profile retrieval (`sub == id`) by operators and analysts | Allow self-lookup where `sub == id` or require `RequiresAdministrator` for accessing third-party user profiles. |
+| 41 | `500 Internal Server Error: relation "users" does not exist` (SqlState: 42P01) or other module tables | PostgreSQL started from Docker without EF Core database migrations having been applied | Run `dotnet ef database update` across all module infrastructure projects (`iam`, `credit`, `compliance`). Automated in `start-all-services.sh`. |
 
 ### 11.2 `.csproj` Package Reference Requirements
 
@@ -2570,3 +2571,4 @@ Before implementing any module, verify:
 - [ ] `AddJwtBearer` has `MapInboundClaims = false` and validates against shared signing key
 - [ ] `ProposalEndpoints` maps `GET /api/v1/proposals` returning `PagedResult<ProposalListItemDto>`
 - [ ] `ListProposalsQueryHandler` and `ICreditProposalRepository.ListAsync` are implemented and registered
+- [ ] Database migrations are executed across all modules (`iam`, `credit`, `compliance`) so all tables exist before API requests arrive

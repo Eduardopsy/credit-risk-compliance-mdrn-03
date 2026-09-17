@@ -140,6 +140,9 @@ start_infrastructure() {
         COMPOSE_CMD="docker compose"
     fi
     
+    # Clean up any orphan containers with conflicting names before compose up
+    docker rm -f crcl-keycloak crcl-postgres crcl-rabbitmq crcl-redis 2>/dev/null || true
+
     # Start containers in detached mode
     $COMPOSE_CMD up -d
     
@@ -171,6 +174,14 @@ start_infrastructure() {
     fi
     
     print_success "Docker infrastructure started!"
+    echo ""
+
+    # Ensure Database Migrations are Applied
+    print_info "Applying EF Core database migrations across all modules..."
+    dotnet ef database update --project src/modules/iam/CreditRisk.IAM.Infrastructure --startup-project src/modules/iam/CreditRisk.IAM.Api >/dev/null 2>&1 || true
+    dotnet ef database update --project src/modules/credit-analysis/CreditRisk.CreditAnalysis.Infrastructure --startup-project src/modules/credit-analysis/CreditRisk.CreditAnalysis.Api >/dev/null 2>&1 || true
+    dotnet ef database update --project src/modules/compliance/CreditRisk.Compliance.Infrastructure --startup-project src/modules/compliance/CreditRisk.Compliance.Api >/dev/null 2>&1 || true
+    print_success "Database migrations verified!"
     echo ""
 }
 
@@ -216,10 +227,10 @@ start_services_tmux() {
     tmux send-keys -t $SESSION:compliance "cd $PROJECT_DIR && dotnet run -p src/modules/compliance/CreditRisk.Compliance.Api" C-m
     sleep 3
     
-    # Window 4: Operations Server
+    # Window 4: Operations Server (hosts SignalR & Blazor WASM)
     print_info "Operations Server (port 5003)"
     tmux new-window -t $SESSION -n "operations"
-    tmux send-keys -t $SESSION:operations "cd $PROJECT_DIR && dotnet run -p src/servers/CreditRisk.Operations.Server" C-m
+    tmux send-keys -t $SESSION:operations "cd $PROJECT_DIR && dotnet run --project src/servers/CreditRisk.Operations.Server --launch-profile Development" C-m
     sleep 3
     
     # Window 5: Credit Analysis Worker
@@ -303,9 +314,9 @@ start_services_background() {
     dotnet run -p src/modules/compliance/CreditRisk.Compliance.Api > /tmp/compliance.log 2>&1 &
     sleep 2
     
-    # Operations Server
+    # Operations Server (hosts SignalR & Blazor WASM)
     print_info "Operations Server (port 5003)"
-    dotnet run -p src/servers/CreditRisk.Operations.Server > /tmp/operations.log 2>&1 &
+    dotnet run --project src/servers/CreditRisk.Operations.Server --launch-profile Development > /tmp/operations.log 2>&1 &
     sleep 2
     
     # Credit Analysis Worker

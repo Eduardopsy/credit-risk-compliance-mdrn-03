@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VEJN5RfcrXPLF4ixuAhyAfcDFi2VFbE2kPqXDzpPF2XbW8iA7PUPVg6cuEgnLcr598RxJ1Vb+U9N+xt6NmI9gQ==",
+  "dgSpecHash": "PpiZDkadvo8JBU9vbNdP3d+L9Jhue0IFzMxvJyUT+SAOTwLapOefdgE9su1HUS5Vw4xk30VnpczeF7Igqa5svw==",
   "success": true,
-  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-03/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj",
+  "projectFilePath": "/home/jorge.eduardo/projects/credit-risk-compliance-mdrn-04/src/shared/CreditRisk.Shared.Observability/CreditRisk.Shared.Observability.csproj",
   "expectedPackageFiles": [
     "/home/jorge.eduardo/.nuget/packages/google.protobuf/3.22.5/google.protobuf.3.22.5.nupkg.sha512",
     "/home/jorge.eduardo/.nuget/packages/grpc.core.api/2.52.0/grpc.core.api.2.52.0.nupkg.sha512",

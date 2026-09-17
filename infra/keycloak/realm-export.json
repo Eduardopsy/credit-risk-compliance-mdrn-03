@@ -1,0 +1,119 @@
+{
+  "realm": "crcl",
+  "displayName": "Credit Risk Compliance Lab",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": false,
+  "editUsernameAllowed": false,
+  "bruteForceProtected": true,
+  "permanentLockout": false,
+  "maxFailureWaitSeconds": 900,
+  "minimumQuickLoginWaitSeconds": 60,
+  "waitIncrementSeconds": 60,
+  "quickLoginCheckMilliSeconds": 1000,
+  "maxDeltaTimeSeconds": 43200,
+  "failureFactor": 5,
+  "accessTokenLifespan": 900,
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 36000,
+  "offlineSessionIdleTimeout": 2592000,
+  "roles": {
+    "realm": [
+      { "name": "desk-operator", "description": "Can create and view own credit proposals" },
+      { "name": "compliance-analyst", "description": "Can view all proposals and AML alerts" },
+      { "name": "administrator", "description": "Full system access" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "crcl-blazor-client",
+      "name": "CRCL Blazor WASM Client",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "redirectUris": [
+        "https://localhost/*",
+        "https://localhost:443/*",
+        "http://localhost:5003/*",
+        "http://localhost:5003/authentication/login-callback"
+      ],
+      "webOrigins": [
+        "https://localhost",
+        "https://localhost:443",
+        "http://localhost:5003",
+        "+"
+      ],
+      "protocol": "openid-connect",
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "access.token.lifespan": "900"
+      },
+      "protocolMappers": [
+        {
+          "name": "realm-roles-mapper",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "config": {
+            "claim.name": "roles",
+            "jsonType.label": "String",
+            "multivalued": "true",
+            "access.token.claim": "true",
+            "id.token.claim": "true"
+          }
+        }
+      ]
+    },
+    {
+      "clientId": "crcl-iam-api",
+      "name": "CRCL IAM API",
+      "enabled": true,
+      "publicClient": false,
+      "serviceAccountsEnabled": true,
+      "standardFlowEnabled": false,
+      "protocol": "openid-connect"
+    }
+  ],
+  "users": [
+    {
+      "username": "desk-operator@example.com",
+      "email": "desk-operator@example.com",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        { "type": "password", "value": "TestPassword123!", "temporary": false }
+      ],
+      "realmRoles": ["desk-operator"]
+    },
+    {
+      "username": "compliance-analyst@example.com",
+      "email": "compliance-analyst@example.com",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        { "type": "password", "value": "TestPassword123!", "temporary": false }
+      ],
+      "realmRoles": ["compliance-analyst"]
+    },
+    {
+      "username": "admin@example.com",
+      "email": "admin@example.com",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        { "type": "password", "value": "TestPassword123!", "temporary": false }
+      ],
+      "realmRoles": ["administrator", "desk-operator", "compliance-analyst"]
+    }
+  ],
+  "otpPolicyType": "totp",
+  "otpPolicyAlgorithm": "HmacSHA1",
+  "otpPolicyInitialCounter": 0,
+  "otpPolicyDigits": 6,
+  "otpPolicyLookAheadWindow": 1,
+  "otpPolicyPeriod": 30
+}
